@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import AllPostsList from '../ShowAllPostsContainer'
+import AllPostsList from '../ShowAllPosts'
+import NewPostForm from '../NewPostForm'
 
 
 export default class PostsContainer extends Component {
@@ -22,6 +23,27 @@ export default class PostsContainer extends Component {
 
             }    
         }
+    createPost = async (postToAdd) =>{
+        try{
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/"
+            const createPostResponse = await fetch(url,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postToAdd)
+            })
+            const createPostJson = await createPostResponse.json()
+            console.log("This is createpostjson", createPostJson);
+            if(createPostResponse.status === 201 || createPostResponse.status === 200){
+                this.setState({
+                    posts: [...this.state.posts, createPostJson.data]
+                })
+            }
+        } catch(err){
+            console.log("Error adding post", err);
+        }
+    }
     componentDidMount() {
         this.getPosts()
     }
@@ -32,6 +54,7 @@ export default class PostsContainer extends Component {
                 <React.Fragment>
                     <h2>ALl Posts</h2>
                     <AllPostsList posts={this.state.posts}/>
+                    <NewPostForm createPost={this.createPost}/>
                 </React.Fragment>
             )
         }
