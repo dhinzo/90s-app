@@ -44,6 +44,26 @@ export default class PostsContainer extends Component {
             console.log("Error adding post", err);
         }
     }
+
+    deletePost = async (id) => {
+        try {
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
+            const deletePostResponse = await fetch(url, {
+                method: "DELETE",
+            }).then( res => {
+                const findIndex = this.state.posts.findIndex(post => post.id === id)
+                const copyPosts = [...this.state.posts]
+                copyPosts.splice(findIndex, 1)
+                this.setState({
+                    posts: copyPosts
+                })
+            })
+        } catch(err) {
+            console.log("There was an error deleting the post", id)
+        }
+    }
+
+
     componentDidMount() {
         this.getPosts()
     }
