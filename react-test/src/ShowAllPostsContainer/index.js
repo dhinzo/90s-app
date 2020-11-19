@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Image, Label } from 'semantic-ui-react'
 
 
 export default function AllPostsList(props){
@@ -11,12 +11,17 @@ export default function AllPostsList(props){
                 <Card.Header>
                     {post.title}
                 </Card.Header>
+                <Image
+                    src={post.img}/>
                 <Card.Meta>
                     {post.description}
                 </Card.Meta>
                 <Card.Description>
                     {post.owner}
                 </Card.Description>
+                <Label>
+                    {post.tags}
+                </Label>
             </Card.Content>
         </Card>
     )
