@@ -1,6 +1,8 @@
 import React from 'react'
 import { Modal, Icon, Card, Button, Image, Label } from 'semantic-ui-react'
 import NewPostForm from '../NewPostForm'
+import ModalLoginModal from '../LoginContainer'
+
 
 
 
@@ -30,10 +32,13 @@ export default function AllPostsList(props){
             </Card>
         )
     })
-    return(
+    return(  
+        <React.Fragment>    
+        <ModalLoginModal/>
         <Card.Group centered={true}>
             {allPosts}
         </Card.Group>
+        </React.Fragment>  
     )
 
 }
