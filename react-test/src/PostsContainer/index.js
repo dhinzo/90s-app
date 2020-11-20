@@ -4,8 +4,9 @@ import NewPostForm from '../NewPostForm'
 import PostToShow from '../ShowThisPost'
 import EditPost from '../EditPost'
 import LoginForm from '../Login'
+import AllUserPostsList from '../ShowUserPosts'
 // import ModalExampleModal from '../ShowPost'
-// import { Button, Header, Image, Modal} from 'semantic-ui-react'
+import { Button, Header, Image, Modal} from 'semantic-ui-react'
 
 
 export default class PostsContainer extends Component {
@@ -13,6 +14,7 @@ export default class PostsContainer extends Component {
         super(props)
         this.state ={
             posts: [],
+            userPosts:[],
             idOfPostToShow: -1,
             idOfPostToEdit: -1,
             loggedIn: false,
@@ -32,6 +34,21 @@ export default class PostsContainer extends Component {
 
             }    
         }
+
+    getUserPost = async () =>{
+        try{
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/userposts/"
+            const postsResponse = await fetch(url,{
+                credentials: 'include'
+            })
+            const postsJson= await postsResponse.json()
+            this.setState({
+                userPosts: postsJson.data
+        })
+        } catch (err){
+            console.log("Error getting User posts data", err)
+        }
+    }
     createPost = async (postToAdd) =>{
         try{
             const url = process.env.REACT_APP_API_URL + "/90s/posts/"
@@ -142,6 +159,7 @@ export default class PostsContainer extends Component {
 
     componentDidMount() {
         this.getPosts()
+        // this.getUserPost()
     }
     showPost = (idOfPostToShow) => {
         console.log("you are trying to show post with id: ", idOfPostToShow)
@@ -171,6 +189,7 @@ export default class PostsContainer extends Component {
                     &&
                 <h2>{this.state.loggedInUser}</h2>
                 }
+                <Button onClick={() => this.getUserPost()}>userPosts</Button>
                 <LoginForm login={this.login} />
                 <NewPostForm 
                 loggedInUser={this.state.loggedInUser}
@@ -181,6 +200,12 @@ export default class PostsContainer extends Component {
                     deletePost={this.deletePost}
                     editPost={this.editPost}
                     />
+                <AllUserPostsList
+                    userPosts={this.state.userPosts}
+                    showPost={this.showPost}
+                    deletePost={this.deletePost}
+                    editPost={this.editPost}
+                />
                     {
                         this.state.idOfPostToEdit !== -1 &&
                         <EditPost
