@@ -69,7 +69,7 @@ export default class PostsContainer extends Component {
                     posts: this.state.posts.filter(post => post.id !== id)
                 })
             }
-            this.getPosts()
+            //this.getPosts()
         } catch(err) {
             console.log("There was an error deleting the post", id)
         }
@@ -155,6 +155,7 @@ export default class PostsContainer extends Component {
                         showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
                         closeShowModal={this.closeShowModal}
                         getPosts={this.getPosts}
+                        deletePost={this.deletePost}
                     />
                 }
             </React.Fragment>
