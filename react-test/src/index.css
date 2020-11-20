@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#login-header{
+  background-color: teal;
+  height: 30px;
+  line-height: 5px;
+  color: whitesmoke
+}
+
+#header-button{
+  position: right;
+  border: solid grey;
+}

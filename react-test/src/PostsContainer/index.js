@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import NewPostForm from '../NewPostForm'
+import ModalLoginModal from '../LoginContainer'
 
 
 export default class PostsContainer extends Component {
@@ -55,6 +56,9 @@ export default class PostsContainer extends Component {
                     <h2>ALl Posts</h2>
                     <AllPostsList posts={this.state.posts}/>
                     <NewPostForm createPost={this.createPost}/>
+                    <ModalLoginModal>
+                        <label>Test</label>
+                    </ModalLoginModal>
                 </React.Fragment>
             )
         }
