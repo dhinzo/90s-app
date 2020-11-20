@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { Modal, Icon, Card, Button, Image, Label } from 'semantic-ui-react'
 import NewPostForm from '../NewPostForm'
 import ModalLoginModal from '../LoginContainer'
@@ -16,6 +17,12 @@ export default function AllPostsList(props){
                 <Card.Header>
                     {post.title}
                 </Card.Header>
+                <Card.Meta>
+                    {post.description}
+                </Card.Meta>
+                <Card.Description>
+                    {post.owner}
+                </Card.Description>
                 <Image raised
                     src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
             </Card.Content>
@@ -29,6 +36,12 @@ export default function AllPostsList(props){
                             {post.likes}
                     </span>  
                 </Card.Content>
+                <Button 
+                    basic color={"red"}
+                    onClick={() => props.deletePost(post.id)}>Delete</Button>
+                <Button
+                    basic color={"yellow"}
+                    onClick={() => props.editPost(post.id)}>Edit</Button>
             </Card>
         )
     })

@@ -13,9 +13,12 @@ export default class PostToShow extends Component {
 			likes: props.showThisPost.likes,
 			owner: props.showThisPost.owner,
 			tags: props.showThisPost.tags,
-			created_at: props.showThisPost.created_at
+			created_at: props.showThisPost.created_at,
+			id: props.showThisPost.id
 		}
 	}
+
+	
 	    
 
 	render() {
@@ -49,7 +52,11 @@ export default class PostToShow extends Component {
       						<input type="text" placeholder="Add Comment..."/>
     					</div>
     				</Card.Content>
-	    			<Button type="Submit" onClick={this.props.closeShowModal}>Back</Button>
+	    			<Button onClick={this.props.closeShowModal}>Back</Button>
+					<Button 
+						color="red"
+						onClick={() => this.props.deletePost(this.state.id)}>Delete
+						</Button>
 	    		</Card>
 			</Segment>
 		)
