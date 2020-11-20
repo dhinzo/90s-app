@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import NewPostForm from '../NewPostForm'
 import PostToShow from '../PostToShow'
+import EditPost from '../EditPost'
 
 
 export default class PostsContainer extends Component {
@@ -9,7 +10,8 @@ export default class PostsContainer extends Component {
         super(props)
         this.state ={
             posts: [],
-            idOfPostToShow: -1
+            idOfPostToShow: -1,
+            idOfPostToEdit: -1
         }
     }
     getPosts = async () =>{
@@ -74,6 +76,35 @@ export default class PostsContainer extends Component {
     }
 
 
+    editPost = (idOfPostToEdit) => {
+        console.log("You are trying to edit a post with the id of: ", idOfPostToEdit)
+        this.setState({
+            idOfPostToEdit: idOfPostToEdit
+        })
+    }
+
+    updatePost = async (updatedPost) => {
+        try {
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/" + this.state.idOfPostToEdit
+
+            const updatePostResponse = await fetch(url, {
+                method: "PUT",
+                body: JSON.stringify(updatedPost),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const updatePostJson = await updatePostResponse.json()
+            console.log(updatePostJson)
+            this.setState({
+                idOfPostToEdit: -1
+            })
+            this.getPosts()
+        } catch(err) {
+            console.log("error trying to edit post: ", updatedPost)
+        }
+    }
+
     componentDidMount() {
         this.getPosts()
     }
@@ -92,6 +123,12 @@ export default class PostsContainer extends Component {
         })
     }
 
+    closeEditModal = () => {
+        this.setState({
+            idOfPostToEdit: -1
+        })
+    }
+
     render(){
         return(
             <React.Fragment>
@@ -100,7 +137,17 @@ export default class PostsContainer extends Component {
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
-                    deletePost={this.deletePost}/>
+                    deletePost={this.deletePost}
+                    editPost={this.editPost}
+                    />
+                    {
+                        this.state.idOfPostToEdit !== -1 &&
+                        <EditPost
+                        postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
+                        updatePost={this.updatePost}
+                        closeEditModal={this.closeEditModal}
+                        />
+                    }
                 {
                     this.state.idOfPostToShow !== -1 
                     &&

@@ -37,6 +37,9 @@ export default function AllPostsList(props){
                 <Button 
                     basic color={"red"}
                     onClick={() => props.deletePost(post.id)}>Delete</Button>
+                <Button
+                    basic color={"yellow"}
+                    onClick={() => props.editPost(post.id)}>Edit</Button>
             </Card>
         )
     })
