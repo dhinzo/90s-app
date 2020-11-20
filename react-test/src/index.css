@@ -13,8 +13,13 @@ code {
     monospace;
 }
 
+body .ui.cards>.card{
+  /*  box-shadow:  6px 6px 2px 1px rgba(255, 0, 255, .2);*/
+    box-shadow: none;
+  }
+
 #login-header{
-  background-color: teal;
+  background-color: rgb(3, 24, 151);
   height: 30px;
   line-height: 5px;
   color: whitesmoke
@@ -23,4 +28,20 @@ code {
 #header-button{
   position: right;
   border: solid grey;
+}
+
+.modal-body {
+  background-color: rgb(253, 254, 248);
+}
+
+#login-button{
+  background-color: rgb(0, 121, 174);
+  z-index: 5;
+  position: absolute;
+}
+
+.ui focus input{
+  display: block;
+  position: absolute;
+  align-items: center;
 }
