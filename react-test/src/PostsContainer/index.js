@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import NewPostForm from '../NewPostForm'
+import PostToShow from '../ShowThisPost'
+// import ModalExampleModal from '../ShowPost'
+// import { Button, Header, Image, Modal} from 'semantic-ui-react'
 
 
 export default class PostsContainer extends Component {
     constructor(props){
         super(props)
         this.state ={
-            posts: []
+            posts: [],
+            idOfPostToShow: -1,
+            openedModal: null
         }
     }
     getPosts = async () =>{
@@ -47,6 +52,27 @@ export default class PostsContainer extends Component {
     componentDidMount() {
         this.getPosts()
     }
+    showPost = (idOfPostToShow) => {
+        console.log("you are trying to show post with id: ", idOfPostToShow)
+        this.setState({
+        idOfPostToShow: idOfPostToShow
+        })
+    }
+    closeShowModal = () => {
+        this.setState({
+            idOfPostToShow: -1
+        })
+    }
+    openModal = (id) => {
+        this.setState({
+            openedModal: id
+        })
+    }
+    closeModal = () => {
+        this.setState({
+            openedModal: null
+        })
+    }
 
 
         render(){
@@ -55,6 +81,15 @@ export default class PostsContainer extends Component {
                     <h2>ALl Posts</h2>
                     <AllPostsList posts={this.state.posts}/>
                     <NewPostForm createPost={this.createPost}/>
+                    {
+                    this.state.idOfPostToShow !== -1 
+                    &&
+                    <PostToShow
+                        showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
+                        closeShowModal={this.closeShowModal}
+                    />
+                    }
+
                 </React.Fragment>
             )
         }
