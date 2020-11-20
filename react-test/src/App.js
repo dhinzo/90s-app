@@ -7,7 +7,7 @@ class App extends React.Component {
   render(){
   return (
     <div className="App">
-      <h1>Title Page Title</h1>
+      <h1>Thats SoOo 90s!</h1>
       <PostContainer/>
     </div>
   );
