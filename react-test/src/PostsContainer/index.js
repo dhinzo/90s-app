@@ -50,14 +50,21 @@ export default class PostsContainer extends Component {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
             const deletePostResponse = await fetch(url, {
                 method: "DELETE",
-            }).then( res => {
-                const findIndex = this.state.posts.findIndex(post => post.id === id)
-                const copyPosts = [...this.state.posts]
-                copyPosts.splice(findIndex, 1)
-                this.setState({
-                    posts: copyPosts
-                })
+            // }).then( res => {
+            //     const findIndex = this.state.posts.findIndex(post => post.id === id)
+            //     const copyPosts = [...this.state.posts]
+            //     copyPosts.splice(findIndex, 1)
+            //     this.setState({
+            //         posts: copyPosts
+            //     })
             })
+            const deletePostJson = await deletePostResponse.json()
+            console.log("Here is the deletePostJson: ", deletePostJson)
+            if(deletePostJson.status === 200 || deletePostJson.status === 201) {
+                this.setState({
+                    posts: this.state.posts.filter(post => post.id !== id)
+                })
+            }
         } catch(err) {
             console.log("There was an error deleting the post", id)
         }
@@ -73,7 +80,10 @@ export default class PostsContainer extends Component {
             return(
                 <React.Fragment>
                     <h2>ALl Posts</h2>
-                    <AllPostsList posts={this.state.posts}/>
+                    <AllPostsList
+                        posts={this.state.posts}
+                        deletePost={this.deletePost}
+                        />
                     <NewPostForm createPost={this.createPost}/>
                 </React.Fragment>
             )
