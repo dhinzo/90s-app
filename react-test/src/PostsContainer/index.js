@@ -47,17 +47,44 @@ export default class PostsContainer extends Component {
         }
     }
 
+    deletePost = async (id) => {
+        try {
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
+            const deletePostResponse = await fetch(url, {
+                method: "DELETE",
+            // }).then( res => {
+            //     const findIndex = this.state.posts.findIndex(post => post.id === id)
+            //     const copyPosts = [...this.state.posts]
+            //     copyPosts.splice(findIndex, 1)
+            //     this.setState({
+            //         posts: copyPosts
+            //     })
+            })
+            const deletePostJson = await deletePostResponse.json()
+            console.log("Here is the deletePostJson: ", deletePostJson)
+            if(deletePostJson.status === 200 || deletePostJson.status === 201) {
+                this.setState({
+                    posts: this.state.posts.filter(post => post.id !== id)
+                })
+            }
+            this.getPosts()
+        } catch(err) {
+            console.log("There was an error deleting the post", id)
+        }
+    }
+
+
     componentDidMount() {
         this.getPosts()
     }
 
     showPost = (idOfPostToShow) => {
         console.log("you are trying to show post with id: ", idOfPostToShow)
-
-        this.setState({
-        idOfPostToShow: idOfPostToShow
-        })
-    }
+            this.setState({
+                idOfPostToShow: idOfPostToShow
+            })
+        }
+    
 
     closeShowModal = () => {
         this.setState({
@@ -69,16 +96,18 @@ export default class PostsContainer extends Component {
         return(
             <React.Fragment>
                 <h2>All Throwback Posts</h2>
+                <NewPostForm createPost={this.createPost}/>
                 <AllPostsList 
                     posts={this.state.posts}
-                    showPost={this.showPost}/>
-                <NewPostForm createPost={this.createPost}/>
+                    showPost={this.showPost}
+                    deletePost={this.deletePost}/>
                 {
                     this.state.idOfPostToShow !== -1 
                     &&
                     <PostToShow
                         showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
                         closeShowModal={this.closeShowModal}
+                        getPosts={this.getPosts}
                     />
                 }
             </React.Fragment>
