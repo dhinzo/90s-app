@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import NewPostForm from '../NewPostForm'
+import PostToShow from '../PostToShow'
 
 
 export default class PostsContainer extends Component {
     constructor(props){
         super(props)
         this.state ={
-            posts: []
+            posts: [],
+            idOfPostToShow: -1
         }
     }
     getPosts = async () =>{
@@ -44,18 +46,42 @@ export default class PostsContainer extends Component {
             console.log("Error adding post", err);
         }
     }
+
     componentDidMount() {
         this.getPosts()
     }
 
+    showPost = (idOfPostToShow) => {
+        console.log("you are trying to show post with id: ", idOfPostToShow)
 
-        render(){
-            return(
-                <React.Fragment>
-                    <h2>ALl Posts</h2>
-                    <AllPostsList posts={this.state.posts}/>
-                    <NewPostForm createPost={this.createPost}/>
-                </React.Fragment>
-            )
-        }
+        this.setState({
+        idOfPostToShow: idOfPostToShow
+        })
     }
+
+    closeShowModal = () => {
+        this.setState({
+            idOfPostToShow: -1
+        })
+    }
+
+    render(){
+        return(
+            <React.Fragment>
+                <h2>All Throwback Posts</h2>
+                <AllPostsList 
+                    posts={this.state.posts}
+                    showPost={this.showPost}/>
+                <NewPostForm createPost={this.createPost}/>
+                {
+                    this.state.idOfPostToShow !== -1 
+                    &&
+                    <PostToShow
+                        showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
+                        closeShowModal={this.closeShowModal}
+                    />
+                }
+            </React.Fragment>
+        )
+    }
+}
