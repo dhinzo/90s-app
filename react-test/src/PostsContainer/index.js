@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
-import NewPostForm from '../NewPostForm'
+//import NewPostForm from '../NewPostForm'
 import PostToShow from '../PostToShow'
 import EditPost from '../EditPost'
+import NewPostModal from '../NewPostModal'
 
 
 export default class PostsContainer extends Component {
@@ -133,7 +134,10 @@ export default class PostsContainer extends Component {
         return(
             <React.Fragment>
                 <h2>All Throwback Posts</h2>
-                <NewPostForm createPost={this.createPost}/>
+                <NewPostModal
+                    createPost={this.createPost} />
+                {/*<NewPostForm createPost={this.createPost}/>*/}
+
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
