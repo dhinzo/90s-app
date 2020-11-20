@@ -21,7 +21,7 @@ export default class PostToShow extends Component {
 	render() {
 		return(
 			<Segment> 
-  				<Card styles="box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);">
+  				<Card>
     				<Image 
     					src={this.state.img} alt="90s pic"/>
 	    			<Card.Content>
