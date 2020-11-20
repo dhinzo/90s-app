@@ -1,8 +1,11 @@
 import React from 'react'
-import { Button, Header, Image, Modal, Dropdown } from 'semantic-ui-react'
+import { Button, Header, Image, Modal, Divider, Form, Grid, Segment } from 'semantic-ui-react'
+
+
 
 function ModalLoginModal() {
   const [open, setOpen] = React.useState(false)
+
 
   return (
     <Modal
@@ -20,24 +23,41 @@ function ModalLoginModal() {
                 onClick={() => setOpen(false)}
                 />
         </Modal.Header>
-        <Modal.Content image>
-            <Image size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped />
-            <Modal.Description>
-                <Header>Default Profile Image</Header>
+        <Modal.Content class='modal-body'>
+        <Segment placeholder>
+    <Grid columns={2} relaxed='very' stackable>
+      <Grid.Column>
+        <Form>
+          <Form.Input
+            icon='user'
+            iconPosition='left'
+            label='Username'
+            placeholder='Username'
+          />
+          <Form.Input
+            icon='lock'
+            iconPosition='left'
+            label='Password'
+            type='password'
+          />
 
-            </Modal.Description>
-            <Modal.Actions>
-                <Button color='blue' onClick={() => setOpen(false)}>
-                Register
-                </Button>
-                <Button
-                content="Log-In"
-                labelPosition='right'
-                icon='checkmark'
-                onClick={() => setOpen(false)}
-                positive
-                />
-            </Modal.Actions>
+          <Button 
+            content='Sign On'
+            color='blue'
+            primary
+            onClick={() => setOpen(false)}
+            positive 
+          />
+        </Form>
+      </Grid.Column>
+
+      <Grid.Column verticalAlign='middle'>
+        <Button content='Sign up' icon='signup' size='big' />
+      </Grid.Column>
+    </Grid>
+
+    <Divider vertical>Or</Divider>
+  </Segment>
         </Modal.Content>
     </Modal>
   )
