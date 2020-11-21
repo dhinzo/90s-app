@@ -1,5 +1,5 @@
 // import React from 'react'
-import { Form, Input, Label, Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Form, Label, Button, Modal } from 'semantic-ui-react'
 import React, {useState} from 'react'
 
 export default function NewPostModal(props) {
@@ -8,14 +8,14 @@ export default function NewPostModal(props) {
     const [eachEntry, setEachEntry] = useState(initialInputState)
     const { title, img, description, likes, owner, tags} = eachEntry
   
-    const handleInputChange = e => {
-    setEachEntry({ ...eachEntry, [e.target.name]: e.target.value })
-  }
+  const handleInputChange = e => {
+  setEachEntry({ ...eachEntry, [e.target.name]: e.target.value })
+}
 
-    const handleSubmit = e => {
-      props.createPost(eachEntry)
-      setOpen(false)
-    } 
+  const handleSubmit = e => {
+    props.createPost(eachEntry)
+    setOpen(false)
+  } 
 
   return (
     <Modal
