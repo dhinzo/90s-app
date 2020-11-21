@@ -153,6 +153,7 @@ export default class PostsContainer extends Component {
                 loggedInUser: loginJson.data.username
               })
               console.log(loginJson.data);
+              this.getUserPost()
             }
         } catch(error) {
           console.error("Error trying to log in")
