@@ -16,6 +16,7 @@ function ModalLoginModal() {
         >
         <Modal.Header id='login-header'>Sign On
             <Button
+
                 id='header-close'
                 icon='x'
                 floated='right'
@@ -25,38 +26,32 @@ function ModalLoginModal() {
         </Modal.Header>
         <Modal.Content class='modal-body'>
         <Segment placeholder>
-    <Grid columns={2} relaxed='very' stackable>
-      <Grid.Column>
+
         <Form>
           <Form.Input
             icon='user'
             iconPosition='left'
             label='Username'
             placeholder='Username'
+            autocomplete='Username'
           />
           <Form.Input
             icon='lock'
             iconPosition='left'
             label='Password'
             type='password'
+            autocomplete='current-password'
           />
 
           <Button 
             content='Sign On'
-            color='blue'
+            color='#0E6EB8'
             primary
             onClick={() => setOpen(false)}
             positive 
           />
         </Form>
-      </Grid.Column>
 
-      <Grid.Column verticalAlign='middle'>
-        <Button content='Sign up' icon='signup' size='big' />
-      </Grid.Column>
-    </Grid>
-
-    <Divider vertical>Or</Divider>
   </Segment>
         </Modal.Content>
     </Modal>

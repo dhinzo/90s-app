@@ -47,3 +47,11 @@
     -moz-background-clip: padding-box;
     background-clip: padding-box;
 }
+
+#login-header{
+  background-color: rgb(3, 24, 151);
+  padding: none;
+  height: 20px;
+  line-height: 5px;
+  color: whitesmoke
+}
