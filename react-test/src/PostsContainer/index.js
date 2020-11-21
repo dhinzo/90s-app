@@ -14,6 +14,7 @@ export default class PostsContainer extends Component {
         super(props)
         this.state ={
             posts: [],
+            likes: [],
             userPosts:[],
             idOfPostToShow: -1,
             idOfPostToEdit: -1,
@@ -27,8 +28,10 @@ export default class PostsContainer extends Component {
             const postsResponse = await fetch(url)
             const postsJson = await postsResponse.json()
             this.setState({
-                posts: postsJson.data
+                posts: postsJson.data.posts,
+                likes: postsJson.data.likes
             })
+            console.log(this.state.likes)
         }catch(err){
             console.log("Error getting posts data", err)
 
