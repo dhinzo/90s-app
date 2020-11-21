@@ -132,23 +132,7 @@ export default class PostsContainer extends Component {
             console.log("error trying to edit post: ", updatedPost)
         }
     }
-    register = async (registerUser) =>{
-        console.log("register() in App.js called with the following info", registerUser);
-        const url = process.env.REACT_APP_API_URL + '/90s/users/register/'
-        try {
-            const registerUserResponse = await fetch(url, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(registerUser)
-            })
-        const registerUserJson = await registerUserResponse.json()
-        console.log(registerUserJson);
-        } catch (err){
-            console.log("Error in registering", registerUser);
-        }
-    }
+
     login = async (loginInfo) => {
         console.log("login() in App.js called with the following info", loginInfo);
         const url = process.env.REACT_APP_API_URL + '/90s/users/login/'
@@ -179,6 +163,39 @@ export default class PostsContainer extends Component {
           console.error(error)
         }
       }
+    register = async (registerUser) =>{
+        console.log("register() in App.js called with the following info", registerUser);
+        const url = process.env.REACT_APP_API_URL + '/90s/users/register/'
+        try {
+            const registerUserResponse = await fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(registerUser)
+            })
+        const registerUserJson = await registerUserResponse.json()
+        console.log(registerUserJson);
+        } catch (err){
+            console.log("Error in registering", registerUser);
+        }
+    }
+    logout = async () =>{
+        console.log("Logout has occured for this username");
+        try{
+            const url = process.env.REACT_APP_API_URL + "/90s/users/logout/"
+            const logoutResponse = await fetch(url)
+            const logoutJson = await logoutResponse.json()
+            this.setState({
+                loggedInUser: null
+            })
+            console.log(logoutJson)
+        }catch(err){
+            console.log("Error getting posts data", err)
+
+            }    
+        }
+    
 
     componentDidMount() {
         this.getPosts()
@@ -217,6 +234,7 @@ export default class PostsContainer extends Component {
                 <RegisterModal 
                 login={this.login}
                 register={this.register}/>
+                <Button onClick={() => this.logout()}>Log Out</Button>
                 <NewPostForm 
                 loggedInUser={this.state.loggedInUser}
                 createPost={this.createPost}/>

@@ -16,7 +16,7 @@ export default function RegisterModal(props) {
         e.preventDefault()
         //lifting up state
         props.register(eachEntry)
-        props.login(eachEntry)
+        // props.login(eachEntry)
         setOpen(false)
     }
 
@@ -28,7 +28,7 @@ export default function RegisterModal(props) {
         open={open}
         trigger={<Button>Register</Button>}
         >
-        <Modal.Header id='login-header'>Sign On
+        <Modal.Header id='login-header'>Register
             <Button
 
                 id='header-close'
@@ -64,7 +64,7 @@ export default function RegisterModal(props) {
           />
 
           <Button 
-            content='Sign On'
+            content='Register'
             color='#0E6EB8'
             primary
             onClick={handleSubmit}
