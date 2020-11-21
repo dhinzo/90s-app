@@ -4,6 +4,13 @@ import AllPostsList from '../ShowAllPosts'
 import PostToShow from '../PostToShow'
 import EditPost from '../EditPost'
 import NewPostModal from '../NewPostModal'
+import NewPostForm from '../NewPostForm'
+//import PostToShow from '../ShowThisPost'
+//import EditPost from '../EditPost'
+import LoginForm from '../Login'
+import AllUserPostsList from '../ShowUserPosts'
+// import ModalExampleModal from '../ShowPost'
+import { Button, Header, Image, Modal} from 'semantic-ui-react'
 
 
 export default class PostsContainer extends Component {
@@ -11,8 +18,11 @@ export default class PostsContainer extends Component {
         super(props)
         this.state ={
             posts: [],
+            userPosts:[],
             idOfPostToShow: -1,
-            idOfPostToEdit: -1
+            idOfPostToEdit: -1,
+            loggedIn: false,
+            loggedInUser: null
         }
     }
     getPosts = async () =>{
@@ -28,10 +38,26 @@ export default class PostsContainer extends Component {
 
             }    
         }
+
+    getUserPost = async () =>{
+        try{
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/userposts/"
+            const postsResponse = await fetch(url,{
+                credentials: 'include'
+            })
+            const postsJson= await postsResponse.json()
+            this.setState({
+                userPosts: postsJson.data
+        })
+        } catch (err){
+            console.log("Error getting User posts data", err)
+        }
+    }
     createPost = async (postToAdd) =>{
         try{
             const url = process.env.REACT_APP_API_URL + "/90s/posts/"
             const createPostResponse = await fetch(url,{
+                credentials: 'include',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -105,18 +131,46 @@ export default class PostsContainer extends Component {
             console.log("error trying to edit post: ", updatedPost)
         }
     }
+    login = async (loginInfo) => {
+        console.log("login() in App.js called with the following info", loginInfo);
+        const url = process.env.REACT_APP_API_URL + '/90s/users/login/'
+      
+        try {
+          const loginResponse = await fetch(url, {
+            credentials: 'include', // sends cookie
+            method: 'POST',
+            body: JSON.stringify(loginInfo),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          console.log("loginResponse", loginResponse);
+          const loginJson = await loginResponse.json()
+          console.log("loginJson", loginJson);
+      
+          if(loginResponse.status === 200) {
+              this.setState({
+                loggedIn: true,
+                loggedInUser: loginJson.data.username
+              })
+              console.log(loginJson.data);
+            }
+        } catch(error) {
+          console.error("Error trying to log in")
+          console.error(error)
+        }
+      }
 
     componentDidMount() {
         this.getPosts()
+        // this.getUserPost()
     }
-
     showPost = (idOfPostToShow) => {
         console.log("you are trying to show post with id: ", idOfPostToShow)
-            this.setState({
-                idOfPostToShow: idOfPostToShow
-            })
-        }
-    
+        this.setState({
+        idOfPostToShow: idOfPostToShow
+        })
+    }
 
     closeShowModal = () => {
         this.setState({
@@ -138,12 +192,28 @@ export default class PostsContainer extends Component {
                     createPost={this.createPost} />
                 {/*<NewPostForm createPost={this.createPost}/>*/}
 
+                {
+                    this.state.loggedIn === true
+                    &&
+                <h2>{this.state.loggedInUser}</h2>
+                }
+                <Button onClick={() => this.getUserPost()}>userPosts</Button>
+                <LoginForm login={this.login} />
+                <NewPostForm 
+                loggedInUser={this.state.loggedInUser}
+                createPost={this.createPost}/>
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
                     />
+                <AllUserPostsList
+                    userPosts={this.state.userPosts}
+                    showPost={this.showPost}
+                    deletePost={this.deletePost}
+                    editPost={this.editPost}
+                />
                     {
                         this.state.idOfPostToEdit !== -1 &&
                         <EditPost

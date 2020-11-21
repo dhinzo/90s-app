@@ -10,7 +10,7 @@ export default class NewPostForm extends Component {
             img: '',
             description: '',
             likes: 0,
-            owner: '',
+            owner: props.loggedInUser,
             tags: []
 
         }
@@ -65,14 +65,14 @@ export default class NewPostForm extends Component {
                     placeholder="Description"
                     onChange={this.handleChange}
                     />
-                    <Label>Owner:</Label>
+                    {/*<Label>Owner:</Label>
                     <Form.Input 
                     type="text"
                     name="owner"
                     value={this.state.owner}
                     placeholder="owner"
-                    onChange={this.handleChange}
-                    /><Label>Tags:</Label>
+                    onChange={this.handleChange}/>*/}
+                    <Label>Tags:</Label>
                     <Form.Input 
                     type="text"
                     name="tags"

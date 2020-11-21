@@ -1,21 +1,17 @@
 import React from 'react'
 
-import { Icon, Card, Button, Image } from 'semantic-ui-react'
-// import NewPostForm from '../NewPostForm'
+import {Icon, Card, Button, Image } from 'semantic-ui-react'
 
 
 
-export default function AllPostsList(props){
-    const [open, setOpen] = React.useState(false)
-    //console.log("Here are the props in AllPostsList: ", props);
-    const allPosts = props.posts.map(post => {
+
+export default function AllUserPostsList(props){
+    // const [open, setOpen] = React.useState(false)
+    console.log(props);
+    const allPosts = props.userPosts.map(post => {
     
     return(
-        <Card 
-            raised="true"
-            key={post.id}
-            onClick={post.id}
-            medium circular>
+        <Card raised key={post.id} onClick={post.id}  medium circular>
             <Card.Content textAlign={"center"}>
                 <Card.Header>
                     {post.title}
@@ -27,19 +23,16 @@ export default function AllPostsList(props){
                    {post.owner.username}
                     
                 </Card.Description>
-                <Image
-                    raised="true"
-                    src={post.img}
-                    onClick={ ()=> props.showPost(post.id)}
-                    medium circular />
+                <Image raised
+                    src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
             </Card.Content>
                 <Card.Content extra>
-                    <a className="left floated">
+                    <a class="left floated">
                     <Icon name='user' />
                         {post.owner.username}
                     </a>
-                    <span className="right floated">
-                        <i className="heart like icon"></i>
+                    <span class="right floated">
+                        <i class="heart like icon"></i>
                             {post.likes}
                     </span>  
                 </Card.Content>
