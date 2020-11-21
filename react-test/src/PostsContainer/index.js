@@ -3,7 +3,8 @@ import AllPostsList from '../ShowAllPosts'
 import NewPostForm from '../NewPostForm'
 import PostToShow from '../ShowThisPost'
 import EditPost from '../EditPost'
-import LoginForm from '../Login'
+// import LoginForm from '../Login'
+import LoginModal from '../LoginContainer'
 import AllUserPostsList from '../ShowUserPosts'
 // import ModalExampleModal from '../ShowPost'
 import { Button, Header, Image, Modal} from 'semantic-ui-react'
@@ -194,7 +195,7 @@ export default class PostsContainer extends Component {
                 <h2>{this.state.loggedInUser}</h2>
                 }
                 <Button onClick={() => this.getUserPost()}>userPosts</Button>
-                <LoginForm login={this.login} />
+                <LoginModal login={this.login} />
                 <NewPostForm 
                 loggedInUser={this.state.loggedInUser}
                 createPost={this.createPost}/>
