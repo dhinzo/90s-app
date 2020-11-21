@@ -9,7 +9,8 @@ export default class PostsContainer extends Component {
         super(props)
         this.state ={
             posts: [],
-            idOfPostToShow: -1
+            likes: [],
+            idOfPostToShow: -1,
         }
     }
     getPosts = async () =>{
@@ -18,8 +19,11 @@ export default class PostsContainer extends Component {
             const postsResponse = await fetch(url)
             const postsJson = await postsResponse.json()
             this.setState({
-                posts: postsJson.data
+                posts: postsJson.data.posts,
+                likes: postsJson.data.likes
+
             })
+            console.log(this.state.likes)
         }catch(err){
             console.log("Error getting posts data", err)
 
@@ -29,6 +33,7 @@ export default class PostsContainer extends Component {
         try{
             const url = process.env.REACT_APP_API_URL + "/90s/posts/"
             const createPostResponse = await fetch(url,{
+                credentials: 'include',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -84,13 +89,43 @@ export default class PostsContainer extends Component {
                 idOfPostToShow: idOfPostToShow
             })
         }
-    
+
+ 
 
     closeShowModal = () => {
         this.setState({
             idOfPostToShow: -1
         })
     }
+
+   addLike = async (id) => {
+        console.log(id)
+        try {
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/like/" + id
+            const likePostResponse = await fetch(url, {
+                method: "POST",
+                credentials: "include",
+            // }).then( res => {
+            //     const findIndex = this.state.posts.findIndex(post => post.id === id)
+            //     const copyPosts = [...this.state.posts]
+            //    setState({
+            //        likes: 
+            //    })
+            })
+            const likePostJson = await likePostResponse.json()
+            console.log("Here is the likePostJson: ", likePostJson)
+            if(likePostJson.status === 200 || likePostJson.status === 201) {
+                this.setState({
+                    likes: this.state.likes + 1   
+                })
+            }
+            this.getPosts()
+//          this.getLikes()
+        } catch(err) {
+            console.log("There was an error liking this post", err)
+        }
+    }
+
 
     render(){
         return(
@@ -100,7 +135,8 @@ export default class PostsContainer extends Component {
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
-                    deletePost={this.deletePost}/>
+                    deletePost={this.deletePost}
+                    addLike={this.addLike} />
                 {
                     this.state.idOfPostToShow !== -1 
                     &&
@@ -108,6 +144,7 @@ export default class PostsContainer extends Component {
                         showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
                         closeShowModal={this.closeShowModal}
                         getPosts={this.getPosts}
+                        addLike={this.addLike}
                     />
                 }
             </React.Fragment>

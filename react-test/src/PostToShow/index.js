@@ -32,30 +32,30 @@ export default class PostToShow extends Component {
 	    				<Card.Meta>
         					<span className='date'>{this.state.created_at}</span>
         				</Card.Meta>
-	    			<Card.Description>
-	    				{this.state.description}
-	    			</Card.Description>
+	    				<Card.Description>
+	    					{this.state.description}
+	    				</Card.Description>
 	    			</Card.Content>
 	    			<Card.Content extra>
-      					<a class="left floated">
-        			<Icon name='user' />
+      					<a className="right floated">
+        				<Icon name='user' />
         				{this.state.owner}
       					</a>
-      					<a class="right floated">
+      					<a className="left floated">
         				<Icon name='like' />
         				{this.state.likes} likes
       					</a>
     				</Card.Content>
     				<Card.Content extra>
-    					<div class="ui large transparent left icon input left floated">
-      						<i class="heart outline icon"></i>
+    					<div className="ui large transparent left icon input left floated">
+      						<i className="heart outline icon"></i>
       						<input type="text" placeholder="Add Comment..."/>
     					</div>
     				</Card.Content>
 	    			<Button onClick={this.props.closeShowModal}>Back</Button>
 					<Button 
 						color="red"
-						onClick={() => this.props.deletePost(this.state.id)}>Delete
+						onClick={() => this.props.deletePost(this.state.id)} >Delete
 						</Button>
 	    		</Card>
 			</Segment>

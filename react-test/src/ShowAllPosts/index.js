@@ -10,7 +10,7 @@ export default function AllPostsList(props){
     console.log(props);
     const allPosts = props.posts.map(post => {
     return(
-        <Card raised key={post.id} onClick={post.id}  medium circular>
+        <Card raised key={post.id} onClick={()=> {}}  medium circular>
             <Card.Content textAlign={"center"}>
                 <Card.Header>
                     {post.title}
@@ -18,25 +18,22 @@ export default function AllPostsList(props){
                 <Card.Meta>
                     {post.description}
                 </Card.Meta>
-                <Card.Description>
-                    {post.owner}
-                </Card.Description>
+                
                 <Image raised
                     src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
             </Card.Content>
                 <Card.Content extra>
-                    <a class="left floated">
-                    <Icon name='user' />
+                    <a className="right floated" onClick={() =>{}}>
+                    <Icon className='trash' onClick={() => props.deletePost(post.id)}/>
+                    <Icon className='user' />
                         {post.owner}
+                    
                     </a>
-                    <span class="right floated">
-                        <i class="heart like icon"></i>
+                    <span className="left floated">
+                        <i className="heart like icon"  onClick={() => props.addLike(post.id)}></i>
                             {post.likes}
                     </span>  
                 </Card.Content>
-                <Button 
-                    basic color={"red"}
-                    onClick={() => props.deletePost(post.id)}>Delete</Button>
             </Card>
         )
     })
