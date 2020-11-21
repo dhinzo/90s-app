@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
+
 import PostToShow from '../PostToShow'
 import EditPost from '../EditPost'
-// import LoginForm from '../Login'
 import LoginModal from '../LoginContainer'
 import RegisterModal from '../RegisterContainer'
 import AllUserPostsList from '../ShowUserPosts'
-import { Button } from 'semantic-ui-react'
+import { Button, Header, Image, Modal} from 'semantic-ui-react'
 import NewPostModal from '../NewPostModal'
-
-
 
 export default class PostsContainer extends Component {
     constructor(props){
@@ -116,6 +114,7 @@ export default class PostsContainer extends Component {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + this.state.idOfPostToEdit
 
             const updatePostResponse = await fetch(url, {
+                credentials: 'include',
                 method: "PUT",
                 body: JSON.stringify(updatedPost),
                 headers: {
