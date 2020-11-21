@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import NewPostForm from '../NewPostForm'
-import PostToShow from '../ShowThisPost'
+import PostToShow from '../PostToShow'
 import EditPost from '../EditPost'
-// import LoginForm from '../Login'
 import LoginModal from '../LoginContainer'
 import RegisterModal from '../RegisterContainer'
 import AllUserPostsList from '../ShowUserPosts'
-// import ModalExampleModal from '../ShowPost'
 import { Button, Header, Image, Modal} from 'semantic-ui-react'
 
 
@@ -116,6 +114,7 @@ export default class PostsContainer extends Component {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + this.state.idOfPostToEdit
 
             const updatePostResponse = await fetch(url, {
+                credentials: 'include',
                 method: "PUT",
                 body: JSON.stringify(updatedPost),
                 headers: {
@@ -258,15 +257,15 @@ export default class PostsContainer extends Component {
                         closeEditModal={this.closeEditModal}
                         />
                     }
-                {
-                    this.state.idOfPostToShow !== -1 
-                    &&
-                    <PostToShow
-                        showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
-                        closeShowModal={this.closeShowModal}
-                        getPosts={this.getPosts}
-                    />
-                }
+                    {
+                        this.state.idOfPostToShow !== -1 
+                        &&
+                        <PostToShow
+                            showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
+                            closeShowModal={this.closeShowModal}
+                            getPosts={this.getPosts}
+                        />
+                    }
             </React.Fragment>
         )
     }
