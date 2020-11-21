@@ -21,7 +21,11 @@ export default function PostToShow(props){
 	    			<Card.Content extra>
       					<a className="left floated">
         			<Icon name='user' />
+<<<<<<< HEAD
         				{props.showThisPost.owner.username}
+=======
+        				{props.showThisPost.owner}
+>>>>>>> b0234cd1a2e947a03c133c4839ac17e105df62fb
       					</a>
       					<a className="right floated">
         				<Icon name='like' />

@@ -2,9 +2,15 @@ import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import PostToShow from '../PostToShow'
 import EditPost from '../EditPost'
+<<<<<<< HEAD
 //import EditPostModal from '../EditPostModal'
 import NewPostModal from '../NewPostModal'
 import LoginForm from '../Login'
+=======
+// import LoginForm from '../Login'
+import LoginModal from '../LoginContainer'
+import RegisterModal from '../RegisterContainer'
+>>>>>>> b0234cd1a2e947a03c133c4839ac17e105df62fb
 import AllUserPostsList from '../ShowUserPosts'
 import { Button } from 'semantic-ui-react'
 
@@ -14,6 +20,7 @@ export default class PostsContainer extends Component {
         super(props)
         this.state ={
             posts: [],
+            likes: [],
             userPosts:[],
             idOfPostToShow: -1,
             idOfPostToEdit: -1,
@@ -27,8 +34,10 @@ export default class PostsContainer extends Component {
             const postsResponse = await fetch(url)
             const postsJson = await postsResponse.json()
             this.setState({
-                posts: postsJson.data
+                posts: postsJson.data.posts,
+                likes: postsJson.data.likes
             })
+            console.log(this.state.likes)
         }catch(err){
             console.log("Error getting posts data", err)
 
@@ -127,6 +136,7 @@ export default class PostsContainer extends Component {
             console.log("error trying to edit post: ", updatedPost)
         }
     }
+
     login = async (loginInfo) => {
         console.log("login() in App.js called with the following info", loginInfo);
         const url = process.env.REACT_APP_API_URL + '/90s/users/login/'
@@ -150,12 +160,46 @@ export default class PostsContainer extends Component {
                 loggedInUser: loginJson.data.username
               })
               console.log(loginJson.data);
+              this.getUserPost()
             }
         } catch(error) {
           console.error("Error trying to log in")
           console.error(error)
         }
       }
+    register = async (registerUser) =>{
+        console.log("register() in App.js called with the following info", registerUser);
+        const url = process.env.REACT_APP_API_URL + '/90s/users/register/'
+        try {
+            const registerUserResponse = await fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(registerUser)
+            })
+        const registerUserJson = await registerUserResponse.json()
+        console.log(registerUserJson);
+        } catch (err){
+            console.log("Error in registering", registerUser);
+        }
+    }
+    logout = async () =>{
+        console.log("Logout has occured for this username");
+        try{
+            const url = process.env.REACT_APP_API_URL + "/90s/users/logout/"
+            const logoutResponse = await fetch(url)
+            const logoutJson = await logoutResponse.json()
+            this.setState({
+                loggedInUser: null
+            })
+            console.log(logoutJson)
+        }catch(err){
+            console.log("Error getting posts data", err)
+
+            }    
+        }
+    
 
     componentDidMount() {
         this.getPosts()
@@ -195,8 +239,19 @@ export default class PostsContainer extends Component {
                 <h2>{this.state.loggedInUser}</h2>
                 }
                 <Button onClick={() => this.getUserPost()}>userPosts</Button>
+<<<<<<< HEAD
                 <LoginForm login={this.login} />
                 
+=======
+                <LoginModal login={this.login} />
+                <RegisterModal 
+                login={this.login}
+                register={this.register}/>
+                <Button onClick={() => this.logout()}>Log Out</Button>
+                <NewPostForm 
+                loggedInUser={this.state.loggedInUser}
+                createPost={this.createPost}/>
+>>>>>>> b0234cd1a2e947a03c133c4839ac17e105df62fb
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
