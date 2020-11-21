@@ -14,7 +14,6 @@ export default function AllPostsList(props){
         <Card 
             raised="true"
             key={post.id}
-            onClick={post.id}
             medium circular>
             <Card.Content textAlign={"center"}>
                 <Card.Header>
@@ -46,9 +45,9 @@ export default function AllPostsList(props){
                 <Button 
                     basic color={"red"}
                     onClick={() => props.deletePost(post.id)}>Delete</Button>
-                <Button
+                {/*<Button
                     basic color={"yellow"}
-                    onClick={() => props.editPost(post.id)}>Edit</Button>
+                    onClick={() => props.editPost(post.id)}>Edit</Button>*/}
             </Card>
         )
     })

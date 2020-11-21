@@ -1,5 +1,5 @@
 import React from 'react'
-
+import EditPost from '../EditPost'
 import {Icon, Card, Button, Image } from 'semantic-ui-react'
 
 
@@ -39,6 +39,7 @@ export default function AllUserPostsList(props){
                 <Button 
                     basic color={"red"}
                     onClick={() => props.deletePost(post.id)}>Delete</Button>
+                {/*<EditPostModal />?*/}
                 <Button
                     basic color={"yellow"}
                     onClick={() => props.editPost(post.id)}>Edit</Button>

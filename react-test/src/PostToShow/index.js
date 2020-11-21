@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Card, Icon, Image, Segment, Button } from 'semantic-ui-react'
 
 export default function PostToShow(props){
@@ -21,7 +21,7 @@ export default function PostToShow(props){
 	    			<Card.Content extra>
       					<a className="left floated">
         			<Icon name='user' />
-        				{props.showThisPost.owner}
+        				{props.showThisPost.owner.username}
       					</a>
       					<a className="right floated">
         				<Icon name='like' />

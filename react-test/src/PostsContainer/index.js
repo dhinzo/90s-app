@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
-//import NewPostForm from '../NewPostForm'
 import PostToShow from '../PostToShow'
 import EditPost from '../EditPost'
+//import EditPostModal from '../EditPostModal'
 import NewPostModal from '../NewPostModal'
-import NewPostForm from '../NewPostForm'
-//import PostToShow from '../ShowThisPost'
-//import EditPost from '../EditPost'
 import LoginForm from '../Login'
 import AllUserPostsList from '../ShowUserPosts'
-// import ModalExampleModal from '../ShowPost'
-import { Button, Header, Image, Modal} from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 
 
 export default class PostsContainer extends Component {
@@ -169,6 +165,7 @@ export default class PostsContainer extends Component {
         console.log("you are trying to show post with id: ", idOfPostToShow)
         this.setState({
         idOfPostToShow: idOfPostToShow
+        // conditionally render the modal when there is a post to show
         })
     }
 
@@ -190,7 +187,7 @@ export default class PostsContainer extends Component {
                 <h2>All Throwback Posts</h2>
                 <NewPostModal
                     createPost={this.createPost} />
-                {/*<NewPostForm createPost={this.createPost}/>*/}
+            
 
                 {
                     this.state.loggedIn === true
@@ -199,9 +196,7 @@ export default class PostsContainer extends Component {
                 }
                 <Button onClick={() => this.getUserPost()}>userPosts</Button>
                 <LoginForm login={this.login} />
-                <NewPostForm 
-                loggedInUser={this.state.loggedInUser}
-                createPost={this.createPost}/>
+                
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
@@ -213,6 +208,7 @@ export default class PostsContainer extends Component {
                     showPost={this.showPost}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
+                    
                 />
                     {
                         this.state.idOfPostToEdit !== -1 &&
@@ -221,6 +217,9 @@ export default class PostsContainer extends Component {
                         updatePost={this.updatePost}
                         closeEditModal={this.closeEditModal}
                         />
+                    }
+                    {
+                        
                     }
                 {
                     this.state.idOfPostToShow !== -1 
