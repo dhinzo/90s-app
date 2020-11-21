@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
-
+import NewPostModal from '../NewPostModal'
 import PostToShow from '../PostToShow'
 import EditPost from '../EditPost'
 import LoginModal from '../LoginContainer'
 import RegisterModal from '../RegisterContainer'
 import AllUserPostsList from '../ShowUserPosts'
 import { Button, Header, Image, Modal} from 'semantic-ui-react'
-import NewPostModal from '../NewPostModal'
+
 
 export default class PostsContainer extends Component {
     constructor(props){
@@ -34,10 +34,8 @@ export default class PostsContainer extends Component {
             console.log(this.state.likes)
         }catch(err){
             console.log("Error getting posts data", err)
-
             }    
         }
-
     getUserPost = async () =>{
         try{
             const url = process.env.REACT_APP_API_URL + "/90s/posts/userposts/"
@@ -74,7 +72,6 @@ export default class PostsContainer extends Component {
             console.log("Error adding post", err);
         }
     }
-
     deletePost = async (id) => {
         try {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
@@ -95,24 +92,20 @@ export default class PostsContainer extends Component {
                     posts: this.state.posts.filter(post => post.id !== id)
                 })
             }
-            //this.getPosts()
+            this.getPosts()
         } catch(err) {
             console.log("There was an error deleting the post", id)
         }
     }
-
-
     editPost = (idOfPostToEdit) => {
         console.log("You are trying to edit a post with the id of: ", idOfPostToEdit)
         this.setState({
             idOfPostToEdit: idOfPostToEdit
         })
     }
-
     updatePost = async (updatedPost) => {
         try {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + this.state.idOfPostToEdit
-
             const updatePostResponse = await fetch(url, {
                 credentials: 'include',
                 method: "PUT",
@@ -131,11 +124,9 @@ export default class PostsContainer extends Component {
             console.log("error trying to edit post: ", updatedPost)
         }
     }
-
     login = async (loginInfo) => {
         console.log("login() in App.js called with the following info", loginInfo);
         const url = process.env.REACT_APP_API_URL + '/90s/users/login/'
-      
         try {
           const loginResponse = await fetch(url, {
             credentials: 'include', // sends cookie
@@ -148,7 +139,6 @@ export default class PostsContainer extends Component {
           console.log("loginResponse", loginResponse);
           const loginJson = await loginResponse.json()
           console.log("loginJson", loginJson);
-      
           if(loginResponse.status === 200) {
               this.setState({
                 loggedIn: true,
@@ -191,11 +181,8 @@ export default class PostsContainer extends Component {
             console.log(logoutJson)
         }catch(err){
             console.log("Error getting posts data", err)
-
             }    
         }
-    
-
     componentDidMount() {
         this.getPosts()
         // this.getUserPost()
@@ -204,30 +191,22 @@ export default class PostsContainer extends Component {
         console.log("you are trying to show post with id: ", idOfPostToShow)
         this.setState({
         idOfPostToShow: idOfPostToShow
-        // conditionally render the modal when there is a post to show
         })
     }
-
     closeShowModal = () => {
         this.setState({
             idOfPostToShow: -1
         })
     }
-
     closeEditModal = () => {
         this.setState({
             idOfPostToEdit: -1
         })
     }
-
     render(){
         return(
             <React.Fragment>
                 <h2>All Throwback Posts</h2>
-                <NewPostModal
-                    createPost={this.createPost} />
-            
-
                 {
                     this.state.loggedIn === true
                     &&
@@ -239,7 +218,12 @@ export default class PostsContainer extends Component {
                 login={this.login}
                 register={this.register}/>
                 <Button onClick={() => this.logout()}>Log Out</Button>
-                
+                {
+                this.state.loggedIn === true
+                &&
+                <NewPostModal
+                    createPost={this.createPost} />
+                }
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
@@ -251,7 +235,6 @@ export default class PostsContainer extends Component {
                     showPost={this.showPost}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
-                    
                 />
                     {
                         this.state.idOfPostToEdit !== -1 &&
@@ -262,17 +245,14 @@ export default class PostsContainer extends Component {
                         />
                     }
                     {
-                        
+                        this.state.idOfPostToShow !== -1 
+                        &&
+                        <PostToShow
+                            showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
+                            closeShowModal={this.closeShowModal}
+                            getPosts={this.getPosts}
+                        />
                     }
-                {
-                    this.state.idOfPostToShow !== -1 
-                    &&
-                    <PostToShow
-                        showThisPost={this.state.posts.find((post) => post._id === this.state.idOfPostToShow)}
-                        closeShowModal={this.closeShowModal}
-                        deletePost={this.deletePost}
-                    />
-                }
             </React.Fragment>
         )
     }
