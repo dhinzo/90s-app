@@ -5,6 +5,7 @@ import PostToShow from '../ShowThisPost'
 import EditPost from '../EditPost'
 // import LoginForm from '../Login'
 import LoginModal from '../LoginContainer'
+import RegisterModal from '../RegisterContainer'
 import AllUserPostsList from '../ShowUserPosts'
 // import ModalExampleModal from '../ShowPost'
 import { Button, Header, Image, Modal} from 'semantic-ui-react'
@@ -131,6 +132,23 @@ export default class PostsContainer extends Component {
             console.log("error trying to edit post: ", updatedPost)
         }
     }
+    register = async (registerUser) =>{
+        console.log("register() in App.js called with the following info", registerUser);
+        const url = process.env.REACT_APP_API_URL + '/90s/users/register/'
+        try {
+            const registerUserResponse = await fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(registerUser)
+            })
+        const registerUserJson = await registerUserResponse.json()
+        console.log(registerUserJson);
+        } catch (err){
+            console.log("Error in registering", registerUser);
+        }
+    }
     login = async (loginInfo) => {
         console.log("login() in App.js called with the following info", loginInfo);
         const url = process.env.REACT_APP_API_URL + '/90s/users/login/'
@@ -196,6 +214,9 @@ export default class PostsContainer extends Component {
                 }
                 <Button onClick={() => this.getUserPost()}>userPosts</Button>
                 <LoginModal login={this.login} />
+                <RegisterModal 
+                login={this.login}
+                register={this.register}/>
                 <NewPostForm 
                 loggedInUser={this.state.loggedInUser}
                 createPost={this.createPost}/>
