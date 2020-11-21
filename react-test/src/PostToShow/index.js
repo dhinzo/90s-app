@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Card, Icon, Image, Segment, Button } from 'semantic-ui-react'
-
 export default function PostToShow(props){
 	// console.log("Here are the props in PostToShow: ", props)
-	
 		return(
 			<Segment> 
   				<Card styles="box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);">
@@ -21,11 +19,7 @@ export default function PostToShow(props){
 	    			<Card.Content extra>
       					<a className="left floated">
         			<Icon name='user' />
-<<<<<<< HEAD
         				{props.showThisPost.owner.username}
-=======
-        				{props.showThisPost.owner}
->>>>>>> b0234cd1a2e947a03c133c4839ac17e105df62fb
       					</a>
       					<a className="right floated">
         				<Icon name='like' />
@@ -46,5 +40,4 @@ export default function PostToShow(props){
 	    		</Card>
 			</Segment>
 		)
-	
 }

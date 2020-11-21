@@ -2,17 +2,13 @@ import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import PostToShow from '../PostToShow'
 import EditPost from '../EditPost'
-<<<<<<< HEAD
-//import EditPostModal from '../EditPostModal'
-import NewPostModal from '../NewPostModal'
-import LoginForm from '../Login'
-=======
 // import LoginForm from '../Login'
 import LoginModal from '../LoginContainer'
 import RegisterModal from '../RegisterContainer'
->>>>>>> b0234cd1a2e947a03c133c4839ac17e105df62fb
 import AllUserPostsList from '../ShowUserPosts'
 import { Button } from 'semantic-ui-react'
+import NewPostModal from '../NewPostModal'
+
 
 
 export default class PostsContainer extends Component {
@@ -239,19 +235,12 @@ export default class PostsContainer extends Component {
                 <h2>{this.state.loggedInUser}</h2>
                 }
                 <Button onClick={() => this.getUserPost()}>userPosts</Button>
-<<<<<<< HEAD
-                <LoginForm login={this.login} />
-                
-=======
                 <LoginModal login={this.login} />
                 <RegisterModal 
                 login={this.login}
                 register={this.register}/>
                 <Button onClick={() => this.logout()}>Log Out</Button>
-                <NewPostForm 
-                loggedInUser={this.state.loggedInUser}
-                createPost={this.createPost}/>
->>>>>>> b0234cd1a2e947a03c133c4839ac17e105df62fb
+                
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
@@ -280,9 +269,8 @@ export default class PostsContainer extends Component {
                     this.state.idOfPostToShow !== -1 
                     &&
                     <PostToShow
-                        showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
+                        showThisPost={this.state.posts.find((post) => post._id === this.state.idOfPostToShow)}
                         closeShowModal={this.closeShowModal}
-                        getPosts={this.getPosts}
                         deletePost={this.deletePost}
                     />
                 }
