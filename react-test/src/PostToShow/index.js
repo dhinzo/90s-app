@@ -6,7 +6,7 @@ export default function PostToShow(props){
 	
 		return(
 			<Segment> 
-  				<Card>
+  				<Card styles="box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);">
     				<Image 
     					src={props.showThisPost.img} alt="90s pic"/>
 	    			<Card.Content>
@@ -14,16 +14,6 @@ export default function PostToShow(props){
 	    				<Card.Meta>
         					<span className='date'>{props.showThisPost.created_at}</span>
         				</Card.Meta>
-	    				<Card.Description>
-	    					{this.state.description}
-	    				</Card.Description>
-	    			</Card.Content>
-	    			<Card.Content extra>
-      					<a className="right floated">
-        				<Icon name='user' />
-        				{this.state.owner}
-      					</a>
-      					<a className="left floated">
 	    			<Card.Description>
 	    				{props.showThisPost.description}
 	    			</Card.Description>
@@ -31,7 +21,7 @@ export default function PostToShow(props){
 	    			<Card.Content extra>
       					<a className="left floated">
         			<Icon name='user' />
-        				{props.showThisPost.owner}
+        				{props.showThisPost.owner.username}
       					</a>
       					<a className="right floated">
         				<Icon name='like' />
@@ -47,7 +37,8 @@ export default function PostToShow(props){
 	    			<Button onClick={props.closeShowModal}>Back</Button>
 					<Button 
 						color="red"
-						onClick={() => this.props.deletePost(this.state.id)} >Delete</Button>
+						onClick={() => props.deletePost(props.showThisPost.id)}>Delete
+						</Button>
 	    		</Card>
 			</Segment>
 		)

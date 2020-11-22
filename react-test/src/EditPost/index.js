@@ -85,5 +85,3 @@ export default class EditPost extends Component {
         )
     }
 }
-
-

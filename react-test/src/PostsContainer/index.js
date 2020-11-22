@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import NewPostForm from '../NewPostForm'
-import PostToShow from '../ShowThisPost'
+import PostToShow from '../PostToShow'
 import EditPost from '../EditPost'
 // import LoginForm from '../Login'
 import LoginModal from '../LoginContainer'
@@ -17,7 +17,6 @@ export default class PostsContainer extends Component {
         this.state ={
             posts: [],
             likes: [],
-            idOfPostToShow: -1,
             userPosts:[],
             idOfPostToShow: -1,
             idOfPostToEdit: -1,
@@ -25,7 +24,6 @@ export default class PostsContainer extends Component {
             loggedInUser: null
         }
     }
-
     getPosts = async () =>{
         try{
             const url = process.env.REACT_APP_API_URL + "/90s/posts/"
@@ -36,6 +34,7 @@ export default class PostsContainer extends Component {
                 likes: postsJson.data.likes
             })
             console.log(this.state.likes)
+            console.log(postsJson)
         }catch(err){
             console.log("Error getting posts data", err)
 
@@ -56,7 +55,6 @@ export default class PostsContainer extends Component {
             console.log("Error getting User posts data", err)
         }
     }
-
     createPost = async (postToAdd) =>{
         try{
             const url = process.env.REACT_APP_API_URL + "/90s/posts/"
@@ -166,7 +164,6 @@ export default class PostsContainer extends Component {
           console.error(error)
         }
       }
-
     register = async (registerUser) =>{
         console.log("register() in App.js called with the following info", registerUser);
         const url = process.env.REACT_APP_API_URL + '/90s/users/register/'
@@ -184,8 +181,6 @@ export default class PostsContainer extends Component {
             console.log("Error in registering", registerUser);
         }
     }
-
-
     logout = async () =>{
         console.log("Logout has occured for this username");
         try{
@@ -201,8 +196,7 @@ export default class PostsContainer extends Component {
 
             }    
         }
-
- 
+    
 
     componentDidMount() {
         this.getPosts()
@@ -215,13 +209,7 @@ export default class PostsContainer extends Component {
         })
     }
 
-    closeShowModal = () => {
-        this.setState({
-            idOfPostToShow: -1
-        })
-    }
-
-   addLike = async (id) => {
+    addLike = async (id) => {
         console.log(id)
         try {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/like/" + id
@@ -249,6 +237,11 @@ export default class PostsContainer extends Component {
         }
     }
 
+    closeShowModal = () => {
+        this.setState({
+            idOfPostToShow: -1
+        })
+    }
 
     closeEditModal = () => {
         this.setState({
@@ -275,17 +268,19 @@ export default class PostsContainer extends Component {
                 loggedInUser={this.state.loggedInUser}
                 createPost={this.createPost}/>
                 <AllPostsList 
+                    likes={this.state.likes}
                     posts={this.state.posts}
                     showPost={this.showPost}
                     deletePost={this.deletePost}
-                    addLike={this.addLike}
                     editPost={this.editPost}
+                    addLike={this.addLike}
                     />
                 <AllUserPostsList
                     userPosts={this.state.userPosts}
                     showPost={this.showPost}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
+                    addLike={this.addLike}
                 />
                     {
                         this.state.idOfPostToEdit !== -1 &&
@@ -295,7 +290,6 @@ export default class PostsContainer extends Component {
                         closeEditModal={this.closeEditModal}
                         />
                     }
-
                 {
                     this.state.idOfPostToShow !== -1 
                     &&
@@ -303,7 +297,6 @@ export default class PostsContainer extends Component {
                         showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
                         closeShowModal={this.closeShowModal}
                         getPosts={this.getPosts}
-                        addLike={this.addLike}
                     />
                 }
             </React.Fragment>
