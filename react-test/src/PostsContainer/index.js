@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import NewPostModal from '../NewPostModal'
 import PostToShow from '../PostToShow'
+import PostToShowUser from '../PostToShowUser'
 import EditPostModal from '../EditPostModal'
 import LoginModal from '../LoginContainer'
 import RegisterModal from '../RegisterContainer'
@@ -229,6 +230,13 @@ export default class PostsContainer extends Component {
         conditionalView: 'show this post'
         })
     }
+    showPostUser = (idOfPostToShow) => {
+        console.log("you are trying to show post with id: ", idOfPostToShow)
+        this.setState({
+        idOfPostToShow: idOfPostToShow,
+        conditionalView: 'show this post user'
+        })
+    }
 
     closeShowModal = () => {
         this.setState({
@@ -305,7 +313,7 @@ export default class PostsContainer extends Component {
                     &&
                 <AllUserPostsList
                     userPosts={this.state.userPosts}
-                    showPost={this.showPost}
+                    showPost={this.showPostUser}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
                 />
@@ -328,6 +336,16 @@ export default class PostsContainer extends Component {
                         <PostToShow
                             showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
                             closeShowModal={this.closeShowModal}
+                            getPosts={this.getPosts}
+                            state={this.state}
+                        />
+                    }
+                    {
+                        this.state.idOfPostToShow !== -1 && this.state.conditionalView === 'show this post user'
+                        &&
+                        <PostToShowUser
+                            showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
+                            closeShowModal={this.closeUserShowModal}
                             getPosts={this.getPosts}
                             state={this.state}
                         />
