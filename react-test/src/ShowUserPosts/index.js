@@ -5,10 +5,10 @@ import {Icon, Card, Button, Image } from 'semantic-ui-react'
 
 
 
-export default function AllPostsList(props){
-    const [open, setOpen] = React.useState(false)
+export default function AllUserPostsList(props){
+    // const [open, setOpen] = React.useState(false)
     console.log(props);
-    const allPosts = props.posts.map(post => {
+    const allPosts = props.userPosts.map(post => {
     
     return(
         <Card raised key={post.id} onClick={post.id}  medium circular>
@@ -23,7 +23,7 @@ export default function AllPostsList(props){
                    {post.owner.username}
                     
                 </Card.Description>
-                <Image raised true
+                <Image raised
                     src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
             </Card.Content>
                 <Card.Content extra>
@@ -36,16 +36,19 @@ export default function AllPostsList(props){
                             {post.likes}
                     </span>  
                 </Card.Content>
+                <Button 
+                    basic color={"red"}
+                    onClick={() => props.deletePost(post.id)}>Delete</Button>
+                <Button
+                    basic color={"yellow"}
+                    onClick={() => props.editPost(post.id)}>Edit</Button>
             </Card>
         )
     })
-    return(  
-        <React.Fragment>    
-        <ModalLoginModal/>
+    return(
         <Card.Group centered={true}>
             {allPosts}
         </Card.Group>
-        </React.Fragment>  
     )
 
 }

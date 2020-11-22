@@ -3,7 +3,7 @@ import { Button, Header, Image, Modal, Divider, Form, Grid, Segment } from 'sema
 
 
 
-export default function LoginModal(props) {
+export default function RegisterModal(props) {
     const [open, setOpen] = React.useState(false)
     const intialInputState = {username: '', password: ''}
     const [eachEntry, setEachEntry] = useState(intialInputState)
@@ -15,7 +15,8 @@ export default function LoginModal(props) {
      const handleSubmit = (e) =>{
         e.preventDefault()
         //lifting up state
-        props.login(eachEntry)
+        props.register(eachEntry)
+        // props.login(eachEntry)
         setOpen(false)
     }
 
@@ -25,9 +26,9 @@ export default function LoginModal(props) {
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
-        trigger={<Button>Sign On</Button>}
+        trigger={<Button>Register</Button>}
         >
-        <Modal.Header id='login-header'>Sign On
+        <Modal.Header id='login-header'>Register
             <Button
 
                 id='header-close'
@@ -63,7 +64,7 @@ export default function LoginModal(props) {
           />
 
           <Button 
-            content='Sign On'
+            content='Register'
             color='#0E6EB8'
             primary
             onClick={handleSubmit}
