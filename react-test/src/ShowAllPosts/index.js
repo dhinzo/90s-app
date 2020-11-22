@@ -23,7 +23,7 @@ export default function AllPostsList(props){
                    {post.owner.username}
                     
                 </Card.Description>
-                <Image raised
+                <Image raised true
                     src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
             </Card.Content>
                 <Card.Content extra>

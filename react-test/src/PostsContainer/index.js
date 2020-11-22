@@ -19,7 +19,8 @@ export default class PostsContainer extends Component {
             idOfPostToShow: -1,
             idOfPostToEdit: -1,
             loggedIn: false,
-            loggedInUser: null
+            loggedInUser: null,
+            conditionalView: ''
         }
     }
     getPosts = async () =>{
@@ -155,7 +156,7 @@ export default class PostsContainer extends Component {
                 loggedInUser: loginJson.data.username
               })
               console.log(loginJson.data);
-              this.getUserPost()
+            //   this.getUserPost()
             }
         } catch(error) {
           console.error("Error trying to log in")
@@ -186,7 +187,8 @@ export default class PostsContainer extends Component {
             const logoutResponse = await fetch(url)
             const logoutJson = await logoutResponse.json()
             this.setState({
-                loggedInUser: null
+                loggedInUser: null,
+                loggedIn: false
             })
             console.log(logoutJson)
         }catch(err){
@@ -199,6 +201,17 @@ export default class PostsContainer extends Component {
     componentDidMount() {
         this.getPosts()
         // this.getUserPost()
+    }
+    showAllPosts = () =>{
+        this.setState({
+            conditionalView: ''
+        })
+    }
+    showUserPosts = () =>{
+        this.setState({
+            conditionalView: 'show user posts'
+        })
+        this.getUserPost()
     }
     showPost = (idOfPostToShow) => {
         console.log("you are trying to show post with id: ", idOfPostToShow)
@@ -228,27 +241,52 @@ export default class PostsContainer extends Component {
                     &&
                 <h2>{this.state.loggedInUser}</h2>
                 }
-                <Button onClick={() => this.getUserPost()}>userPosts</Button>
+                <Button onClick={() => this.showUserPosts()}>My Posts</Button>
+                <Button onClick={() => this.showAllPosts()}>All Posts</Button>
+                {
+                    this.state.loggedIn === false
+                    &&
                 <LoginModal login={this.login} />
+                }
+                {
+                    this.state.loggedIn === false
+                    &&
                 <RegisterModal 
                 login={this.login}
                 register={this.register}/>
+                }
+                {
+                    this.state.loggedIn === true
+                    &&
                 <Button onClick={() => this.logout()}>Log Out</Button>
+                }
+                {
+                    this.state.loggedIn === true
+                    &&
                 <NewPostForm 
                 loggedInUser={this.state.loggedInUser}
                 createPost={this.createPost}/>
+                }
+                {
+                    this.state.conditionalView === ''
+                    &&
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
                     />
+                }
+                {
+                    this.state.conditionalView === 'show user posts'
+                    &&
                 <AllUserPostsList
                     userPosts={this.state.userPosts}
                     showPost={this.showPost}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
                 />
+                }
                     {
                         this.state.idOfPostToEdit !== -1 &&
                         <EditPost
