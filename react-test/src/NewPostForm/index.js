@@ -72,7 +72,7 @@ export default class NewPostForm extends Component {
                     value={this.state.owner}
                     placeholder="owner"
                     onChange={this.handleChange}*/}
-                    /><Label>Tags:</Label>
+                    <Label>Tags:</Label>
                     <Form.Input 
                     type="text"
                     name="tags"

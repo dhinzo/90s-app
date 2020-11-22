@@ -133,10 +133,11 @@ export default class PostsContainer extends Component {
                 idOfPostToEdit: -1,
                 conditionalView: 'show user posts'
             })
-            this.getUserPosts()
+
         } catch(err) {
             console.log("error trying to edit post: ", updatedPost)
         }
+        this.getUserPost()
     }
 
     login = async (loginInfo) => {
@@ -233,6 +234,12 @@ export default class PostsContainer extends Component {
         this.setState({
             idOfPostToShow: -1,
             conditionalView: ''
+        })
+    }
+    closeUserShowModal = () => {
+        this.setState({
+            idOfPostToShow: -1,
+            conditionalView: 'show user posts'
         })
     }
 

@@ -35,14 +35,7 @@ export default function PostToShow(props){
     					</div>
     				</Card.Content>
 	    			<Button onClick={props.closeShowModal}>Back</Button>
-					{
-						props.state.loggedIn === true
-						&&
-					<Button 
-						color="red"
-						onClick={() => props.deletePost(props.showThisPost.id)}>Delete
-						</Button>
-					}
+					
 	    		</Card>
 			</Segment>
 		)
