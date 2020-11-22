@@ -29,12 +29,6 @@ export default function AllPostsList(props){
                             {post.likes}
                     </span>  
                 </Card.Content>
-                <Button 
-                    basic color={"red"}
-                    onClick={() => props.deletePost(post.id)}>Delete</Button>
-                <Button
-                    basic color={"yellow"}
-                    onClick={() => props.editPost(post.id)}>Edit</Button>
             </Card>
         )
     })

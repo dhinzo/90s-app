@@ -1,5 +1,5 @@
 import React from 'react'
-//import EditPostModal from '../EditPostModal'
+import EditPostModal from '../EditPostModal'
 import {Icon, Card, Button, Image } from 'semantic-ui-react'
 
 
@@ -39,11 +39,7 @@ export default function AllUserPostsList(props){
                 <Button 
                     basic color={"red"}
                     onClick={() => props.deletePost(post.id)}>Delete</Button>
-                {/*WHY ARE THESE UNDEFINED?
-                <EditPostModal
-                    editPost={props.editPost(post.id)}
-                    thisPostToEdit={props.postToEdit}
-                    userPost={props.userPosts} />*/}
+                {/*WHY ARE THESE UNDEFINED?*/}
                 <Button
                     basic color={"yellow"}
                     onClick={() => props.editPost(post.id)}>Edit</Button>

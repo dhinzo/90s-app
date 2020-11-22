@@ -6,13 +6,21 @@ function EditPostModal(props) {
     // state for modal
     const [open, setOpen] = React.useState(false)
         // variables for useState (form fields and their respective current state values)
-        const initialInputState = { title: props.thisPostToEdit.title, img: props.thisPostToEdit.img, description: props.thisPostToEdit.description, likes: props.thisPostToEdit.likes, owner: props.thisPostToEdit.owner, tags: props.thisPostToEdit.tags }
+        const initialInputState = {
+            id: props.postToEdit.id, 
+            title: props.postToEdit.title, 
+            img: props.postToEdit.img, 
+            description: props.postToEdit.description, 
+            likes: props.postToEdit.likes, 
+            owner: props.postToEdit.owner.username, 
+            tags: props.postToEdit.tags 
+        }
 
         
 
 
         const [eachEntry, setEachEntry] = useState(initialInputState)
-        const { title, img, description, likes, owner, tags} = eachEntry
+        const { title, img, description, tags} = eachEntry
 
     const handleInputChange = e => {
         setEachEntry({ ...eachEntry, [e.target.name]: e.target.value })
@@ -30,10 +38,8 @@ function EditPostModal(props) {
             <Modal
                 onClose={() => setOpen(false)}
                 onOpen={() => setOpen(true)}
-                open={open}
-                trigger={<Button 
-                            basic
-                            color={"yellow"}>Edit Post</Button>}
+                
+                open={() => props.editPost(props.postToEdit.id)}
                 >
             <Modal.Header>Edit Your Post</Modal.Header>
             <Form>
@@ -42,14 +48,14 @@ function EditPostModal(props) {
                 <Modal.Description>
                 <Label htmlFor="title">Post Title</Label>
                 <Form.Input
-                    name={title}
+                    name="title"
                     placeholder={title}
                     onChange={handleInputChange}
                     value={title}
                 />
                 <Label htmlForr="img">Image Link</Label>
                 <Form.Input
-                    name={img}
+                    name="img"
                     placeholder="Enter an Image URL"
                     onChange={handleInputChange}
                     value={img}
