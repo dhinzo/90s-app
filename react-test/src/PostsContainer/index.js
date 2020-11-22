@@ -218,13 +218,15 @@ export default class PostsContainer extends Component {
     showPost = (idOfPostToShow) => {
         console.log("you are trying to show post with id: ", idOfPostToShow)
         this.setState({
-        idOfPostToShow: idOfPostToShow
+        idOfPostToShow: idOfPostToShow,
+        conditionalView: 'show this post'
         })
     }
 
     closeShowModal = () => {
         this.setState({
-            idOfPostToShow: -1
+            idOfPostToShow: -1,
+            conditionalView: ''
         })
     }
 
@@ -283,8 +285,6 @@ export default class PostsContainer extends Component {
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
-                    deletePost={this.deletePost}
-                    editPost={this.editPost}
                     />
                 }
                 {
@@ -306,12 +306,13 @@ export default class PostsContainer extends Component {
                         />
                     }
                     {
-                        this.state.idOfPostToShow !== -1 
+                        this.state.idOfPostToShow !== -1 && this.state.conditionalView === 'show this post'
                         &&
                         <PostToShow
                             showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
                             closeShowModal={this.closeShowModal}
                             getPosts={this.getPosts}
+                            state={this.state}
                         />
                     }
             </React.Fragment>
