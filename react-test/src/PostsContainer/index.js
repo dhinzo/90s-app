@@ -188,7 +188,9 @@ export default class PostsContainer extends Component {
             const logoutJson = await logoutResponse.json()
             this.setState({
                 loggedInUser: null,
-                loggedIn: false
+                loggedIn: false,
+                conditionalView: ''
+
             })
             console.log(logoutJson)
         }catch(err){
@@ -241,8 +243,16 @@ export default class PostsContainer extends Component {
                     &&
                 <h2>{this.state.loggedInUser}</h2>
                 }
+                {
+                    this.state.loggedIn === true 
+                    &&
                 <Button onClick={() => this.showUserPosts()}>My Posts</Button>
+                }
+                {
+                    this.state.loggedIn === true 
+                    &&
                 <Button onClick={() => this.showAllPosts()}>All Posts</Button>
+                }
                 {
                     this.state.loggedIn === false
                     &&
