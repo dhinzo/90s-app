@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
-import NewPostForm from '../NewPostForm'
+import NewPostModal from '../NewPostModal'
 import PostToShow from '../PostToShow'
-import EditPost from '../EditPost'
+import EditPostModal from '../EditPostModal'
 import LoginModal from '../LoginContainer'
 import RegisterModal from '../RegisterContainer'
 import AllUserPostsList from '../ShowUserPosts'
@@ -80,6 +80,7 @@ export default class PostsContainer extends Component {
         try {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
             const deletePostResponse = await fetch(url, {
+                credentials: 'include',
                 method: "DELETE",
             // }).then( res => {
             //     const findIndex = this.state.posts.findIndex(post => post.id === id)
@@ -93,10 +94,13 @@ export default class PostsContainer extends Component {
             console.log("Here is the deletePostJson: ", deletePostJson)
             if(deletePostJson.status === 200 || deletePostJson.status === 201) {
                 this.setState({
-                    posts: this.state.posts.filter(post => post.id !== id)
+                    posts: this.state.posts.filter(post => post.id !== id),
+                    conditionalView: 'show user posts'
+                    
                 })
+                this.getPosts()
+                this.getUserPosts()
             }
-            this.getPosts()
         } catch(err) {
             console.log("There was an error deleting the post", id)
         }
@@ -104,9 +108,10 @@ export default class PostsContainer extends Component {
 
 
     editPost = (idOfPostToEdit) => {
-        console.log("You are trying to edit a post with the id of: ", idOfPostToEdit)
+        // console.log("You are trying to edit a post with the id of: ", idOfPostToEdit)
         this.setState({
-            idOfPostToEdit: idOfPostToEdit
+            idOfPostToEdit: idOfPostToEdit,
+            conditionalView: "edit this post"
         })
     }
 
@@ -125,9 +130,10 @@ export default class PostsContainer extends Component {
             const updatePostJson = await updatePostResponse.json()
             console.log(updatePostJson)
             this.setState({
-                idOfPostToEdit: -1
+                idOfPostToEdit: -1,
+                conditionalView: 'show user posts'
             })
-            this.getPosts()
+            this.getUserPosts()
         } catch(err) {
             console.log("error trying to edit post: ", updatedPost)
         }
@@ -275,7 +281,7 @@ export default class PostsContainer extends Component {
                 {
                     this.state.loggedIn === true
                     &&
-                <NewPostForm 
+                <NewPostModal 
                 loggedInUser={this.state.loggedInUser}
                 createPost={this.createPost}/>
                 }
@@ -298,11 +304,15 @@ export default class PostsContainer extends Component {
                 />
                 }
                     {
-                        this.state.idOfPostToEdit !== -1 &&
-                        <EditPost
+                        this.state.idOfPostToEdit !== -1 && this.state.conditionalView === "edit this post"
+                        &&
+                        <EditPostModal
                         postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
                         updatePost={this.updatePost}
                         closeEditModal={this.closeEditModal}
+                        editPost={this.editPost}
+                        showUserPosts={this.showUserPosts}
+                        getUserPost={this.getUserPost}
                         />
                     }
                     {
