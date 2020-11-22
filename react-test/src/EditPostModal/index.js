@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { Form, Label, Button, Modal } from 'semantic-ui-react'
 
 function EditPostModal(props) {
+    console.log("these are the props in editpostmodal: ", props)
     // state for modal
     const [open, setOpen] = React.useState(false)
         // variables for useState (form fields and their respective current state values)
-        const initialInputState = { title: props.postToEdit.title, img: props.postToEdit.img, description: props.postToEdit.description, likes: props.postToEdit.likes, owner: props.postToEdit.owner, tags: props.postToEdit.tags }
+        const initialInputState = { title: props.thisPostToEdit.title, img: props.thisPostToEdit.img, description: props.thisPostToEdit.description, likes: props.thisPostToEdit.likes, owner: props.thisPostToEdit.owner, tags: props.thisPostToEdit.tags }
+
+        
 
 
         const [eachEntry, setEachEntry] = useState(initialInputState)
@@ -28,7 +31,9 @@ function EditPostModal(props) {
                 onClose={() => setOpen(false)}
                 onOpen={() => setOpen(true)}
                 open={open}
-                trigger={<Button>Create Throwback</Button>}
+                trigger={<Button 
+                            basic
+                            color={"yellow"}>Edit Post</Button>}
                 >
             <Modal.Header>Edit Your Post</Modal.Header>
             <Form>
@@ -37,7 +42,7 @@ function EditPostModal(props) {
                 <Modal.Description>
                 <Label htmlFor="title">Post Title</Label>
                 <Form.Input
-                    name="title"
+                    name={title}
                     placeholder={title}
                     onChange={handleInputChange}
                     value={title}

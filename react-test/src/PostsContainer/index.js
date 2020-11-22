@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import NewPostModal from '../NewPostModal'
 import PostToShow from '../PostToShow'
-import EditPost from '../EditPost'
+//import EditPost from '../EditPost'
 import LoginModal from '../LoginContainer'
 import RegisterModal from '../RegisterContainer'
 import AllUserPostsList from '../ShowUserPosts'
-import { Button, Header, Image, Modal} from 'semantic-ui-react'
+import { Button} from 'semantic-ui-react'
 
 
 export default class PostsContainer extends Component {
@@ -31,7 +31,7 @@ export default class PostsContainer extends Component {
                 posts: postsJson.data.posts,
                 likes: postsJson.data.likes
             })
-            console.log(this.state.likes)
+            // console.log(this.state.likes)
         }catch(err){
             console.log("Error getting posts data", err)
             }    
@@ -62,7 +62,7 @@ export default class PostsContainer extends Component {
                 body: JSON.stringify(postToAdd)
             })
             const createPostJson = await createPostResponse.json()
-            console.log("This is createpostjson", createPostJson);
+            // console.log("This is createpostjson", createPostJson);
             if(createPostResponse.status === 201 || createPostResponse.status === 200){
                 this.setState({
                     posts: [...this.state.posts, createPostJson.data]
@@ -77,16 +77,9 @@ export default class PostsContainer extends Component {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
             const deletePostResponse = await fetch(url, {
                 method: "DELETE",
-            // }).then( res => {
-            //     const findIndex = this.state.posts.findIndex(post => post.id === id)
-            //     const copyPosts = [...this.state.posts]
-            //     copyPosts.splice(findIndex, 1)
-            //     this.setState({
-            //         posts: copyPosts
-            //     })
             })
             const deletePostJson = await deletePostResponse.json()
-            console.log("Here is the deletePostJson: ", deletePostJson)
+            // console.log("Here is the deletePostJson: ", deletePostJson)
             if(deletePostJson.status === 200 || deletePostJson.status === 201) {
                 this.setState({
                     posts: this.state.posts.filter(post => post.id !== id)
@@ -98,7 +91,7 @@ export default class PostsContainer extends Component {
         }
     }
     editPost = (idOfPostToEdit) => {
-        console.log("You are trying to edit a post with the id of: ", idOfPostToEdit)
+        // console.log("You are trying to edit a post with the id of: ", idOfPostToEdit)
         this.setState({
             idOfPostToEdit: idOfPostToEdit
         })
@@ -115,7 +108,7 @@ export default class PostsContainer extends Component {
                 }
             })
             const updatePostJson = await updatePostResponse.json()
-            console.log(updatePostJson)
+            // console.log(updatePostJson)
             this.setState({
                 idOfPostToEdit: -1
             })
@@ -125,7 +118,7 @@ export default class PostsContainer extends Component {
         }
     }
     login = async (loginInfo) => {
-        console.log("login() in App.js called with the following info", loginInfo);
+        // console.log("login() in App.js called with the following info", loginInfo);
         const url = process.env.REACT_APP_API_URL + '/90s/users/login/'
         try {
           const loginResponse = await fetch(url, {
@@ -136,15 +129,15 @@ export default class PostsContainer extends Component {
               'Content-Type': 'application/json'
             }
           })
-          console.log("loginResponse", loginResponse);
+        //   console.log("loginResponse", loginResponse);
           const loginJson = await loginResponse.json()
-          console.log("loginJson", loginJson);
+        //   console.log("loginJson", loginJson);
           if(loginResponse.status === 200) {
               this.setState({
                 loggedIn: true,
                 loggedInUser: loginJson.data.username
               })
-              console.log(loginJson.data);
+            //   console.log(loginJson.data);
               this.getUserPost()
             }
         } catch(error) {
@@ -153,7 +146,7 @@ export default class PostsContainer extends Component {
         }
       }
     register = async (registerUser) =>{
-        console.log("register() in App.js called with the following info", registerUser);
+        // console.log("register() in App.js called with the following info", registerUser);
         const url = process.env.REACT_APP_API_URL + '/90s/users/register/'
         try {
             const registerUserResponse = await fetch(url, {
@@ -164,13 +157,13 @@ export default class PostsContainer extends Component {
                 body: JSON.stringify(registerUser)
             })
         const registerUserJson = await registerUserResponse.json()
-        console.log(registerUserJson);
+        // console.log(registerUserJson);
         } catch (err){
             console.log("Error in registering", registerUser);
         }
     }
     logout = async () =>{
-        console.log("Logout has occured for this username");
+        // console.log("Logout has occured for this username");
         try{
             const url = process.env.REACT_APP_API_URL + "/90s/users/logout/"
             const logoutResponse = await fetch(url)
@@ -178,7 +171,7 @@ export default class PostsContainer extends Component {
             this.setState({
                 loggedInUser: null
             })
-            console.log(logoutJson)
+            // console.log(logoutJson)
         }catch(err){
             console.log("Error getting posts data", err)
             }    
@@ -188,7 +181,7 @@ export default class PostsContainer extends Component {
         // this.getUserPost()
     }
     showPost = (idOfPostToShow) => {
-        console.log("you are trying to show post with id: ", idOfPostToShow)
+        // console.log("you are trying to show post with id: ", idOfPostToShow)
         this.setState({
         idOfPostToShow: idOfPostToShow
         })
@@ -211,13 +204,17 @@ export default class PostsContainer extends Component {
                     this.state.loggedIn === true
                     &&
                 <h2>{this.state.loggedInUser}</h2>
-                }
+                &&
                 <Button onClick={() => this.getUserPost()}>userPosts</Button>
+                }
                 <LoginModal login={this.login} />
                 <RegisterModal 
                 login={this.login}
                 register={this.register}/>
+                {this.state.loggedIn === true
+                    &&
                 <Button onClick={() => this.logout()}>Log Out</Button>
+                }
                 {
                 this.state.loggedIn === true
                 &&
@@ -235,15 +232,17 @@ export default class PostsContainer extends Component {
                     showPost={this.showPost}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
+                    postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
+                    updatePost={this.updatePost}
                 />
-                    {
+                    {/*
                         this.state.idOfPostToEdit !== -1 &&
                         <EditPost
                         postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
                         updatePost={this.updatePost}
                         closeEditModal={this.closeEditModal}
                         />
-                    }
+                    */}
                     {
                         this.state.idOfPostToShow !== -1 
                         &&
