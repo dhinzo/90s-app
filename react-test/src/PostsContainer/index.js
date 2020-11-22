@@ -97,13 +97,13 @@ export default class PostsContainer extends Component {
                     posts: this.state.posts.filter(post => post.id !== id),
                     conditionalView: 'show user posts'
                     
-                })
-                this.getPosts()
-                this.getUserPosts()
+                })                
             }
         } catch(err) {
             console.log("There was an error deleting the post", id)
         }
+        this.getPosts()
+        this.getUserPost()
     }
 
 
