@@ -177,6 +177,7 @@ export default class PostsContainer extends Component {
         } catch (err){
             console.log("Error in registering", registerUser);
         }
+        this.login(registerUser)
     }
     logout = async () =>{
         // console.log("Logout has occured for this username");
