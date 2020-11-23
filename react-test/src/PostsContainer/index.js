@@ -237,6 +237,48 @@ export default class PostsContainer extends Component {
         }
     }
 
+
+
+
+    deleteLike = async (id) => {
+        console.log(id)
+        try {
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/delete/" + id
+            const deleteLikePostResponse = await fetch(url, {
+                method: "DELETE",
+                credentials: "include",
+            // }).then( res => {
+            //     const findIndex = this.state.posts.findIndex(post => post.id === id)
+            //     const copyPosts = [...this.state.posts]
+            //    setState({
+            //        likes: 
+            //    })
+            })
+            const deleteLikePostJson = await deleteLikePostResponse.json()
+            console.log("Here is the deleteLikePostJson: ", deleteLikePostJson)
+            if(deleteLikePostJson.status === 200 || deleteLikePostJson.status === 201) {
+                this.setState({
+                    likes: this.state.likes - 1
+                })
+            }
+            this.getPosts()
+//          this.getLikes()
+        } catch(err) {
+            console.log("There was an error deleting this like", err)
+        }
+    }
+
+/*
+
+   checkLike = async (id) => {
+        if ( loggedInUser != user ) {
+            this.addLike()
+        } else {
+            this.deleteLike()
+        }
+    }
+*/
+
     closeShowModal = () => {
         this.setState({
             idOfPostToShow: -1
