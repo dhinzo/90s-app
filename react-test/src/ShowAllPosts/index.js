@@ -11,7 +11,7 @@ export default function AllPostsList(props){
     const allPosts = props.posts.map(post => {
     
     return(
-        <Card raised key={post.id} onClick={post.id}  medium circular>
+        <Card class='card-style' raised key={post.id} onClick={post.id}  medium circular>
             <Card.Content textAlign={"center"}>
                 <Card.Header>
                     {post.title}
@@ -40,12 +40,11 @@ export default function AllPostsList(props){
         )
     })
     return(  
-        <React.Fragment>    
-        <ModalLoginModal/>
+ 
         <Card.Group centered={true}>
             {allPosts}
         </Card.Group>
-        </React.Fragment>  
+
     )
 
 }

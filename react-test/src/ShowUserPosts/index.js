@@ -5,6 +5,7 @@ import {Icon, Card, Button, Image } from 'semantic-ui-react'
 
 
 
+
 export default function AllUserPostsList(props){
     // const [open, setOpen] = React.useState(false)
     console.log(props);
@@ -46,9 +47,12 @@ export default function AllUserPostsList(props){
         )
     })
     return(
+        <React.Fragment>
         <Card.Group centered={true}>
             {allPosts}
         </Card.Group>
+
+        </React.Fragment>
     )
 
 }

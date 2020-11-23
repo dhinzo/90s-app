@@ -245,7 +245,7 @@ export default class PostsContainer extends Component {
     render(){
         return(
             <React.Fragment>
-                <h2>All Throwback Posts</h2>
+                <h2 class='main-text'>All Throwback Posts</h2>
                 {
                     this.state.loggedIn === true
                     &&

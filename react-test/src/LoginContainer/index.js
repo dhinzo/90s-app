@@ -38,8 +38,7 @@ export default function LoginModal(props) {
                 />
         </Modal.Header>
         <Modal.Content class='modal-body'>
-        <Segment placeholder>
-
+        <Segment class='layer' placeholder>
         <Form>
           <Form.Input
             icon='user'
