@@ -6,15 +6,17 @@ export default function NewPostModal(props) {
   const [open, setOpen] = React.useState(false)
     const initialInputState = { title: '', img: '', description: '', likes: 0, owner: '', tags: '' }
     const [eachEntry, setEachEntry] = useState(initialInputState)
-    const { title, img, description, likes, owner, tags} = eachEntry
+    const { title, img, description, tags} = eachEntry
   
   const handleInputChange = e => {
   setEachEntry({ ...eachEntry, [e.target.name]: e.target.value })
 }
 
   const handleSubmit = e => {
+    e.preventDefault()
     props.createPost(eachEntry)
     setOpen(false)
+    setEachEntry(initialInputState)
   } 
 
   return (

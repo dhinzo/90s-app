@@ -7,6 +7,7 @@ import LoginModal from '../LoginContainer'
 import RegisterModal from '../RegisterContainer'
 import AllUserPostsList from '../ShowUserPosts'
 import { Button} from 'semantic-ui-react'
+import RailExampleRail from '../UserNav'
 
 
 export default class PostsContainer extends Component {
@@ -77,16 +78,20 @@ export default class PostsContainer extends Component {
         try {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
             const deletePostResponse = await fetch(url, {
+                credentials: 'include',
                 method: "DELETE",
             })
             const deletePostJson = await deletePostResponse.json()
             // console.log("Here is the deletePostJson: ", deletePostJson)
             if(deletePostJson.status === 200 || deletePostJson.status === 201) {
                 this.setState({
-                    posts: this.state.posts.filter(post => post.id !== id)
+                    posts: this.state.posts.filter(post => post.id !== id),
+                    conditionalView: 'show user posts'
+                    
                 })
+                this.getPosts()
+                this.getUserPosts()
             }
-            this.getPosts()
         } catch(err) {
             console.log("There was an error deleting the post", id)
         }
@@ -118,9 +123,10 @@ export default class PostsContainer extends Component {
             const updatePostJson = await updatePostResponse.json()
             // console.log(updatePostJson)
             this.setState({
-                idOfPostToEdit: -1
+                idOfPostToEdit: -1,
+                conditionalView: 'show user posts'
             })
-            this.getPosts()
+            this.getUserPosts()
         } catch(err) {
             console.log("error trying to edit post: ", updatedPost)
         }
@@ -223,21 +229,10 @@ export default class PostsContainer extends Component {
     render(){
         return(
             <React.Fragment>
-                <h2>All Throwback Posts</h2>
                 {
                     this.state.loggedIn === true
                     &&
                 <h2>{this.state.loggedInUser}</h2>
-                }
-                {
-                    this.state.loggedIn === true 
-                    &&
-                <Button onClick={() => this.showUserPosts()}>My Posts</Button>
-                }
-                {
-                    this.state.loggedIn === true 
-                    &&
-                <Button onClick={() => this.showAllPosts()}>All Posts</Button>
                 }
                 {
                     this.state.loggedIn === false
@@ -257,12 +252,20 @@ export default class PostsContainer extends Component {
                 <Button onClick={() => this.logout()}>Log Out</Button>
                 }
                 {
+                    this.state.loggedIn === true 
+                    &&
+                <RailExampleRail
+                    showAllPosts={this.showAllPosts}
+                    showUserPosts={this.showUserPosts} />
+                }
+                {
                     this.state.loggedIn === true
                     &&
                 <NewPostModal 
                 loggedInUser={this.state.loggedInUser}
                 createPost={this.createPost}/>
                 }
+                <h2>All Throwback Posts</h2>
                 {
                     this.state.conditionalView === ''
                     &&
@@ -290,6 +293,8 @@ export default class PostsContainer extends Component {
                         updatePost={this.updatePost}
                         closeEditModal={this.closeEditModal}
                         editPost={this.editPost}
+                        showUserPosts={this.showUserPosts}
+                        getUserPost={this.getUserPost}
                         />
                     }
                     {
