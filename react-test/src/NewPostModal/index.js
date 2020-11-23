@@ -15,6 +15,7 @@ export default function NewPostModal(props) {
   const handleSubmit = e => {
     props.createPost(eachEntry)
     setOpen(false)
+    setEachEntry(initialInputState)
   } 
 
   return (
