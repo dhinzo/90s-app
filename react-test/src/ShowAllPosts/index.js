@@ -1,15 +1,9 @@
 import React from 'react'
-
 import {Icon, Card, Button, Image } from 'semantic-ui-react'
-
-
-
-
 export default function AllPostsList(props){
     const [open, setOpen] = React.useState(false)
     console.log(props);
     const allPosts = props.posts.map(post => {
-    
     return(
         <Card raised key={post.id} onClick={() => {} }  medium circular>
             <Card.Content textAlign={"center"}>
@@ -21,7 +15,6 @@ export default function AllPostsList(props){
                 </Card.Meta>
                 <Card.Description>
                    {post.owner.username}
-                    
                 </Card.Description>
                 <Image raised true
                     src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
@@ -46,5 +39,4 @@ export default function AllPostsList(props){
         </Card.Group>
 
     )
-
 }

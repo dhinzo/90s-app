@@ -1,5 +1,5 @@
 import React from 'react'
-
+import EditPostModal from '../EditPostModal'
 import {Icon, Card, Button, Image } from 'semantic-ui-react'
 
 
@@ -8,7 +8,7 @@ import {Icon, Card, Button, Image } from 'semantic-ui-react'
 
 export default function AllUserPostsList(props){
     // const [open, setOpen] = React.useState(false)
-    console.log(props);
+    console.log("These are the props in AllUserPosts: ", props);
     const allPosts = props.userPosts.map(post => {
     
     return(
@@ -40,6 +40,7 @@ export default function AllUserPostsList(props){
                 <Button 
                     basic color={"red"}
                     onClick={() => props.deletePost(post.id)}>Delete</Button>
+                {/*WHY ARE THESE UNDEFINED?*/}
                 <Button
                     basic color={"yellow"}
                     onClick={() => props.editPost(post.id)}>Edit</Button>

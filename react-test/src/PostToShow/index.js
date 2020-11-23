@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Icon, Image, Segment, Button } from 'semantic-ui-react'
-
 export default function PostToShow(props){
 	// console.log("Here are the props in PostToShow: ", props)
-	
 		return(
 			<Segment> 
 				  <Card 
@@ -42,5 +40,4 @@ export default function PostToShow(props){
 	    		</Card>
 			</Segment>
 		)
-	
 }
