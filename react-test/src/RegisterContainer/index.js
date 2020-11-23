@@ -27,7 +27,9 @@ export default function RegisterModal(props) {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={<Button
-                    size="tiny">Register</Button>}
+                    basic
+                    color="grey"
+                    compact>Register</Button>}
         >
         <Modal.Header id='login-header'>Register
             <Button

@@ -10,11 +10,31 @@
   font-family: 'Orbitron';
 }
 
+.main-text {
+  margin-top: 2rem;
+}
+
 h1,
 h2 {
+  margin-top: 4rem;
   font-family: 'Gloria Hallelujah' !important;
 }
 
-body {
-  background-color: host-white hsla(270, 40%, 98%, 1);
+.dropShadow {
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+#login-header {
+  background-color: rgb(3, 24, 151);
+  padding: none;
+  height: 20px;
+  line-height: 5px;
+  color: whitesmoke
 }

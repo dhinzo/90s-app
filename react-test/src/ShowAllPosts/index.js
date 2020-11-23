@@ -32,9 +32,11 @@ export default function AllPostsList(props){
             </Card>
         )
     })
-    return(
+    return(  
+ 
         <Card.Group centered={true}>
             {allPosts}
         </Card.Group>
+
     )
 }

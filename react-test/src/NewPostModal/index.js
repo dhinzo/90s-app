@@ -24,7 +24,10 @@ export default function NewPostModal(props) {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>Create Throwback</Button>}
+      trigger={<Button
+                  basic
+                  color="grey"
+                  compact>Create Throwback</Button>}
     >
       <Modal.Header>Create New Post</Modal.Header>
     <Form>

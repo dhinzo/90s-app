@@ -26,21 +26,22 @@ export default function LoginModal(props) {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={<Button
-                    size='tiny'>Sign On</Button>}
+                    basic
+                    color="grey"
+                    compact>Sign On</Button>}
         >
         <Modal.Header id='login-header'>Sign On
             <Button
-
+                
                 id='header-close'
                 icon='x'
-                floated='right'
-                size='mini'
+                position='right'
+                size='tiny'
                 onClick={() => setOpen(false)}
                 />
         </Modal.Header>
         <Modal.Content class='modal-body'>
-        <Segment placeholder>
-
+        <Segment class='layer' placeholder>
         <Form>
           <Form.Input
             icon='user'

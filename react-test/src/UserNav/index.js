@@ -24,7 +24,6 @@
 import React, { useState } from 'react'
 import {
   Container,
-  Dropdown,
   Menu,
   Button
 } from 'semantic-ui-react'
@@ -49,22 +48,28 @@ const UserNav = (props) => (
           <React.Fragment>
           <NewPostModal
             createPost={props.createPost} />
-        <Dropdown item simple text="Get Jiggy wit' It">
-          <Dropdown.Menu>
-          
-        <Dropdown.Item
-           as='a'
-           onClick={() => props.showAllPosts()}>Home</Dropdown.Item> 
-          <Dropdown.Item 
-            onClick={() => props.showUserPosts()}>My Posts</Dropdown.Item>
-              </Dropdown.Menu>            
-        </Dropdown>
-          <Button onClick={() => props.logout()}>Log Out</Button>
+        <Button
+          basic
+          color="grey"
+          compact
+           onClick={() => props.showAllPosts()}>Home</Button> 
+          <Button
+            basic
+            color="grey"
+            compact 
+            onClick={() => props.showUserPosts()}>My Posts</Button>
+          <Button
+            basic
+            color="grey"
+            compact
+            position='right'
+            onClick={() => props.logout()}>Log Out</Button>
         </React.Fragment>
         :   
         <React.Fragment>  
         <LoginModal
-          login={props.login} />
+          login={props.login}
+           />
         <RegisterModal
           login={props.login}
           register={props.register}
