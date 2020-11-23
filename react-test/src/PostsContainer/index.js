@@ -268,10 +268,10 @@ export default class PostsContainer extends Component {
         }
     }
 
-/*
 
+/*
    checkLike = async (id) => {
-        if ( loggedInUser != user ) {
+        if ( loggedInUser !== user ) {
             this.addLike()
         } else {
             this.deleteLike()
