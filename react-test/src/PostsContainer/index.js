@@ -4,11 +4,11 @@ import NewPostModal from '../NewPostModal'
 import PostToShow from '../PostToShow'
 import PostToShowUser from '../PostToShowUser'
 import EditPostModal from '../EditPostModal'
-import LoginModal from '../LoginContainer'
-import RegisterModal from '../RegisterContainer'
+// import LoginModal from '../LoginContainer'
+// import RegisterModal from '../RegisterContainer'
 import AllUserPostsList from '../ShowUserPosts'
 import { Button} from 'semantic-ui-react'
-import RailExampleRail from '../UserNav'
+import UserNav from '../UserNav'
 
 
 export default class PostsContainer extends Component {
@@ -245,55 +245,38 @@ export default class PostsContainer extends Component {
     }
     render(){
         return(
-            <React.Fragment>
-                {
-                    this.state.loggedIn === true
-                    &&
-                <h2>{this.state.loggedInUser}</h2>
-                }
-                {
-                    this.state.loggedIn === false
-                    &&
-                <LoginModal login={this.login} />
-                }
-                {
-                    this.state.loggedIn === false
-                    &&
-                <RegisterModal 
-                login={this.login}
-                register={this.register}/>
-                }
-                {
-                    this.state.loggedIn === true
-                    &&
-                <Button onClick={() => this.logout()}>Log Out</Button>
-                }
-                {
-                    this.state.loggedIn === true 
-                    &&
-                <RailExampleRail
+            <div className="container">
+                <UserNav
                     showAllPosts={this.showAllPosts}
-                    showUserPosts={this.showUserPosts} />
-                }
+                    showUserPosts={this.showUserPosts}
+                    login={this.login}
+                    logout={this.logout} 
+                    register={this.register}
+                    loggedIn={this.state.loggedIn}
+                    loggedInUser={this.state.loggedInUser}
+                    createPost={this.createPost} />
                 {
                     this.state.loggedIn === true
                     &&
-                <NewPostModal 
-                loggedInUser={this.state.loggedInUser}
-                createPost={this.createPost}/>
+                <h2>Lookin' fly, {this.state.loggedInUser}</h2>
                 }
-                <h2>All Throwback Posts</h2>
+
                 {
                     this.state.conditionalView === ''
                     &&
+                    <React.Fragment>
+                <h2>All Throwback Posts</h2>
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
                     />
+                    </React.Fragment>
                 }
                 {
                     this.state.conditionalView === 'show user posts'
                     &&
+                    <React.Fragment>
+                    <h2>{this.state.loggedInUser}'s Throwback Posts</h2>
                 <AllUserPostsList
                     userPosts={this.state.userPosts}
                     showPost={this.showPostUser}
@@ -301,6 +284,7 @@ export default class PostsContainer extends Component {
                     editPost={this.editPost}
                     updatePost={this.updatePost}
                 />
+                </React.Fragment>
                 }
                     {
                         this.state.idOfPostToEdit !== -1 && this.state.conditionalView === "edit this post"
@@ -334,7 +318,7 @@ export default class PostsContainer extends Component {
                             state={this.state}
                         />
                     }
-            </React.Fragment>
+                    </div>
         )
     }
 }

@@ -25,7 +25,8 @@ export default function LoginModal(props) {
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
-        trigger={<Button>Sign On</Button>}
+        trigger={<Button
+                    size='tiny'>Sign On</Button>}
         >
         <Modal.Header id='login-header'>Sign On
             <Button
