@@ -28,8 +28,8 @@ body .ui.cards>.card{
 #login-header{
   background-color: rgb(3, 24, 151);
   padding: none;
-  height: 10px;
-  line-height: 5px;
+  /* height: 10px; */
+  /* line-height: 5px; */
   color: whitesmoke
 }
 
@@ -41,7 +41,7 @@ body .ui.cards>.card{
 }
 
 .modal-body {
-  background-color: rgb(253, 254, 248);
+  background-image: url();
 }
 
 
