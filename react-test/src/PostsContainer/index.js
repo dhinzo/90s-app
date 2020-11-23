@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
 import NewPostModal from '../NewPostModal'
 import PostToShow from '../PostToShow'
+import PostToShowUser from '../PostToShowUser'
 import EditPostModal from '../EditPostModal'
 import LoginModal from '../LoginContainer'
 import RegisterModal from '../RegisterContainer'
@@ -88,13 +89,13 @@ export default class PostsContainer extends Component {
                     posts: this.state.posts.filter(post => post.id !== id),
                     conditionalView: 'show user posts'
                     
-                })
-                this.getPosts()
-                this.getUserPosts()
+                })                
             }
         } catch(err) {
             console.log("There was an error deleting the post", id)
         }
+        this.getPosts()
+        this.getUserPost()
     }
 
 
@@ -126,10 +127,11 @@ export default class PostsContainer extends Component {
                 idOfPostToEdit: -1,
                 conditionalView: 'show user posts'
             })
-            this.getUserPosts()
+
         } catch(err) {
             console.log("error trying to edit post: ", updatedPost)
         }
+        this.getUserPost()
     }
     login = async (loginInfo) => {
         // console.log("login() in App.js called with the following info", loginInfo);
@@ -215,12 +217,27 @@ export default class PostsContainer extends Component {
         conditionalView: 'show this post'
         })
     }
+    showPostUser = (idOfPostToShow) => {
+        console.log("you are trying to show post with id: ", idOfPostToShow)
+        this.setState({
+        idOfPostToShow: idOfPostToShow,
+        conditionalView: 'show this post user'
+        })
+    }
+
     closeShowModal = () => {
         this.setState({
             idOfPostToShow: -1,
             conditionalView: ''
         })
     }
+    closeUserShowModal = () => {
+        this.setState({
+            idOfPostToShow: -1,
+            conditionalView: 'show user posts'
+        })
+    }
+
     closeEditModal = () => {
         this.setState({
             idOfPostToEdit: -1
@@ -279,7 +296,7 @@ export default class PostsContainer extends Component {
                     &&
                 <AllUserPostsList
                     userPosts={this.state.userPosts}
-                    showPost={this.showPost}
+                    showPost={this.showPostUser}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
                     updatePost={this.updatePost}
@@ -303,6 +320,16 @@ export default class PostsContainer extends Component {
                         <PostToShow
                             showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
                             closeShowModal={this.closeShowModal}
+                            getPosts={this.getPosts}
+                            state={this.state}
+                        />
+                    }
+                    {
+                        this.state.idOfPostToShow !== -1 && this.state.conditionalView === 'show this post user'
+                        &&
+                        <PostToShowUser
+                            showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
+                            closeShowModal={this.closeUserShowModal}
                             getPosts={this.getPosts}
                             state={this.state}
                         />

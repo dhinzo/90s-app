@@ -5,7 +5,7 @@ export default function AllPostsList(props){
     console.log(props);
     const allPosts = props.posts.map(post => {
     return(
-        <Card raised key={post.id} onClick={post.id}  medium circular>
+        <Card raised key={post.id} onClick={() => {} }  medium circular>
             <Card.Content textAlign={"center"}>
                 <Card.Header>
                     {post.title}

@@ -51,7 +51,7 @@ function EditPostModal(props) {
                     onChange={handleInputChange}
                     value={title}
                 />
-                <Label htmlForr="img">Image Link</Label>
+                <Label htmlFor="img">Image Link</Label>
                 <Form.Input
                     name="img"
                     placeholder="Enter an Image URL"
