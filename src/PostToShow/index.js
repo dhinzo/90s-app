@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { Card, Icon, Image, Segment, Button } from 'semantic-ui-react'
 export default function PostToShow(props){
 	// console.log("Here are the props in PostToShow: ", props)
+	const likes = props.likes.filter(like => like.post.id === props.showThisPost.id)
 		return(
 			<div id='show-container'>
 			<Segment id='show-modal'> 
-				  <Card 
+				  <Card
+				  id="post-card" 
 				  styles="box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);"
 				  floated='center'
 				  >
@@ -27,16 +29,11 @@ export default function PostToShow(props){
       					</a>
       					<a className="right floated">
         				<Icon name='like' />
-        				{props.showThisPost.likes} likes
+        				{likes.length}
       					</a>
     				</Card.Content>
-    				<Card.Content extra>
-    					<div className="ui large transparent left icon input left floated">
-      						<i className="heart outline icon"></i>
-      						<input type="text" placeholder="Add Comment..."/>
-    					</div>
-    				</Card.Content>
 	    			<Button id='back-button' onClick={props.closeShowModal}>Back</Button>
+	    			
 					
 	    		</Card>
 			</Segment>
