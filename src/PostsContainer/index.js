@@ -74,6 +74,7 @@ export default class PostsContainer extends Component {
         } catch(err){
             console.log("Error adding post", err);
         }
+        this.getUserPost()
     }
     deletePost = async (id) => {
         try {
@@ -196,6 +197,67 @@ export default class PostsContainer extends Component {
             console.log("Error getting posts data", err)
             }    
         }
+        addLike = async (id) => {
+            console.log(id)
+            try {
+                const url = process.env.REACT_APP_API_URL + "/90s/posts/like/" + id
+                const likePostResponse = await fetch(url, {
+                    method: "POST",
+                    credentials: "include",
+                // }).then( res => {
+                //     const findIndex = this.state.posts.findIndex(post => post.id === id)
+                //     const copyPosts = [...this.state.posts]
+                //    setState({
+                //        likes: 
+                //    })
+                })
+                const likePostJson = await likePostResponse.json()
+                console.log("Here is the likePostJson: ", likePostJson)
+                if(likePostJson.status === 200 || likePostJson.status === 201) {
+                    this.setState({
+                        likes: [...this.state.likes, likePostJson.data]
+                    })
+                }
+                console.log(this.state.likes);
+                this.getPosts()
+    //          this.getLikes()
+            } catch(err) {
+                console.log("There was an error liking this post", err)
+            }
+        }
+    
+    
+    
+    
+        deleteLike = async (id) => {
+            console.log(id)
+            try {
+                const url = process.env.REACT_APP_API_URL + "/90s/posts/delete/" + id
+                const deleteLikePostResponse = await fetch(url, {
+                    method: "DELETE",
+                    credentials: "include",
+                // }).then( res => {
+                //     const findIndex = this.state.posts.findIndex(post => post.id === id)
+                //     const copyPosts = [...this.state.posts]
+                //    setState({
+                //        likes: 
+                //    })
+                })
+                const deleteLikePostJson = await deleteLikePostResponse.json()
+                console.log("Here is the deleteLikePostJson: ", deleteLikePostJson)
+                if(deleteLikePostJson.status === 200 || deleteLikePostJson.status === 201) {
+                    this.setState({
+                        likes: [...this.state.likes, ]
+                    })
+                }
+                this.getPosts()
+    //          this.getLikes()
+            } catch(err) {
+                console.log("There was an error deleting this like", err)
+            }
+        }
+    
+
     componentDidMount() {
         this.getPosts()
         // this.getUserPost()
@@ -244,9 +306,13 @@ export default class PostsContainer extends Component {
             idOfPostToEdit: -1
         })
     }
+
+
+    
+
     render(){
         return(
-            <div>
+            <div className="container">
                 <UserNav
                     showAllPosts={this.showAllPosts}
                     showUserPosts={this.showUserPosts}
@@ -259,21 +325,27 @@ export default class PostsContainer extends Component {
 
                 />
                 
-                <h1 id='title-text' class='main-text'>Thats SoOo 90s!</h1>
+                <h1 id='title-text' className='main-text'>Thats SoOo 90s!</h1>
                 {
                     this.state.loggedIn === true
                     &&
-                <h2>Lookin' fly, {this.state.loggedInUser}</h2>
+                <h2 id='user-welcome'>Lookin' fly, {this.state.loggedInUser}</h2>
                 }
                 
                 {
                     this.state.conditionalView === ''
                     &&
                     <React.Fragment>
-                <h2>All Throwback Posts</h2>
+                <h2
+                    id="user-header">All Throwback Posts</h2>
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
+                    likes={this.state.likes}
+                    addLike={this.addLike}
+                    deleteLike={this.deleteLike}
+                    loggedInUser={this.state.loggedInUser}
+                    loggedIn={this.state.loggedIn}
                     />
                     </React.Fragment>
                 }
@@ -281,13 +353,15 @@ export default class PostsContainer extends Component {
                     this.state.conditionalView === 'show user posts'
                     &&
                     <React.Fragment>
-                    <h2>{this.state.loggedInUser}'s Throwback Posts</h2>
+                    <h2
+                        id="user-header">{this.state.loggedInUser}'s Throwback Posts</h2>
                 <AllUserPostsList
                     userPosts={this.state.userPosts}
                     showPost={this.showPostUser}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
                     updatePost={this.updatePost}
+                    likes={this.state.likes}
                 />
                 </React.Fragment>
                 }
@@ -311,6 +385,7 @@ export default class PostsContainer extends Component {
                             closeShowModal={this.closeShowModal}
                             getPosts={this.getPosts}
                             state={this.state}
+                            likes={this.state.likes}
                         />
                     }
                     {
@@ -321,9 +396,11 @@ export default class PostsContainer extends Component {
                             closeShowModal={this.closeUserShowModal}
                             getPosts={this.getPosts}
                             state={this.state}
+                            likes={this.state.likes}
                         />
                     }
                     </div>
         )
+
     }
 }
