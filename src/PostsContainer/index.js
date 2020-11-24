@@ -32,7 +32,7 @@ export default class PostsContainer extends Component {
             const postsJson = await postsResponse.json()
             this.setState({
                 posts: postsJson.data.posts,
-                likes: postsJson.data.likes
+                // likes: postsJson.data.likes
             })
             // console.log(this.state.likes)
         }catch(err){
@@ -134,6 +134,8 @@ export default class PostsContainer extends Component {
         }
         this.getUserPost()
     }
+
+
     login = async (loginInfo) => {
         // console.log("login() in App.js called with the following info", loginInfo);
         const url = process.env.REACT_APP_API_URL + '/90s/users/login/'
@@ -162,6 +164,8 @@ export default class PostsContainer extends Component {
           console.error(error)
         }
       }
+
+
     register = async (registerUser) =>{
         // console.log("register() in App.js called with the following info", registerUser);
         const url = process.env.REACT_APP_API_URL + '/90s/users/register/'
@@ -180,6 +184,9 @@ export default class PostsContainer extends Component {
         }
         this.login(registerUser)
     }
+
+
+
     logout = async () =>{
         // console.log("Logout has occured for this username");
         try{
@@ -197,6 +204,7 @@ export default class PostsContainer extends Component {
             console.log("Error getting posts data", err)
             }    
         }
+        /*
         addLike = async (id) => {
             console.log(id)
             try {
@@ -255,17 +263,17 @@ export default class PostsContainer extends Component {
             } catch(err) {
                 console.log("There was an error deleting this like", err)
             }
-        }
-    
-
+        }    
+            */
     componentDidMount() {
         this.getPosts()
         // this.getUserPost()
     }
     showAllPosts = () =>{
         this.setState({
-            conditionalView: ''
+            conditionalView: '',
         })
+        this.getPosts()
     }
     showUserPosts = () =>{
         this.setState({

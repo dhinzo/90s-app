@@ -5,7 +5,7 @@ export default function AllPostsList(props){
     console.log(props);
     const allPosts = props.posts.map(post => {
     // console.log(post);
-    const likes = props.likes.filter(like => like.post.id === post.id)
+    // const likes = props.likes.filter(like => like.post.id === post.id)
     // console.log(likes);
     // console.log(props.loggedInUser);
     // const likedUser = props.likes.filter(like => like.user.username === props.loggedInUser )
@@ -31,7 +31,7 @@ export default function AllPostsList(props){
                     src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
             </Card.Content>
                 <Card.Content extra>
-                    <a class="left floated">
+                    <a className="left floated">
                     <Icon name='user' />
                         {post.owner.username}
                     </a>
