@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Icon, Image, Segment, Button } from 'semantic-ui-react'
 
-export default function PostToShow(props){
+export default function PostToShowUser(props){
 	// console.log("Here are the props in PostToShow: ", props)
 	
 		return(
@@ -35,10 +35,7 @@ export default function PostToShow(props){
     					</div>
     				</Card.Content>
 	    			<Button onClick={props.closeShowModal}>Back</Button>
-					<Button 
-						color="red"
-						onClick={() => props.deletePost(props.showThisPost.id)}>Delete
-						</Button>
+					
 	    		</Card>
 			</Segment>
 		)

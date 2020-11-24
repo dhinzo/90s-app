@@ -26,7 +26,10 @@ export default function RegisterModal(props) {
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
-        trigger={<Button>Register</Button>}
+        trigger={<Button
+                    basic
+                    color="grey"
+                    compact>Register</Button>}
         >
         <Modal.Header id='login-header'>Register
             <Button
@@ -34,11 +37,11 @@ export default function RegisterModal(props) {
                 id='header-close'
                 icon='x'
                 floated='right'
-                size='mini'
+                size='tiny'
                 onClick={() => setOpen(false)}
                 />
         </Modal.Header>
-        <Modal.Content class='modal-body'>
+        <Modal.Content className='modal-body'>
         <Segment placeholder>
 
         <Form>
