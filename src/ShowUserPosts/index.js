@@ -4,13 +4,11 @@ import {Icon, Card, Button, Image } from 'semantic-ui-react'
 
 
 
-
-
 export default function AllUserPostsList(props){
     // const [open, setOpen] = React.useState(false)
     console.log("These are the props in AllUserPosts: ", props);
     const allPosts = props.userPosts.map(post => {
-    const likes = props.likes.filter(like => like.post.id === post.id)
+    // const likes = props.likes.filter(like => like.post.id === post.id)
     return(
         <Card
             id="post-card"
@@ -37,7 +35,7 @@ export default function AllUserPostsList(props){
                     </a>
                     <span className="right floated">
                         <i className="heart like icon"></i>
-                            {likes.length}
+                            {props.likes}
                     </span>  
                 </Card.Content>
                 <Button 
