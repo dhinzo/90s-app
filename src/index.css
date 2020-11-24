@@ -1,54 +1,63 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,500;1,100;1,400;1,600;1,900&display=swap');
+
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif, 'Gloria Hallelujah', cursive;;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background-color: linear-gradient(to right,#7f53ac 0,#657ced 100%); */
-  background-image: url('https://i.imgur.com/ysqPz4G.jpg');
-  background-size: cover;
+  background-size: cover !important;
   height: 100%;
   overflow: hidden;
+  background-image: url('https://i.imgur.com/ysqPz4G.jpg') !important;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
-body .ui.cards>.card{
+
+body .ui.cards>.card {
   /*  box-shadow:  6px 6px 2px 1px rgba(255, 0, 255, .2);*/
-    box-shadow: none;
-  }
+  box-shadow: none;
+}
 
-#login-header{
+#login-header {
   background-color: rgb(3, 24, 151);
   padding: none;
-  height: 10px;
-  line-height: 5px;
-  color: whitesmoke
+  /* height: 10px; */
+  /* line-height: 5px; */
+  color: whitesmoke;
+  font-family: 'Press Start 2P', cursive !important;
+
 }
 
-#header-button{
+#header-button {
   position: right;
   border: solid grey;
   margin: none;
   padding: none;
 }
 
-.modal-body {
-  background-color: rgb(253, 254, 248);
+#logout-button {
+  background-color: hsla(53, 88%, 63%, 1);
+  text-shadow: 1px 1px hotpink;
+
+
 }
 
 
-.ui focus input{
+.ui focus input {
   display: block;
   position: absolute;
   align-items: center;
+}
+
+.ui.segment {
+  background-image: url('https://imgur.com/3iH46Di') !important;
+  font-family: 'Raleway', cursive !important;
+  letter-spacing: 2px;
+  text-align: center;
 }
 
 .layer {
@@ -58,14 +67,14 @@ body .ui.cards>.card{
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
 }
 
-.main-text{
-  font-family: 'Gloria Hallelujah', cursive
-}
 
-#title-text{
+
+#title-text {
   font-size: 100px;
+  margin-top: 6rem;
   color: hsla(348, 79%, 72%, 1);
   text-shadow: 3px 3px hsla(58, 83%, 69%, 1);
 }
@@ -76,4 +85,109 @@ h2 {
 
 .card-style {
   padding-top: 1.5em;
+}
+
+
+.ui.button {
+  font-family: 'Gloria Hallelujah', cursive !important;
+}
+
+.main-text {
+  margin-top: 2rem;
+}
+
+#show-modal {
+  background-image: url('https://thumbs.dreamstime.com/b/s-patches-fashion-poster-frame-decoration-stripes-background-s-patches-fashion-poster-frame-decoration-stripes-background-110461382.jpg') !important;
+  align-items: center;
+  width: fit-content;
+  padding: 2em 2em 2em 2em;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: solid whitesmoke 4px;
+  margin-top: 12rem;
+}
+
+#show-container {
+  height: 200%;
+  width: 200%;
+}
+
+#nav-title.header.item {
+  font-family: 'Gloria Hallelujah', cursive !important;
+
+  font-size: 15px;
+  margin: none !important;
+  color: hsla(270, 40%, 98%, 1);
+
+  font-family: cursive;
+
+  position: relative;
+}
+
+.ui.positive.button {
+  background-color: rgb(3, 24, 151) !important;
+  font-family: 'Press Start 2P', cursive !important;
+}
+
+#post-title {
+  font-family: 'Gloria Hallelujah', cursive !important;
+  margin-bottom: 5px;
+}
+
+
+@media only screen and (min-width: 1200px) {
+  .ui.container {
+    width: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+
+#logout-btn,
+#login-modal,
+#reg-modal {
+  position: "end" !important;
+}
+
+#post-timestamp {
+  font-size: 9px;
+}
+
+#user-header {
+  width: 25rem;
+  margin: 0 auto;
+  border-radius: 70%;
+  background-color: black;
+}
+
+#post-card {
+  margin-top: 6rem !important;
+  background: hsla(296, 28%, 39%, 1) !important;
+  font-family: 'Raleway' !important;
+  font-weight: 900;
+}
+
+
+
+#back-button {
+  background-color: hotpink;
+  border: solid rgb(97, 222, 42) 4px;
+}
+
+#user-welcome {
+  font-size: 40px;
+  background-color: black;
+  color: hsla(98, 51%, 62%, 1);
+  text-shadow: 1px 1px rgb(97, 222, 42);
+  width: 25rem;
+  margin: 0 auto;
+  margin-bottom: 4rem !important;
+  border-radius: 70%;
+}
+
+.ui.container {
+  margin: none;
 }
