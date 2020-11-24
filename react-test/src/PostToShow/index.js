@@ -28,12 +28,6 @@ export default function PostToShow(props){
         				{likes.length}
       					</a>
     				</Card.Content>
-    				<Card.Content extra>
-    					<div className="ui large transparent left icon input left floated">
-      						<i className="heart outline icon"></i>
-      						<input type="text" placeholder="Add Comment..."/>
-    					</div>
-    				</Card.Content>
 	    			<Button onClick={props.closeShowModal}>Back</Button>
 					
 	    		</Card>
