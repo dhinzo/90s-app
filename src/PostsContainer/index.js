@@ -31,7 +31,7 @@ export default class PostsContainer extends Component {
             const postsJson = await postsResponse.json()
             this.setState({
                 posts: postsJson.data.posts,
-                likes: postsJson.data.likes
+                // likes: postsJson.data.likes
             })
             console.log(postsJson)
         }catch(err){
@@ -49,6 +49,7 @@ export default class PostsContainer extends Component {
             const postsJson= await postsResponse.json()
             this.setState({
                 userPosts: postsJson.data
+                // likes: postsJson.data.likes
         })
         } catch (err){
             console.log("Error getting User posts data", err)
@@ -97,7 +98,7 @@ export default class PostsContainer extends Component {
             if(deletePostJson.status === 200 || deletePostJson.status === 201) {
                 this.setState({
                     posts: this.state.posts.filter(post => post.id !== id),
-                    likes: this.state.likes.filter(like => like.user.id !==id),
+                    // likes: this.state.likes.filter(like => like.user.id !==id),
                     conditionalView: 'show user posts'
                     
                 })                
