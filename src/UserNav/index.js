@@ -39,7 +39,9 @@ const UserNav = (props) => (
   <div>
     <Menu fixed='top' inverted>
       <Container>
-        <Menu.Item header>   
+        <Menu.Item 
+        header id='nav-title'
+        onClick={() => props.showAllPosts()}>   
           That 90s App!
         </Menu.Item>
         {

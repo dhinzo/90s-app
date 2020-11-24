@@ -41,7 +41,7 @@ export default function RegisterModal(props) {
                 onClick={() => setOpen(false)}
                 />
         </Modal.Header>
-        <Modal.Content class='modal-body'>
+        <Modal.Content className='modal-body'>
         <Segment placeholder>
 
         <Form>

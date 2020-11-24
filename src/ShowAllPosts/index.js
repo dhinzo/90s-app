@@ -20,12 +20,12 @@ export default function AllPostsList(props){
                     src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
             </Card.Content>
                 <Card.Content extra>
-                    <a class="left floated">
+                    <a className="left floated">
                     <Icon name='user' />
                         {post.owner.username}
                     </a>
-                    <span class="right floated">
-                        <i class="heart like icon"></i>
+                    <span className="right floated">
+                        <i className="heart like icon"></i>
                             {post.likes}
                     </span>  
                 </Card.Content>

@@ -246,7 +246,7 @@ export default class PostsContainer extends Component {
     }
     render(){
         return(
-            <div>
+            <div className="container">
                 <UserNav
                     showAllPosts={this.showAllPosts}
                     showUserPosts={this.showUserPosts}
@@ -259,11 +259,11 @@ export default class PostsContainer extends Component {
 
                 />
                 
-                <h1 id='title-text' class='main-text'>Thats SoOo 90s!</h1>
+                <h1 id='title-text' className='main-text'>Thats SoOo 90s!</h1>
                 {
                     this.state.loggedIn === true
                     &&
-                <h2>Lookin' fly, {this.state.loggedInUser}</h2>
+                <h2 id='user-welcome'>Lookin' fly, {this.state.loggedInUser}</h2>
                 }
                 
                 {
@@ -325,5 +325,6 @@ export default class PostsContainer extends Component {
                     }
                     </div>
         )
+
     }
 }

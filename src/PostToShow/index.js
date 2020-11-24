@@ -3,7 +3,8 @@ import { Card, Icon, Image, Segment, Button } from 'semantic-ui-react'
 export default function PostToShow(props){
 	// console.log("Here are the props in PostToShow: ", props)
 		return(
-			<Segment> 
+			<div id='show-container'>
+			<Segment id='show-modal'> 
 				  <Card 
 				  styles="box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);"
 				  floated='center'
@@ -11,11 +12,11 @@ export default function PostToShow(props){
     				<Image 
     					src={props.showThisPost.img} alt="90s pic"/>
 	    			<Card.Content>
-	    				<Card.Header>{props.showThisPost.title}</Card.Header>
-	    				<Card.Meta>
+	    				<Card.Header id='post-title'>{props.showThisPost.title}</Card.Header>
+	    				<Card.Meta id='post-timestamp'>
         					<span className='date'>{props.showThisPost.created_at}</span>
         				</Card.Meta>
-	    			<Card.Description>
+	    			<Card.Description id='post-description'>
 	    				{props.showThisPost.description}
 	    			</Card.Description>
 	    			</Card.Content>
@@ -35,9 +36,10 @@ export default function PostToShow(props){
       						<input type="text" placeholder="Add Comment..."/>
     					</div>
     				</Card.Content>
-	    			<Button onClick={props.closeShowModal}>Back</Button>
+	    			<Button id='back-button' onClick={props.closeShowModal}>Back</Button>
 					
 	    		</Card>
 			</Segment>
+			</div>
 		)
 }
