@@ -75,6 +75,7 @@ export default class PostsContainer extends Component {
         } catch(err){
             console.log("Error adding post", err);
         }
+        this.getUserPost()
     }
 
     deletePost = async (id) => {
@@ -384,6 +385,7 @@ export default class PostsContainer extends Component {
                     showPost={this.showPostUser}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
+                    likes={this.state.likes}
                 />
                 }
                     {
@@ -406,6 +408,7 @@ export default class PostsContainer extends Component {
                             closeShowModal={this.closeShowModal}
                             getPosts={this.getPosts}
                             state={this.state}
+                            likes={this.state.likes}
                         />
                     }
                     {
@@ -416,6 +419,7 @@ export default class PostsContainer extends Component {
                             closeShowModal={this.closeUserShowModal}
                             getPosts={this.getPosts}
                             state={this.state}
+                            likes={this.state.likes}
                         />
                     }
             </React.Fragment>

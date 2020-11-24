@@ -9,7 +9,7 @@ export default function AllUserPostsList(props){
     // const [open, setOpen] = React.useState(false)
     console.log(props);
     const allPosts = props.userPosts.map(post => {
-    
+    const likes = props.likes.filter(like => like.post.id === post.id)
     return(
         <Card raised key={post.id} onClick={() => {} }  medium circular>
             <Card.Content textAlign={"center"}>
@@ -33,7 +33,7 @@ export default function AllUserPostsList(props){
                     </a>
                     <span class="right floated">
                         <i class="heart like icon"></i>
-                            {post.likes}
+                            {likes.length}
                     </span>  
                 </Card.Content>
                 <Button 

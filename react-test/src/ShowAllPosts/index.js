@@ -9,7 +9,7 @@ export default function AllPostsList(props){
     const [open, setOpen] = React.useState(false)
     console.log(props);
     const allPosts = props.posts.map(post => {
-        console.log(post);
+    console.log(post);
     const likes = props.likes.filter(like => like.post.id === post.id)
     console.log(likes);
     console.log(props.loggedInUser);
@@ -63,4 +63,3 @@ export default function AllPostsList(props){
 
 }
 
-// likes.indexOf((like) =>like.user.username === props.loggedInUser)
