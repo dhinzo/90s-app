@@ -27,7 +27,7 @@ export default class PostsContainer extends Component {
     }
     getPosts = async () =>{
         try{
-            const url = process.env.REACT_APP_API_URL + "90s/posts/"
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/"
             const postsResponse = await fetch(url)
             const postsJson = await postsResponse.json()
             this.setState({
@@ -41,7 +41,7 @@ export default class PostsContainer extends Component {
         }
     getUserPost = async () =>{
         try{
-            const url = process.env.REACT_APP_API_URL + "90s/posts/userposts/"
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/userposts/"
             const postsResponse = await fetch(url,{
                 credentials: 'include'
             })
@@ -55,7 +55,7 @@ export default class PostsContainer extends Component {
     }
     createPost = async (postToAdd) =>{
         try{
-            const url = process.env.REACT_APP_API_URL + "90s/posts/"
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/"
             const createPostResponse = await fetch(url,{
                 credentials: 'include',
                 method: 'POST',
@@ -78,7 +78,7 @@ export default class PostsContainer extends Component {
     }
     deletePost = async (id) => {
         try {
-            const url = process.env.REACT_APP_API_URL + "90s/posts/" + id
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
             const deletePostResponse = await fetch(url, {
                 credentials: 'include',
                 method: "DELETE",
@@ -113,7 +113,7 @@ export default class PostsContainer extends Component {
 
     updatePost = async (updatedPost) => {
         try {
-            const url = process.env.REACT_APP_API_URL + "90s/posts/" + this.state.idOfPostToEdit
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/" + this.state.idOfPostToEdit
             const updatePostResponse = await fetch(url, {
                 credentials: 'include',
                 method: "PUT",
@@ -138,7 +138,7 @@ export default class PostsContainer extends Component {
 
     login = async (loginInfo) => {
         // console.log("login() in App.js called with the following info", loginInfo);
-        const url = process.env.REACT_APP_API_URL + '90s/users/login/'
+        const url = process.env.REACT_APP_API_URL + '/90s/users/login/'
         try {
           const loginResponse = await fetch(url, {
             credentials: 'include', // sends cookie
@@ -168,7 +168,7 @@ export default class PostsContainer extends Component {
 
     register = async (registerUser) =>{
         // console.log("register() in App.js called with the following info", registerUser);
-        const url = process.env.REACT_APP_API_URL + '90s/users/register/'
+        const url = process.env.REACT_APP_API_URL + '/90s/users/register/'
         try {
             const registerUserResponse = await fetch(url, {
                 method: "POST",
@@ -190,7 +190,7 @@ export default class PostsContainer extends Component {
     logout = async () =>{
         // console.log("Logout has occured for this username");
         try{
-            const url = process.env.REACT_APP_API_URL + "90s/users/logout/"
+            const url = process.env.REACT_APP_API_URL + "/90s/users/logout/"
             const logoutResponse = await fetch(url)
             const logoutJson = await logoutResponse.json()
             this.setState({
