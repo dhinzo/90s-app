@@ -5,7 +5,8 @@
 Remember the good ole days of AOL dialup? Or how about the confident, succinct and yet reassuring voice of Elwood Edwards saying "You've got mail" upon login? The good news is that the impending tech apocalpyse of Y2K didn't send mankind back to the stone-age. The bad news is that it's not the 90s anymore! If you have a pulse and love a retro trip down memory lane with your friends then the 90s app is for you! We took inspiration from South Park's 'member berries' for this concept. What better way to get to know your friends better than knowing what parts of their 90s childhood still bring them joy?
 
 ## Heroku Link
-http://the-90s-app.herokuapp.com/
+Open [http://the-90s-app.herokuapp.com/](http://the-90s-app.herokuapp.com/) to view it in the browser.
+
 
 
 ### Technologies Used 
@@ -13,9 +14,12 @@ http://the-90s-app.herokuapp.com/
 This is a full CRUD app using Flask and Peewee on the backend and the power of React components and Semantic UI on the frontend. We make excellent use of the seven RESTFUL routes which give the users the ability to create new content, post it, edit it, update it, delete it, and view it all together on an index page. We also incorporate login functionailty and user auth capabilities with a one-to-many relationship between a user and their various posts. We have two to three class models for our SQLITE database. A couple of those other class models (such as users) have their own routes such a POST, GET, and DESTROY. Bcrypt allows for addded user security by hashing user passwords in the database. These types of features are extremely important for creating trust and having credibility with users. We incorporated much custom CSS for a beautiful, fun retro look along with the power of Semantic UI for functionality, consistency and especially... modals! Finally we utilized Git and Github for version control which seemed ever more important and simultaneously challenging in a group-work dynamic. Aditionally, Balsamiq was used for wireframing. 
 
 ### Wireframes
-https://i.ibb.co/0VScctC/Screen-Shot-2020-11-24-at-8-22-52-AM.png
-https://i.ibb.co/vXvT8xq/Screen-Shot-2020-11-24-at-8-22-44-AM.png
-https://i.ibb.co/s9nRMYB/Screen-Shot-2020-11-24-at-8-23-12-AM.png
+Wireframe 1: [https://i.ibb.co/0VScctC/Screen-Shot-2020-11-24-at-8-22-52-AM.png](https://i.ibb.co/0VScctC/Screen-Shot-2020-11-24-at-8-22-52-AM.png) click to view it in the browser.
+
+Wireframe 2: [https://i.ibb.co/vXvT8xq/Screen-Shot-2020-11-24-at-8-22-44-AM.png](https://i.ibb.co/vXvT8xq/Screen-Shot-2020-11-24-at-8-22-44-AM.png) click to view it in the browser.
+
+Wireframe 3: [https://i.ibb.co/s9nRMYB/Screen-Shot-2020-11-24-at-8-23-12-AM.png](https://i.ibb.co/s9nRMYB/Screen-Shot-2020-11-24-at-8-23-12-AM.png) click to view it in the browser.
+
 
 ### User Stories
 
