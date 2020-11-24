@@ -97,6 +97,7 @@ export default class PostsContainer extends Component {
             if(deletePostJson.status === 200 || deletePostJson.status === 201) {
                 this.setState({
                     posts: this.state.posts.filter(post => post.id !== id),
+                    likes: this.state.likes.filter(like => like.id !==id),
                     conditionalView: 'show user posts'
                     
                 })                
@@ -140,6 +141,7 @@ export default class PostsContainer extends Component {
             console.log("error trying to edit post: ", updatedPost)
         }
         this.getUserPost()
+
     }
 
     login = async (loginInfo) => {
@@ -277,6 +279,7 @@ export default class PostsContainer extends Component {
         this.setState({
             conditionalView: ''
         })
+        this.getPosts()
     }
     showUserPosts = () =>{
         this.setState({
@@ -386,6 +389,7 @@ export default class PostsContainer extends Component {
                     deletePost={this.deletePost}
                     editPost={this.editPost}
                     likes={this.state.likes}
+                    addLike={this.addLike}
                 />
                 }
                     {

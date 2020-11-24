@@ -3,7 +3,7 @@ import { Card, Icon, Image, Segment, Button } from 'semantic-ui-react'
 
 export default function PostToShowUser(props){
 	// console.log("Here are the props in PostToShow: ", props)
-	const likes = props.likes.filter(like => like.post.id === props.showThisPost.id)
+	// const likes = props.likes.filter(like => like.post.id === props.showThisPost.id)
 		return(
 			<Segment> 
   				<Card styles="box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);">
@@ -25,14 +25,8 @@ export default function PostToShowUser(props){
       					</a>
       					<a className="right floated">
         				<Icon name='like' />
-        				{likes.length} 
+        				{props.likes} 
       					</a>
-    				</Card.Content>
-    				<Card.Content extra>
-    					<div className="ui large transparent left icon input left floated">
-      						<i className="heart outline icon"></i>
-      						<input type="text" placeholder="Add Comment..."/>
-    					</div>
     				</Card.Content>
 	    			<Button onClick={props.closeShowModal}>Back</Button>
 					

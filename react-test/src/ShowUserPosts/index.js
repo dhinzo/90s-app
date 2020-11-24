@@ -9,7 +9,7 @@ export default function AllUserPostsList(props){
     // const [open, setOpen] = React.useState(false)
     console.log(props);
     const allPosts = props.userPosts.map(post => {
-    const likes = props.likes.filter(like => like.post.id === post.id)
+    // const likes = props.likes.filter(like => like.post.id === post.id)
     return(
         <Card raised key={post.id} onClick={() => {} }  medium circular>
             <Card.Content textAlign={"center"}>
@@ -27,13 +27,13 @@ export default function AllUserPostsList(props){
                     src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
             </Card.Content>
                 <Card.Content extra>
-                    <a class="left floated">
+                    <a className="left floated">
                     <Icon name='user' />
                         {post.owner.username}
                     </a>
-                    <span class="right floated">
-                        <i class="heart like icon"></i>
-                            {likes.length}
+                    <span className="right floated">
+                        <i className="heart like icon" ></i>
+                            {props.likes}
                     </span>  
                 </Card.Content>
                 <Button 
