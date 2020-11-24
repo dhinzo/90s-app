@@ -227,7 +227,7 @@ export default class PostsContainer extends Component {
             console.log("Here is the likePostJson: ", likePostJson)
             if(likePostJson.status === 200 || likePostJson.status === 201) {
                 this.setState({
-                    likes: this.state.likes + 1   
+                    likes: [...this.state.likes, likePostJson.data] 
                 })
             }
             this.getPosts()
@@ -239,10 +239,11 @@ export default class PostsContainer extends Component {
 
 
 
-
+/*
     deleteLike = async (id) => {
         console.log(id)
         try {
+            const loggedInUser = this.state.loggedInUser
             const url = process.env.REACT_APP_API_URL + "/90s/posts/delete/" + id
             const deleteLikePostResponse = await fetch(url, {
                 method: "DELETE",
@@ -258,7 +259,7 @@ export default class PostsContainer extends Component {
             console.log("Here is the deleteLikePostJson: ", deleteLikePostJson)
             if(deleteLikePostJson.status === 200 || deleteLikePostJson.status === 201) {
                 this.setState({
-                    likes: this.state.likes - 1
+                    likes: this.state.likes.filter(like => like.username.user !== loggedInUser)
                 })
             }
             this.getPosts()
@@ -267,7 +268,7 @@ export default class PostsContainer extends Component {
             console.log("There was an error deleting this like", err)
         }
     }
-
+*/
 
 /*
    checkLike = async (id) => {
