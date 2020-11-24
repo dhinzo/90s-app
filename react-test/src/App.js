@@ -8,7 +8,6 @@ class App extends React.Component {
   render(){
   return (
     <div className="App">
-      <h1 id='title-text' class='main-text'>Thats SoOo 90s!</h1>
       <PostContainer/>
     </div>
   );

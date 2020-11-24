@@ -255,13 +255,14 @@ export default class PostsContainer extends Component {
                     register={this.register}
                     loggedIn={this.state.loggedIn}
                     loggedInUser={this.state.loggedInUser}
-                    createPost={this.createPost} />
+                    createPost={this.createPost} 
+                />
+                <h1 id='title-text' class='main-text'>Thats SoOo 90s!</h1>
                 {
                     this.state.loggedIn === true
                     &&
-                <h2>Lookin' fly, {this.state.loggedInUser}</h2>
+                <h2 id='user-welcome'>Lookin' fly, {this.state.loggedInUser}</h2>
                 }
-
                 {
                     this.state.conditionalView === ''
                     &&
@@ -321,5 +322,6 @@ export default class PostsContainer extends Component {
                     }
                     </div>
         )
+
     }
 }

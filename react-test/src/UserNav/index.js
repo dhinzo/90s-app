@@ -40,7 +40,9 @@ const UserNav = (props) => (
   <div>
     <Menu fixed='top' inverted>
       <Container>
-        <Menu.Item header>   
+        <Menu.Item 
+        header id='nav-title'
+        onClick={() => props.showAllPosts()}>   
           That 90s App!
         </Menu.Item>
         {
@@ -59,7 +61,9 @@ const UserNav = (props) => (
             onClick={() => props.showUserPosts()}>My Posts</Dropdown.Item>
               </Dropdown.Menu>            
         </Dropdown>
-          <Button onClick={() => props.logout()}>Log Out</Button>
+          <Button 
+            id='logout-button'
+            onClick={() => props.logout()}>Log Out</Button>
         </React.Fragment>
         :   
         <React.Fragment>  
