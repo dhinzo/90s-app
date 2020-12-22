@@ -1,4 +1,4 @@
-# That's SoOo 90s - React and Flask app
+# That's SoOo 90s! - React and Flask app
 
 ## About This App
 

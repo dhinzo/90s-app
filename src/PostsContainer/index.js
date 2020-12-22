@@ -92,7 +92,6 @@ export default class PostsContainer extends Component {
             if(deletePostJson.status === 200 || deletePostJson.status === 201) {
                 this.setState({
                     posts: this.state.posts.filter(post => post.id !== id),
-                    likes: this.state.likes.filer(like.post.id !== id)
                     conditionalView: 'show user posts'
                     
                 })                
@@ -247,12 +246,6 @@ export default class PostsContainer extends Component {
             const likePostResponse = await fetch(url, {
                 method: "POST",
                 credentials: "include",
-            // }).then( res => {
-            //     const findIndex = this.state.posts.findIndex(post => post.id === id)
-            //     const copyPosts = [...this.state.posts]
-            //    setState({
-            //        likes: 
-            //    })
             })
             const likePostJson = await likePostResponse.json()
             console.log("Here is the likePostJson: ", likePostJson)
@@ -262,7 +255,6 @@ export default class PostsContainer extends Component {
                 })
             }
             this.getPosts()
-//          this.getLikes()
         } catch(err) {
             console.log("There was an error liking this post", err)
         }
@@ -270,7 +262,7 @@ export default class PostsContainer extends Component {
 
 
 
-/*
+
     deleteLike = async (id) => {
         console.log(id)
         try {
@@ -299,7 +291,7 @@ export default class PostsContainer extends Component {
             console.log("There was an error deleting this like", err)
         }
     }
-*/
+
 
 /*
    checkLike = async (id) => {
@@ -352,13 +344,17 @@ export default class PostsContainer extends Component {
                     showPost={this.showPost}
                     deletePost={this.deletePost}
                     addLike={this.addLike}
+                    deleteLike={this.deleteLike}
                     editPost={this.editPost}
+                    loggedInUser={this.state.loggedInUser}
+                    likes={this.state.likes}
                     />
                 <AllUserPostsList
                     userPosts={this.state.userPosts}
                     showPost={this.showPost}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
+                    loggedInUser={this.state.loggedInUser}
                 />
                     {
                         this.state.idOfPostToEdit !== -1 &&

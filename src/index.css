@@ -161,3 +161,7 @@ border: solid whitesmoke 4px;
   color: hotpink;
   text-shadow: 1px 1px rgb(97,222,42);
 }
+
+.redIcon {
+  color: red;
+}

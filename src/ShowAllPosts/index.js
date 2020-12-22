@@ -12,7 +12,7 @@ export default function AllPostsList(props){
     const likes = props.likes.filter(like => like.post.id === post.id)
     console.log(likes);
     console.log(props.loggedInUser);
-    // const likedUser = props.likes.filter(like => like.user.username === props.loggedInUser )
+    //const likedUser = props.likes.filter(like => like.user.username === props.loggedInUser )
     const likedUser = likes.filter(like => like.user.username === props.loggedInUser);
     console.log(likedUser);
 
@@ -37,22 +37,18 @@ export default function AllPostsList(props){
                         {post.owner.username}
                     </a>
                     { 
-                        likedUser < 1 && props.loggedIn === true
+                    likedUser.length < 1
                         ?
-                    <span class="right floated">
-                        <i class="heart like icon" onClick={() => props.addLike(post.id)}></i>
-                            {likes.length}
+                    <span className="right floated">
+                        <i className="heart like icon" onClick={() => props.addLike(post.id)}></i>
+                        {likes.length}
                     </span>
                         :
-                        <span class="right floated">
-                        <i class="heart like icon"></i>
-                            {likes.length}
+                    <span className="right floated">
+                        <i className="heart like icon redIcon" onClick={() => props.deleteLike(post.id)}></i>
+                        {likes.length}
                     </span>
                   }   
-                    <span className="right floated">
-                        <i className="heart like icon"></i>
-                            {post.likes}
-                    </span>  
                 </Card.Content>
             </Card>
         )
