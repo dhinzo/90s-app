@@ -4,26 +4,27 @@ import {Icon, Card, Button, Image } from 'semantic-ui-react'
 
 
 
-
-
 export default function AllUserPostsList(props){
     // const [open, setOpen] = React.useState(false)
     console.log("These are the props in AllUserPosts: ", props);
     const allPosts = props.userPosts.map(post => {
-    
+    // const likes = props.likes.filter(like => like.post.id === post.id)
     return(
-        <Card raised key={post.id} onClick={() => {} }  medium circular>
+        <Card
+            id="post-card"
+            raised
+            key={post.id}
+            onClick={() => {} }
+            medium 
+            circular>
             <Card.Content textAlign={"center"}>
                 <Card.Header>
                     {post.title}
                 </Card.Header>
-                <Card.Meta>
-                    {post.description}
-                </Card.Meta>
                 <Card.Description>
-                   {post.owner.username}
-                    
+                    {post.description}
                 </Card.Description>
+                
                 <Image raised
                     src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
             </Card.Content>
@@ -34,15 +35,17 @@ export default function AllUserPostsList(props){
                     </a>
                     <span className="right floated">
                         <i className="heart like icon"></i>
-                            {post.likes}
+                            {props.likes}
                     </span>  
                 </Card.Content>
                 <Button 
-                    basic color={"red"}
+                    inverted
+                    color="red"
                     onClick={() => props.deletePost(post.id)}>Delete</Button>
                 {/*WHY ARE THESE UNDEFINED?*/}
                 <Button
-                    basic color={"yellow"}
+                    inverted
+                    color="yellow"
                     onClick={() => props.editPost(post.id)}>Edit</Button>
             </Card>
         )

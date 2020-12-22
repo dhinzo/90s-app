@@ -29,11 +29,13 @@ export default function RegisterModal(props) {
         trigger={<Button
                     basic
                     color="grey"
-                    compact>Register</Button>}
+                    compact
+                    size="small"
+                    >Register</Button>}
         >
         <Modal.Header id='login-header'>Register
             <Button
-
+                compact
                 id='header-close'
                 icon='x'
                 floated='right'
@@ -68,7 +70,7 @@ export default function RegisterModal(props) {
 
           <Button 
             content='Register'
-            color='#0E6EB8'
+            color='blue'
             primary
             onClick={handleSubmit}
             positive 
@@ -80,4 +82,3 @@ export default function RegisterModal(props) {
     </Modal>
   )
 }
-

@@ -1,26 +1,3 @@
-// import React from 'react'
-// import { Grid, Rail, Button } from 'semantic-ui-react'
-// import AllPostsList from '../ShowAllPosts'
-
-// const RailExampleRail = (props) => (
-//   <Grid centered columns={3}>
-//     <Grid.Column>
-      
-
-//         <Rail position='left'>
-//           <Button
-//             onClick={() => props.showAllPosts()}>All Posts</Button>
-//           <Button
-//             onClick={() => props.showUserPosts()}>My Posts</Button>
-//         </Rail>
-
-      
-//     </Grid.Column>
-//   </Grid>
-// )
-
-// export default RailExampleRail
-
 import React, { useState } from 'react'
 import {
   Container,
@@ -36,8 +13,10 @@ import RegisterModal from '../RegisterContainer'
 const UserNav = (props) => (
 
 
-  <div>
-    <Menu fixed='top' inverted>
+  <React.Fragment>
+    <Menu
+      position='left' 
+      fixed='top' inverted>
       <Container>
         <Menu.Item 
         header id='nav-title'
@@ -60,27 +39,34 @@ const UserNav = (props) => (
             color="grey"
             compact 
             onClick={() => props.showUserPosts()}>My Posts</Button>
+        <Menu.Menu position="right">
           <Button
+            id="logout-btn"
             basic
             color="grey"
             compact
-            position='right'
             onClick={() => props.logout()}>Log Out</Button>
+          </Menu.Menu>
         </React.Fragment>
         :   
-        <React.Fragment>  
+        <React.Fragment>
+        <Menu.Menu position="right">  
         <LoginModal
+          id="login-modal"
           login={props.login}
            />
         <RegisterModal
+          id="reg-modal"
           login={props.login}
           register={props.register}
-          />    
+          
+          />
+          </Menu.Menu>    
           </React.Fragment>
         } 
       </Container>
     </Menu>   
-  </div>
+    </React.Fragment>
 )
 
 export default UserNav

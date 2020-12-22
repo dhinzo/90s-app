@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # That's SoOo 90s! - React and Flask app
+=======
+# That's SoOo 90s - React and Flask app
+>>>>>>> 9ae323a8370377ca46186c107cfc321c44e290c1
 
 ## About This App
 

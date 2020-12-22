@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
-// import LoginForm from '../Login'
-import LoginModal from '../LoginContainer'
-import RegisterModal from '../RegisterContainer'
 import NewPostModal from '../NewPostModal'
 import PostToShow from '../PostToShow'
 import PostToShowUser from '../PostToShowUser'
@@ -37,13 +34,11 @@ export default class PostsContainer extends Component {
                 posts: postsJson.data.posts,
                 likes: postsJson.data.likes
             })
-            console.log(this.state.likes)
-            console.log(postsJson)
+            // console.log(this.state.likes)
         }catch(err){
             console.log("Error getting posts data", err)
             }    
         }
-
     getUserPost = async () =>{
         try{
             const url = process.env.REACT_APP_API_URL + "/90s/posts/userposts/"
@@ -79,6 +74,7 @@ export default class PostsContainer extends Component {
         } catch(err){
             console.log("Error adding post", err);
         }
+        this.getUserPost()
     }
     deletePost = async (id) => {
         try {
@@ -139,6 +135,7 @@ export default class PostsContainer extends Component {
         this.getUserPost()
     }
 
+
     login = async (loginInfo) => {
         // console.log("login() in App.js called with the following info", loginInfo);
         const url = process.env.REACT_APP_API_URL + '/90s/users/login/'
@@ -168,6 +165,7 @@ export default class PostsContainer extends Component {
         }
       }
 
+
     register = async (registerUser) =>{
         // console.log("register() in App.js called with the following info", registerUser);
         const url = process.env.REACT_APP_API_URL + '/90s/users/register/'
@@ -187,6 +185,8 @@ export default class PostsContainer extends Component {
         this.login(registerUser)
     }
 
+
+
     logout = async () =>{
         // console.log("Logout has occured for this username");
         try{
@@ -204,41 +204,7 @@ export default class PostsContainer extends Component {
             console.log("Error getting posts data", err)
             }    
         }
-
-    componentDidMount() {
-        this.getPosts()
-        // this.getUserPost()
-    }
-
-    showAllPosts = () =>{
-        this.setState({
-            conditionalView: ''
-        })
-    }
-
-    showUserPosts = () =>{
-        this.setState({
-            conditionalView: 'show user posts'
-        })
-        this.getUserPost()
-    }
-
-    showPost = (idOfPostToShow) => {
-        // console.log("you are trying to show post with id: ", idOfPostToShow)
-        this.setState({
-        idOfPostToShow: idOfPostToShow,
-        conditionalView: 'show this post'
-        })
-    }
-
-    showPostUser = (idOfPostToShow) => {
-        console.log("you are trying to show post with id: ", idOfPostToShow)
-        this.setState({
-        idOfPostToShow: idOfPostToShow,
-        conditionalView: 'show this post user'
-        })
-    }
-
+        
     addLike = async (id) => {
         console.log(id)
         try {
@@ -246,12 +212,18 @@ export default class PostsContainer extends Component {
             const likePostResponse = await fetch(url, {
                 method: "POST",
                 credentials: "include",
+            // }).then( res => {
+            //     const findIndex = this.state.posts.findIndex(post => post.id === id)
+            //     const copyPosts = [...this.state.posts]
+            //    setState({
+            //        likes: 
+            //    })
             })
             const likePostJson = await likePostResponse.json()
             console.log("Here is the likePostJson: ", likePostJson)
             if(likePostJson.status === 200 || likePostJson.status === 201) {
                 this.setState({
-                    likes: [...this.state.likes, likePostJson.data] 
+                    likes: [...this.state.likes, likePostJson.data]
                 })
             }
             this.getPosts()
@@ -260,9 +232,9 @@ export default class PostsContainer extends Component {
         }
     }
 
-
-
-
+    
+    
+    
     deleteLike = async (id) => {
         console.log(id)
         try {
@@ -286,22 +258,41 @@ export default class PostsContainer extends Component {
                 })
             }
             this.getPosts()
-//          this.getLikes()
         } catch(err) {
             console.log("There was an error deleting this like", err)
         }
+    }    
+            
+    componentDidMount() {
+        this.getPosts()
+        // this.getUserPost()
     }
-
-
-/*
-   checkLike = async (id) => {
-        if ( loggedInUser !== user ) {
-            this.addLike()
-        } else {
-            this.deleteLike()
-        }
+    showAllPosts = () =>{
+        this.setState({
+            conditionalView: '',
+        })
+        this.getPosts()
     }
-*/
+    showUserPosts = () =>{
+        this.setState({
+            conditionalView: 'show user posts'
+        })
+        this.getUserPost()
+    }
+    showPost = (idOfPostToShow) => {
+        // console.log("you are trying to show post with id: ", idOfPostToShow)
+        this.setState({
+        idOfPostToShow: idOfPostToShow,
+        conditionalView: 'show this post'
+        })
+    }
+    showPostUser = (idOfPostToShow) => {
+        console.log("you are trying to show post with id: ", idOfPostToShow)
+        this.setState({
+        idOfPostToShow: idOfPostToShow,
+        conditionalView: 'show this post user'
+        })
+    }
 
     closeShowModal = () => {
         this.setState({
@@ -321,62 +312,100 @@ export default class PostsContainer extends Component {
             idOfPostToEdit: -1
         })
     }
+
+
+    
+
     render(){
         return(
-            <React.Fragment>
-                 <h2>All Throwback Posts</h2>
+            <div className="container">
+                <UserNav
+                    showAllPosts={this.showAllPosts}
+                    showUserPosts={this.showUserPosts}
+                    login={this.login}
+                    logout={this.logout} 
+                    register={this.register}
+                    loggedIn={this.state.loggedIn}
+                    loggedInUser={this.state.loggedInUser}
+                    createPost={this.createPost} 
+
+                />
+                
+                <h1 id='title-text' className='main-text'>Thats SoOo 90s!</h1>
                 {
                     this.state.loggedIn === true
                     &&
-                <h2>{this.state.loggedInUser}</h2>
+                <h2 id='user-welcome'>Lookin' fly, {this.state.loggedInUser}</h2>
                 }
-                <Button onClick={() => this.getUserPost()}>userPosts</Button>
-                <LoginModal login={this.login} />
-                <RegisterModal 
-                login={this.login}
-                register={this.register}/>
-                <Button onClick={() => this.logout()}>Log Out</Button>
-                <NewPostModal 
-                loggedInUser={this.state.loggedInUser}
-                createPost={this.createPost}/>
+                
+                {
+                    this.state.conditionalView === ''
+                    &&
+                    <React.Fragment>
+                <h2
+                    id="user-header">All Throwback Posts</h2>
                 <AllPostsList 
                     posts={this.state.posts}
                     showPost={this.showPost}
-                    deletePost={this.deletePost}
+                    likes={this.state.likes}
                     addLike={this.addLike}
                     deleteLike={this.deleteLike}
-                    editPost={this.editPost}
                     loggedInUser={this.state.loggedInUser}
-                    likes={this.state.likes}
+                    loggedIn={this.state.loggedIn}
                     />
+                    </React.Fragment>
+                }
+                {
+                    this.state.conditionalView === 'show user posts'
+                    &&
+                    <React.Fragment>
+                    <h2
+                        id="user-header">{this.state.loggedInUser}'s Throwback Posts</h2>
                 <AllUserPostsList
                     userPosts={this.state.userPosts}
-                    showPost={this.showPost}
+                    showPost={this.showPostUser}
                     deletePost={this.deletePost}
                     editPost={this.editPost}
-                    loggedInUser={this.state.loggedInUser}
+                    updatePost={this.updatePost}
+                    likes={this.state.likes}
                 />
+                </React.Fragment>
+                }
                     {
-                        this.state.idOfPostToEdit !== -1 &&
+                        this.state.idOfPostToEdit !== -1 && this.state.conditionalView === "edit this post"
+                        &&
                         <EditPostModal
                         postToEdit={this.state.posts.find((post) => post.id === this.state.idOfPostToEdit)}
                         updatePost={this.updatePost}
                         closeEditModal={this.closeEditModal}
+                        editPost={this.editPost}
+                        showUserPosts={this.showUserPosts}
+                        getUserPost={this.getUserPost}
                         />
                     }
-
-                {
-                    this.state.idOfPostToShow !== -1 
-                    &&
-                    <PostToShow
-                        showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
-                        closeShowModal={this.closeShowModal}
-                        getPosts={this.getPosts}
-                        addLike={this.addLike}
-                    />
-                }            
-            </React.Fragment>           
-    
+                    {
+                        this.state.idOfPostToShow !== -1 && this.state.conditionalView === 'show this post'
+                        &&
+                        <PostToShow
+                            showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
+                            closeShowModal={this.closeShowModal}
+                            getPosts={this.getPosts}
+                            state={this.state}
+                            likes={this.state.likes}
+                        />
+                    }
+                    {
+                        this.state.idOfPostToShow !== -1 && this.state.conditionalView === 'show this post user'
+                        &&
+                        <PostToShowUser
+                            showThisPost={this.state.posts.find((post) => post.id === this.state.idOfPostToShow)}
+                            closeShowModal={this.closeUserShowModal}
+                            getPosts={this.getPosts}
+                            state={this.state}
+                            likes={this.state.likes}
+                        />
+                    }
+                    </div>
         )
 
     }
