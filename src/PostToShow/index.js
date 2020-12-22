@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Card, Icon, Image, Segment, Button } from 'semantic-ui-react'
 export default function PostToShow(props){
 	// console.log("Here are the props in PostToShow: ", props)
-	// const likes = props.likes.filter(like => like.post.id === props.showThisPost.id)
+	const likes = props.likes.filter(like => like.post.id === props.showThisPost.id)
 		return(
 			<div id='show-container'>
 			<Segment id='show-modal'> 
@@ -29,7 +29,7 @@ export default function PostToShow(props){
       					</a>
       					<a className="right floated">
         				<Icon name='like' />
-        				{props.likes}
+        				{likes.length}
       					</a>
     				</Card.Content>
 	    			<Button id='back-button' onClick={props.closeShowModal}>Back</Button>

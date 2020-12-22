@@ -36,24 +36,25 @@ export default function AllPostsList(props){
                     <Icon name='user' />
                         {post.owner.username}
                     </a>
-                    { props.loggedIn === true
+                    { 
+                        props.loggedIn === true
                         ?
-                    likedUser.length < 1
-                        ?
-                    <span className="right floated">
-                        <i className="heart like icon" onClick={() => props.addLike(post.id)}></i>
-                        {likes.length}
-                    </span>
+                            likedUser.length < 1
+                            ?
+                            <span className="right floated">
+                                <i className="heart like icon" onClick={() => props.addLike(post.id)}></i>
+                                {likes.length}
+                            </span>
+                            :
+                            <span className="right floated">
+                                <i className="heart like icon redIcon" onClick={() => props.deleteLike(post.id)}></i>
+                                {likes.length}
+                            </span> 
                         :
-                    <span className="right floated">
-                        <i className="heart like icon redIcon" onClick={() => props.deleteLike(post.id)}></i>
-                        {likes.length}
-                    </span> 
-                        :
-                    <span className="right floated">
-                        <i className="heart like icon"></i>
-                        {likes.length}
-                    </span>    
+                        <span className="right floated">
+                            <i className="heart like icon"></i>
+                            {likes.length}
+                        </span>    
                     } 
 
                 </Card.Content>

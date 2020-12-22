@@ -368,6 +368,10 @@ export default class PostsContainer extends Component {
                     editPost={this.editPost}
                     updatePost={this.updatePost}
                     likes={this.state.likes}
+                    addLike={this.addLike}
+                    deleteLike={this.deleteLike}
+                    loggedInUser={this.state.loggedInUser}
+                    loggedIn={this.state.loggedIn}
                 />
                 </React.Fragment>
                 }

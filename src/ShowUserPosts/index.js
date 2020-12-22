@@ -8,6 +8,8 @@ export default function AllUserPostsList(props){
     // const [open, setOpen] = React.useState(false)
     console.log("These are the props in AllUserPosts: ", props);
     const allPosts = props.userPosts.map(post => {
+    const likes = props.likes.filter(like => like.post.id === post.id)
+    const likedUser = likes.filter(like => like.user.username === props.loggedInUser);
     // const likes = props.likes.filter(like => like.post.id === post.id)
     return(
         <Card
@@ -33,10 +35,26 @@ export default function AllUserPostsList(props){
                     <Icon name='user' />
                         {post.owner.username}
                     </a>
-                    <span className="right floated">
-                        <i className="heart like icon"></i>
-                            {props.likes}
-                    </span>  
+                    { 
+                        props.loggedIn === true
+                        ?
+                            likedUser.length < 1
+                            ?
+                            <span className="right floated">
+                                <i className="heart like icon" onClick={() => props.addLike(post.id)}></i>
+                                {likes.length}
+                            </span>
+                            :
+                            <span className="right floated">
+                                <i className="heart like icon redIcon" onClick={() => props.deleteLike(post.id)}></i>
+                                {likes.length}
+                            </span> 
+                        :
+                        <span className="right floated">
+                            <i className="heart like icon"></i>
+                            {likes.length}
+                        </span>    
+                    } 
                 </Card.Content>
                 <Button 
                     inverted
