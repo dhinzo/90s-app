@@ -1,4 +1,3 @@
-// import React from 'react'
 import { Form, Label, Button, Modal } from 'semantic-ui-react'
 import React, {useState} from 'react'
 
@@ -6,13 +5,14 @@ export default function NewPostModal(props) {
   const [open, setOpen] = React.useState(false)
     const initialInputState = { title: '', img: '', description: '', likes: 0, owner: '', tags: '' }
     const [eachEntry, setEachEntry] = useState(initialInputState)
-    const { title, img, description, likes, owner, tags} = eachEntry
+    const { title, img, description, tags} = eachEntry
   
   const handleInputChange = e => {
   setEachEntry({ ...eachEntry, [e.target.name]: e.target.value })
 }
 
   const handleSubmit = e => {
+    e.preventDefault()
     props.createPost(eachEntry)
     setOpen(false)
     setEachEntry(initialInputState)
@@ -23,7 +23,10 @@ export default function NewPostModal(props) {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>Create Throwback</Button>}
+      trigger={<Button
+                  basic
+                  color="grey"
+                  compact>Create Throwback</Button>}
     >
       <Modal.Header>Create New Post</Modal.Header>
     <Form>
@@ -78,3 +81,4 @@ export default function NewPostModal(props) {
     </Modal>
   )
 }
+
