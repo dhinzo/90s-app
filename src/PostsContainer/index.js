@@ -47,7 +47,8 @@ export default class PostsContainer extends Component {
             })
             const postsJson= await postsResponse.json()
             this.setState({
-                userPosts: postsJson.data
+                userPosts: postsJson.data.posts,
+                likes: postsJson.data.likes
         })
         } catch (err){
             console.log("Error getting User posts data", err)
@@ -79,16 +80,26 @@ export default class PostsContainer extends Component {
     deletePost = async (id) => {
         try {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
+            const likeUrl = process.env.REACT_APP_API_URL + "/90s/posts/delete-all-likes" + id
             const deletePostResponse = await fetch(url, {
                 credentials: 'include',
                 method: "DELETE",
             })
+            const deleteLikeResponse = await fetch(likeUrl, {
+                credentials: 'include',
+                method: "DELETE",
+            })
             const deletePostJson = await deletePostResponse.json()
-            // console.log("Here is the deletePostJson: ", deletePostJson)
-            if(deletePostJson.status === 200 || deletePostJson.status === 201) {
+            const deleteLikeJson = await deleteLikeResponse.json()
+            console.log("This is the dlete post json", deletePostJson)
+            console.log("This is the dlete like json", deleteLikeJson)
+            if(deletePostJson.status === 200 || deleteLikeJson.status === 200) {
                 this.setState({
+                    // conditionalView: 'show user posts',
                     posts: this.state.posts.filter(post => post.id !== id),
-                    conditionalView: 'show user posts'
+                    userPosts: this.state.userPosts.filter(post => post.id !== id),
+                    likes: this.state.likes.filter(like => like.post.id !== id),
+                    
                     
                 })                
             }
@@ -97,6 +108,8 @@ export default class PostsContainer extends Component {
         }
         this.getPosts()
         this.getUserPost()
+        console.log(this.state.posts);
+        console.log(this.state.userPosts);
     }
 
 
@@ -254,7 +267,7 @@ export default class PostsContainer extends Component {
             console.log("Here is the deleteLikePostJson: ", deleteLikePostJson)
             if(deleteLikePostJson.status === 200 || deleteLikePostJson.status === 201) {
                 this.setState({
-                    likes: this.state.likes.filter(like => like.username.user !== loggedInUser)
+                    likes: this.state.likes.filter(like => like.user.username !== loggedInUser)
                 })
             }
             this.getPosts()
@@ -372,6 +385,7 @@ export default class PostsContainer extends Component {
                     deleteLike={this.deleteLike}
                     loggedInUser={this.state.loggedInUser}
                     loggedIn={this.state.loggedIn}
+                    
                 />
                 </React.Fragment>
                 }
