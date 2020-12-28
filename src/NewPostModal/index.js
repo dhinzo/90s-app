@@ -1,4 +1,3 @@
-// import React from 'react'
 import { Form, Label, Button, Modal } from 'semantic-ui-react'
 import React, {useState} from 'react'
 
