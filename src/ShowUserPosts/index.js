@@ -20,10 +20,12 @@ export default function AllUserPostsList(props){
             medium 
             circular>
             <Card.Content textAlign={"center"}>
-                <Card.Header>
+                <Card.Header
+                className="card-header">
                     {post.title}
                 </Card.Header>
-                <Card.Description>
+                <Card.Description
+                className="card-description">
                     {post.description}
                 </Card.Description>
                 

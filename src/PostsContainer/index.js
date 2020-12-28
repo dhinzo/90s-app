@@ -80,12 +80,12 @@ export default class PostsContainer extends Component {
     deletePost = async (id) => {
         try {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
-            const likeUrl = process.env.REACT_APP_API_URL + "/90s/posts/delete-all-likes" + id
-            const deletePostResponse = await fetch(url, {
+            const likeUrl = process.env.REACT_APP_API_URL + "/90s/posts/delete-all-likes/" + id
+            const deleteLikeResponse = await fetch(likeUrl, {
                 credentials: 'include',
                 method: "DELETE",
             })
-            const deleteLikeResponse = await fetch(likeUrl, {
+            const deletePostResponse = await fetch(url, {
                 credentials: 'include',
                 method: "DELETE",
             })

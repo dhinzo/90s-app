@@ -9,10 +9,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* background-color: linear-gradient(to right,#7f53ac 0,#657ced 100%); */
   background-size: cover !important;
-  height: 100%;
-  overflow: hidden;
   background-image: url('https://i.imgur.com/ysqPz4G.jpg') !important;
-
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important; 
+  -o-background-size: cover !important;
 }
 
 
@@ -47,7 +47,7 @@ body .ui.cards>.card {
 }
 
 
-.ui focus input {
+/* .ui focus input {
   display: block;
   position: absolute;
   align-items: center;
@@ -58,11 +58,11 @@ body .ui.cards>.card {
   font-family: 'Raleway', cursive !important;
   letter-spacing: 2px;
   text-align: center;
-}
+} */
 
 .layer {
   background-color: rgba(248, 247, 216, 0.7);
-  position: absolute;
+  
   top: 0;
   left: 0;
   width: 100%;
@@ -73,6 +73,7 @@ body .ui.cards>.card {
 
 
 #title-text {
+  font-family: 'Raleway', cursive !important;
   font-size: 100px;
   margin-top: 6rem;
   color: hsla(348, 79%, 72%, 1);
@@ -94,24 +95,24 @@ h2 {
 
 .main-text {
   margin-top: 2rem;
+  padding-bottom: 5% !important;
 }
 
 #show-modal {
-  background-image: url('https://thumbs.dreamstime.com/b/s-patches-fashion-poster-frame-decoration-stripes-background-s-patches-fashion-poster-frame-decoration-stripes-background-110461382.jpg') !important;
+  /* background-image: url('https://thumbs.dreamstime.com/b/s-patches-fashion-poster-frame-decoration-stripes-background-s-patches-fashion-poster-frame-decoration-stripes-background-110461382.jpg') !important;
+  background-size: cover !important;
+   */
   align-items: center;
-  width: fit-content;
+  /* width: fit-content; */
+  background-color: #abd5f2 !important;
   padding: 2em 2em 2em 2em;
-  position: fixed;
-  top: 45%;
-  left: 50%;
+  position: absolute !important;
+  margin-top: 10rem !important;
+  margin-left: 50% !important;
   transform: translate(-50%, -50%);
   border: solid whitesmoke 4px;
   margin-top: 12rem;
-}
-
-#show-container {
-  height: 200%;
-  width: 200%;
+  color: rgb(241, 247, 116) !important;
 }
 
 #nav-title.header.item {
@@ -129,11 +130,6 @@ h2 {
 .ui.positive.button {
   background-color: rgb(3, 24, 151) !important;
   font-family: 'Press Start 2P', cursive !important;
-}
-
-#post-title {
-  font-family: 'Gloria Hallelujah', cursive !important;
-  margin-bottom: 5px;
 }
 
 
@@ -165,9 +161,21 @@ h2 {
 
 #post-card {
   margin-top: 6rem !important;
-  background: hsla(296, 28%, 39%, 1) !important;
+  background: #d89bd0 !important;
   font-family: 'Raleway' !important;
-  font-weight: 900;
+  font-weight: 900 !important;
+  
+}
+.card-header{
+  font-size: 30px !important;
+  font-weight: 900 !important;
+  font-family: 'Gloria Hallelujah', cursive !important;
+}
+.card-description{
+  margin-bottom: 1rem !important;
+  margin-top: 1rem !important;
+  font-family: 'Raleway' !important;
+  font-weight: 900 !important;
 }
 
 
@@ -190,4 +198,12 @@ h2 {
 
 .ui.container {
   margin: none;
+}
+.post-content-background{
+  background-color: rgb(242 237 110) !important;
+  border-radius: 25% !important;
+ 
+}
+.post-image{
+  border-radius: 25% !important;
 }
