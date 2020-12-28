@@ -7,7 +7,6 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: linear-gradient(to right,#7f53ac 0,#657ced 100%); */
   background-size: cover !important;
   background-image: url('https://i.imgur.com/ysqPz4G.jpg') !important;
   -webkit-background-size: cover !important;
@@ -15,21 +14,15 @@ body {
   -o-background-size: cover !important;
 }
 
-
-
 body .ui.cards>.card {
-  /*  box-shadow:  6px 6px 2px 1px rgba(255, 0, 255, .2);*/
   box-shadow: none;
 }
 
 #login-header {
   background-color: rgb(3, 24, 151);
   padding: none;
-  /* height: 10px; */
-  /* line-height: 5px; */
   color: whitesmoke;
   font-family: 'Press Start 2P', cursive !important;
-
 }
 
 #header-button {
@@ -45,33 +38,14 @@ body .ui.cards>.card {
 
 
 }
-
-
-/* .ui focus input {
-  display: block;
-  position: absolute;
-  align-items: center;
-}
-
-.ui.segment {
-  background-image: url('https://imgur.com/3iH46Di') !important;
-  font-family: 'Raleway', cursive !important;
-  letter-spacing: 2px;
-  text-align: center;
-} */
-
 .layer {
   background-color: rgba(248, 247, 216, 0.7);
-  
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
 }
-
-
-
 #title-text {
   font-family: 'Raleway', cursive !important;
   font-size: 86px !important;
@@ -79,31 +53,21 @@ body .ui.cards>.card {
   color: hsla(348, 79%, 72%, 1);
   text-shadow: 3px 3px hsla(58, 83%, 69%, 1);
 }
-
 h2 {
   color: hsla(348, 79%, 72%, 1);
 }
-
 .card-style {
   padding-top: 1.5em;
 }
-
-
 .ui.button {
   font-family: 'Gloria Hallelujah', cursive !important;
 }
-
 .main-text {
   margin-top: 2rem;
   padding-bottom: 5% !important;
 }
-
 #show-modal {
-  /* background-image: url('https://thumbs.dreamstime.com/b/s-patches-fashion-poster-frame-decoration-stripes-background-s-patches-fashion-poster-frame-decoration-stripes-background-110461382.jpg') !important;
-  background-size: cover !important;
-   */
   align-items: center;
-  /* width: fit-content; */
   background-color: #abd5f2 !important;
   padding: 2em 2em 2em 2em;
   position: absolute !important;
@@ -117,22 +81,16 @@ h2 {
 
 #nav-title.header.item {
   font-family: 'Gloria Hallelujah', cursive !important;
-
   font-size: 15px;
   margin: none !important;
   color: hsla(270, 40%, 98%, 1);
-
   font-family: cursive;
-
   position: relative;
 }
-
 .ui.positive.button {
   background-color: rgb(3, 24, 151) !important;
   font-family: 'Press Start 2P', cursive !important;
 }
-
-
 @media only screen and (min-width: 1200px) {
   .ui.container {
     width: auto !important;
@@ -140,31 +98,25 @@ h2 {
     margin-right: auto !important;
   }
 }
-
-
 #logout-btn,
 #login-modal,
 #reg-modal {
   position: "end" !important;
 }
-
 #post-timestamp {
   font-size: 9px;
 }
-
 #user-header {
   width: 25rem;
   margin: 0 auto;
   border-radius: 70%;
   background-color: black;
 }
-
 #post-card {
   margin-top: 6rem !important;
   background: #d89bd0 !important;
   font-family: 'Raleway' !important;
   font-weight: 900 !important;
-  
 }
 .card-header{
   font-size: 30px !important;
@@ -177,14 +129,10 @@ h2 {
   font-family: 'Raleway' !important;
   font-weight: 900 !important;
 }
-
-
-
 #back-button {
   background-color: hotpink;
   border: solid rgb(97, 222, 42) 4px;
 }
-
 #user-welcome {
   font-size: 37px;
   background-color: black;
@@ -195,14 +143,12 @@ h2 {
   margin-bottom: 4rem !important;
   border-radius: 70%;
 }
-
 .ui.container {
   margin: none;
 }
 .post-content-background{
   background-color: rgb(242 237 110) !important;
   border-radius: 25% !important;
- 
 }
 .post-image{
   border-radius: 25% !important;
