@@ -74,7 +74,7 @@ body .ui.cards>.card {
 
 #title-text {
   font-family: 'Raleway', cursive !important;
-  font-size: 100px;
+  font-size: 86px !important;
   margin-top: 6rem;
   color: hsla(348, 79%, 72%, 1);
   text-shadow: 3px 3px hsla(58, 83%, 69%, 1);
@@ -186,7 +186,7 @@ h2 {
 }
 
 #user-welcome {
-  font-size: 40px;
+  font-size: 37px;
   background-color: black;
   color: hsla(98, 51%, 62%, 1);
   text-shadow: 1px 1px rgb(97, 222, 42);
