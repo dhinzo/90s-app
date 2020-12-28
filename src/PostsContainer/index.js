@@ -7,6 +7,7 @@ import EditPostModal from '../EditPostModal'
 import AllUserPostsList from '../ShowUserPosts'
 import { Button} from 'semantic-ui-react'
 import UserNav from '../UserNav'
+import LoginError from '../ErrorMessages/LoginError.js'
 
 
 export default class PostsContainer extends Component {
@@ -20,7 +21,8 @@ export default class PostsContainer extends Component {
             idOfPostToEdit: -1,
             loggedIn: false,
             loggedInUser: null,
-            conditionalView: ''
+            conditionalView: '',
+            errorMessage:''
         }
     }
     getPosts = async () =>{
@@ -152,8 +154,13 @@ export default class PostsContainer extends Component {
           if(loginResponse.status === 200) {
               this.setState({
                 loggedIn: true,
-                loggedInUser: loginJson.data.username
+                loggedInUser: loginJson.data.username,
+                errorMessage: ''
               })
+            } else {
+                this.setState({
+                    errorMessage: 'login error'
+                })
             }
         } catch(error) {
           console.error("Error trying to log in")
@@ -284,6 +291,11 @@ export default class PostsContainer extends Component {
             idOfPostToEdit: -1
         })
     }
+    closeErrorModals = () => {
+        this.setState({
+            errorMessage: ''
+        })
+    }
 
 
     
@@ -380,6 +392,15 @@ export default class PostsContainer extends Component {
                             getPosts={this.getPosts}
                             state={this.state}
                             likes={this.state.likes}
+                        />
+                    }
+                    {
+                        this.state.errorMessage === "login error"
+                        &&
+                        <LoginError
+                        closeErrorModals={this.closeErrorModals}
+                        login={this.login}
+                        register={this.register}
                         />
                     }
                     </div>
