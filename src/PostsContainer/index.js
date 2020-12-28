@@ -32,7 +32,7 @@ export default class PostsContainer extends Component {
             const postsJson = await postsResponse.json()
             this.setState({
                 posts: postsJson.data.posts,
-                // likes: postsJson.data.likes
+                likes: postsJson.data.likes
             })
             // console.log(this.state.likes)
         }catch(err){
@@ -47,7 +47,8 @@ export default class PostsContainer extends Component {
             })
             const postsJson= await postsResponse.json()
             this.setState({
-                userPosts: postsJson.data
+                userPosts: postsJson.data.posts,
+                likes: postsJson.data.likes
         })
         } catch (err){
             console.log("Error getting User posts data", err)
@@ -79,16 +80,26 @@ export default class PostsContainer extends Component {
     deletePost = async (id) => {
         try {
             const url = process.env.REACT_APP_API_URL + "/90s/posts/" + id
+            const likeUrl = process.env.REACT_APP_API_URL + "/90s/posts/delete-all-likes/" + id
+            const deleteLikeResponse = await fetch(likeUrl, {
+                credentials: 'include',
+                method: "DELETE",
+            })
             const deletePostResponse = await fetch(url, {
                 credentials: 'include',
                 method: "DELETE",
             })
             const deletePostJson = await deletePostResponse.json()
-            // console.log("Here is the deletePostJson: ", deletePostJson)
-            if(deletePostJson.status === 200 || deletePostJson.status === 201) {
+            const deleteLikeJson = await deleteLikeResponse.json()
+            console.log("This is the dlete post json", deletePostJson)
+            console.log("This is the dlete like json", deleteLikeJson)
+            if(deletePostJson.status === 200 || deleteLikeJson.status === 200) {
                 this.setState({
+                    // conditionalView: 'show user posts',
                     posts: this.state.posts.filter(post => post.id !== id),
-                    conditionalView: 'show user posts'
+                    userPosts: this.state.userPosts.filter(post => post.id !== id),
+                    likes: this.state.likes.filter(like => like.post.id !== id),
+                    
                     
                 })                
             }
@@ -97,6 +108,8 @@ export default class PostsContainer extends Component {
         }
         this.getPosts()
         this.getUserPost()
+        console.log(this.state.posts);
+        console.log(this.state.userPosts);
     }
 
 
@@ -204,67 +217,65 @@ export default class PostsContainer extends Component {
             console.log("Error getting posts data", err)
             }    
         }
-        /*
-        addLike = async (id) => {
-            console.log(id)
-            try {
-                const url = process.env.REACT_APP_API_URL + "/90s/posts/like/" + id
-                const likePostResponse = await fetch(url, {
-                    method: "POST",
-                    credentials: "include",
-                // }).then( res => {
-                //     const findIndex = this.state.posts.findIndex(post => post.id === id)
-                //     const copyPosts = [...this.state.posts]
-                //    setState({
-                //        likes: 
-                //    })
+        
+    addLike = async (id) => {
+        console.log(id)
+        try {
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/like/" + id
+            const likePostResponse = await fetch(url, {
+                method: "POST",
+                credentials: "include",
+            // }).then( res => {
+            //     const findIndex = this.state.posts.findIndex(post => post.id === id)
+            //     const copyPosts = [...this.state.posts]
+            //    setState({
+            //        likes: 
+            //    })
+            })
+            const likePostJson = await likePostResponse.json()
+            console.log("Here is the likePostJson: ", likePostJson)
+            if(likePostJson.status === 200 || likePostJson.status === 201) {
+                this.setState({
+                    likes: [...this.state.likes, likePostJson.data]
                 })
-                const likePostJson = await likePostResponse.json()
-                console.log("Here is the likePostJson: ", likePostJson)
-                if(likePostJson.status === 200 || likePostJson.status === 201) {
-                    this.setState({
-                        likes: [...this.state.likes, likePostJson.data]
-                    })
-                }
-                console.log(this.state.likes);
-                this.getPosts()
-    //          this.getLikes()
-            } catch(err) {
-                console.log("There was an error liking this post", err)
             }
+            this.getPosts()
+        } catch(err) {
+            console.log("There was an error liking this post", err)
         }
+    }
+
     
     
     
-    
-        deleteLike = async (id) => {
-            console.log(id)
-            try {
-                const url = process.env.REACT_APP_API_URL + "/90s/posts/delete/" + id
-                const deleteLikePostResponse = await fetch(url, {
-                    method: "DELETE",
-                    credentials: "include",
-                // }).then( res => {
-                //     const findIndex = this.state.posts.findIndex(post => post.id === id)
-                //     const copyPosts = [...this.state.posts]
-                //    setState({
-                //        likes: 
-                //    })
+    deleteLike = async (id) => {
+        console.log(id)
+        try {
+            const loggedInUser = this.state.loggedInUser
+            const url = process.env.REACT_APP_API_URL + "/90s/posts/delete/" + id
+            const deleteLikePostResponse = await fetch(url, {
+                method: "DELETE",
+                credentials: "include",
+            // }).then( res => {
+            //     const findIndex = this.state.posts.findIndex(post => post.id === id)
+            //     const copyPosts = [...this.state.posts]
+            //    setState({
+            //        likes: 
+            //    })
+            })
+            const deleteLikePostJson = await deleteLikePostResponse.json()
+            console.log("Here is the deleteLikePostJson: ", deleteLikePostJson)
+            if(deleteLikePostJson.status === 200 || deleteLikePostJson.status === 201) {
+                this.setState({
+                    likes: this.state.likes.filter(like => like.user.username !== loggedInUser)
                 })
-                const deleteLikePostJson = await deleteLikePostResponse.json()
-                console.log("Here is the deleteLikePostJson: ", deleteLikePostJson)
-                if(deleteLikePostJson.status === 200 || deleteLikePostJson.status === 201) {
-                    this.setState({
-                        likes: [...this.state.likes, ]
-                    })
-                }
-                this.getPosts()
-    //          this.getLikes()
-            } catch(err) {
-                console.log("There was an error deleting this like", err)
             }
-        }    
-            */
+            this.getPosts()
+        } catch(err) {
+            console.log("There was an error deleting this like", err)
+        }
+    }    
+            
     componentDidMount() {
         this.getPosts()
         // this.getUserPost()
@@ -370,6 +381,11 @@ export default class PostsContainer extends Component {
                     editPost={this.editPost}
                     updatePost={this.updatePost}
                     likes={this.state.likes}
+                    addLike={this.addLike}
+                    deleteLike={this.deleteLike}
+                    loggedInUser={this.state.loggedInUser}
+                    loggedIn={this.state.loggedIn}
+                    
                 />
                 </React.Fragment>
                 }
