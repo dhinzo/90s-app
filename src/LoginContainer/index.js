@@ -15,7 +15,6 @@ export default function LoginModal(props) {
     }
      const handleSubmit = (e) =>{
         e.preventDefault()
-        //lifting up state
         props.login(eachEntry)
         setOpen(false)
     }

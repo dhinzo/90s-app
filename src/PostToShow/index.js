@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Card, Icon, Image, Button, Segment } from 'semantic-ui-react'
 export default function PostToShow(props){
-	// console.log("Here are the props in PostToShow: ", props)
 	const likes = props.likes.filter(like => like.post.id === props.showThisPost.id)
 		return(
 			<Segment id="show-modal">

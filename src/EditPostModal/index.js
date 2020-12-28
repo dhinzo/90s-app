@@ -2,10 +2,7 @@ import React, { useState } from 'react'
 import { Form, Label, Button, Modal } from 'semantic-ui-react'
 
 function EditPostModal(props) {
-    // console.log("these are the props in editpostmodal: ", props)
     const [open, setOpen] = React.useState(false)
-    // console.log(setOpen)
-        // variables for useState (form fields and their respective current state values)
         const initialInputState = { 
             title: props.postToEdit.title, 
             img: props.postToEdit.img, 

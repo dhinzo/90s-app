@@ -3,15 +3,9 @@ import {Icon, Card, Image } from 'semantic-ui-react'
 
 
 export default function AllPostsList(props){
-    console.log(props);
     const allPosts = props.posts.map(post => {
-    // console.log(post);
     const likes = props.likes.filter(like => like.post.id === post.id)
-    // console.log(likes);
-    // console.log(props.loggedInUser);
-    // const likedUser = props.likes.filter(like => like.user.username === props.loggedInUser )
     const likedUser = likes.filter(like => like.user.username === props.loggedInUser);
-    // console.log(likedUser);
     return(
         <Card
             id="post-card"
