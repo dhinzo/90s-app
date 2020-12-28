@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Header, Image, Modal, Divider, Form, Grid, Segment } from 'semantic-ui-react'
+import { Button, Modal, Form, Segment } from 'semantic-ui-react'
 
 
 
@@ -17,6 +17,7 @@ export default function LoginModal(props) {
         e.preventDefault()
         props.login(eachEntry)
         setOpen(false)
+        
     }
 
 

@@ -5,7 +5,6 @@ import PostToShow from '../PostToShow'
 import PostToShowUser from '../PostToShowUser'
 import EditPostModal from '../EditPostModal'
 import AllUserPostsList from '../ShowUserPosts'
-import { Button} from 'semantic-ui-react'
 import UserNav from '../UserNav'
 import LoginError from '../ErrorMessages/LoginError.js'
 
@@ -153,9 +152,9 @@ export default class PostsContainer extends Component {
           const loginJson = await loginResponse.json()
           if(loginResponse.status === 200) {
               this.setState({
+                errorMessage: '',
                 loggedIn: true,
                 loggedInUser: loginJson.data.username,
-                errorMessage: ''
               })
             } else {
                 this.setState({
@@ -180,10 +179,16 @@ export default class PostsContainer extends Component {
                 body: JSON.stringify(registerUser)
             })
         const registerUserJson = await registerUserResponse.json()
+            if (registerUserResponse.status === 200 || registerUserResponse.status === 201){
+                this.login(registerUser)
+            } else {
+                this.setState({
+                    errorMessage: 'login error'
+                })
+            }
         } catch (err){
             console.log("Error in registering", registerUser);
         }
-        this.login(registerUser)
     }
 
 
@@ -311,8 +316,7 @@ export default class PostsContainer extends Component {
                     register={this.register}
                     loggedIn={this.state.loggedIn}
                     loggedInUser={this.state.loggedInUser}
-                    createPost={this.createPost} 
-
+                    createPost={this.createPost}
                 />
                 
                 <h1 id='title-text' className='main-text'>Thats SoOo 90s!</h1>
