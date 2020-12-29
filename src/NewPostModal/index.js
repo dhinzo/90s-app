@@ -68,9 +68,7 @@ export default function NewPostModal(props) {
           Sike!
         </Button>
         <Button
-          content="Create Rad Post"
           labelPosition='right'
-          icon='checkmark'
           onClick={handleSubmit}
           positive
         >

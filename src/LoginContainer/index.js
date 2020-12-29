@@ -9,21 +9,29 @@ export default function LoginModal(props) {
     const intialInputState = {username: '', password: ''}
     const [eachEntry, setEachEntry] = useState(intialInputState)
     const {username, password} = eachEntry
-   
-     const handleInputChange = (e) =>{
+    
+    const handleClose = () => {
+      setOpen(false)
+      setEachEntry('')
+    }
+
+    const handleInputChange = (e) =>{
         setEachEntry({ ...eachEntry, [e.target.name]: e.target.value})
     }
+
+
      const handleSubmit = (e) =>{
-        e.preventDefault()
-        props.login(eachEntry)
-        setOpen(false)
-        
+      e.preventDefault()
+      props.login(eachEntry)
+      setEachEntry('')
+      setOpen(false)      
     }
 
 
   return (
     <Modal
         onClose={() => setOpen(false)}
+        closeOnDimmerClick={false}
         onOpen={() => setOpen(true)}
         open={open}
         trigger={<Button
@@ -39,7 +47,7 @@ export default function LoginModal(props) {
                 icon='x'
                 floated='right'
                 size='tiny'
-                onClick={() => setOpen(false)}
+                onClick={handleClose}
                 />
         </Modal.Header>
         <Modal.Content>
@@ -53,7 +61,7 @@ export default function LoginModal(props) {
             onChange = {handleInputChange}
             value = {username}
             placeholder='Username'
-            autocomplete='Username'
+            
           />
           <Form.Input
             icon='lock'
@@ -63,7 +71,7 @@ export default function LoginModal(props) {
             onChange = {handleInputChange}
             value = {password}
             type='password'
-            autocomplete='current-password'
+            
           />
 
           <Button

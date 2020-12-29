@@ -9,18 +9,25 @@ export default function RegisterModal(props) {
     const [eachEntry, setEachEntry] = useState(intialInputState)
     const {username, password} = eachEntry
    
-     const handleInputChange = (e) =>{
-        setEachEntry({ ...eachEntry, [e.target.name]: e.target.value})
+    const handleClose = () => {
+      setOpen(false)
+      setEachEntry('')
     }
-     const handleSubmit = (e) =>{
-        e.preventDefault()
-        props.register(eachEntry)
-        setOpen(false)
+
+    const handleInputChange = (e) =>{
+      setEachEntry({ ...eachEntry, [e.target.name]: e.target.value})
+    }
+    const handleSubmit = (e) =>{
+      e.preventDefault()
+      props.register(eachEntry)
+      setEachEntry('')
+      setOpen(false)
     }
 
 
   return (
     <Modal
+        closeOnDimmerClick={false}
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
         open={open}
@@ -38,7 +45,7 @@ export default function RegisterModal(props) {
                 icon='x'
                 floated='right'
                 size='tiny'
-                onClick={() => setOpen(false)}
+                onClick={handleClose}
                 />
         </Modal.Header>
         <Modal.Content className='modal-body'>

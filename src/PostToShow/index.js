@@ -5,12 +5,12 @@ export default function PostToShow(props){
 		return(
 			<Segment id="show-modal">
 				<Card
-				raised
+				
 				styles="box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);"
 				centered={true}
 				>
-    				<Image raised true
-    					src={props.showThisPost.img} alt="90s pic" medium circular/>
+    				<Image
+    					src={props.showThisPost.img} alt="90s pic"/>
 	    			<Card.Content className="post-content-background">
 	    				<Card.Header className="card-header">{props.showThisPost.title}</Card.Header>
 	    				

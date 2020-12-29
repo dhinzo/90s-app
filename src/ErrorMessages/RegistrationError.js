@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal } from 'semantic-ui-react'
 
 
-function LoginError() {
+function RegistrationError(props) {
   const [open, setOpen] = React.useState(true)
 
   return (
@@ -16,7 +16,7 @@ function LoginError() {
       <Modal.Content>
         <Modal.Description>
           <p id="login-error-text">
-            The Username and Password do not match one another. If you do not have an account, please Register. Otherwise, try again.
+            That username is already taken. Please choose another and try again.
           </p>
         </Modal.Description>
       </Modal.Content>
@@ -28,4 +28,4 @@ function LoginError() {
   )
 }
 
-export default LoginError
+export default RegistrationError
