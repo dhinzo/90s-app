@@ -1,4 +1,3 @@
-// import React from 'react'
 import { Form, Label, Button, Modal } from 'semantic-ui-react'
 import React, {useState} from 'react'
 
@@ -29,7 +28,7 @@ export default function NewPostModal(props) {
                   color="grey"
                   compact>Create Throwback</Button>}
     >
-      <Modal.Header>Create New Post</Modal.Header>
+    <Modal.Header>Create New Post</Modal.Header>
     <Form>
       <Modal.Content>
         
