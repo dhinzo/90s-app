@@ -60,7 +60,6 @@ export default function RegisterModal(props) {
             onChange = {handleInputChange}
             value = {username}
             placeholder='Username'
-            autocomplete='Username'
           />
           <Form.Input
             icon='lock'
@@ -70,7 +69,6 @@ export default function RegisterModal(props) {
             onChange = {handleInputChange}
             value = {password}
             type='password'
-            autocomplete='current-password'
           />
 
           <Button 

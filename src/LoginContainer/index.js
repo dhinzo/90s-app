@@ -12,7 +12,7 @@ export default function LoginModal(props) {
     
     const handleClose = () => {
       setOpen(false)
-      setEachEntry('')
+      setEachEntry(intialInputState)
     }
 
     const handleInputChange = (e) =>{
@@ -23,11 +23,9 @@ export default function LoginModal(props) {
      const handleSubmit = (e) =>{
       e.preventDefault()
       props.login(eachEntry)
-      setEachEntry('')
+      setEachEntry(intialInputState)
       setOpen(false)      
     }
-
-
   return (
     <Modal
         onClose={() => setOpen(false)}
@@ -54,22 +52,23 @@ export default function LoginModal(props) {
         <Segment className='layer' placeholder>
         <Form>
           <Form.Input
+            label="Username"
             icon='user'
             iconPosition='left'
-            label='Username'
-            name = 'username'
-            onChange = {handleInputChange}
-            value = {username}
+            name='username'
+            onChange={handleInputChange}
+            value={username}
             placeholder='Username'
             
           />
+          
           <Form.Input
+            label="Password"
             icon='lock'
             iconPosition='left'
-            label='Password'
-            name = 'password'
-            onChange = {handleInputChange}
-            value = {password}
+            name='password'
+            onChange={handleInputChange}
+            value={password} 
             type='password'
             
           />

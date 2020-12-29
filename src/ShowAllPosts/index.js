@@ -27,10 +27,10 @@ export default function AllPostsList(props){
                     src={post.img} onClick={ ()=> props.showPost(post.id)} />
             </Card.Content>
                 <Card.Content extra>
-                    <a className="left floated">
+                    <span className="left floated">
                     <Icon name='user' />
                         {post.owner.username}
-                    </a>
+                    </span>
                     { 
                         props.loggedIn === true
                         ?
