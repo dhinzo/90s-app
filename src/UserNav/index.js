@@ -54,6 +54,7 @@ const UserNav = (props) => (
         <LoginModal
           id="login-modal"
           login={props.login}
+          errorModal={props.errorModal}
            />
         <RegisterModal
           id="reg-modal"

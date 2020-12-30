@@ -32,8 +32,7 @@ function EditPostModal(props) {
     return (
             <Modal
                 onClose={() => setOpen(false)}
-                onOpen={() => setOpen(true)}
-                
+                onOpen={() => setOpen(true)}                
                 open={() => props.editPost(props.postToEdit.id)}
                 >
             <Modal.Header>Edit Your Post</Modal.Header>
@@ -76,13 +75,11 @@ function EditPostModal(props) {
                 Sike!
                 </Button>
                 <Button
-                content="Create Rad Post"
-                labelPosition='right'
-                icon='checkmark'
+                
                 onClick={handleSubmit}
                 positive
                 >
-                Create Rad Post
+                Edit Rad Post
             </Button>
             </Modal.Actions>
                 </Form>  

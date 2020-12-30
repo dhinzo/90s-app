@@ -10,11 +10,9 @@ export default function AllUserPostsList(props){
     return(
         <Card
             id="post-card"
-            raised
             key={post.id}
             onClick={() => {} }
-            medium 
-            circular>
+            >
             <Card.Content textAlign={"center"}>
                 <Card.Header
                 className="card-header">
@@ -25,14 +23,15 @@ export default function AllUserPostsList(props){
                     {post.description}
                 </Card.Description>
                 
-                <Image raised
-                    src={post.img} onClick={ ()=> props.showPost(post.id)} medium circular />
+                <Image
+                    src={post.img}
+                    onClick={ ()=> props.showPost(post.id)} />
             </Card.Content>
                 <Card.Content extra>
-                    <a className="left floated">
+                    <span className="left floated">
                     <Icon name='user' />
                         {post.owner.username}
-                    </a>
+                    </span>
                     { 
                         props.loggedIn === true
                         ?
