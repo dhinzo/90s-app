@@ -33,7 +33,6 @@ export default class PostsContainer extends Component {
                 posts: postsJson.data.posts,
                 likes: postsJson.data.likes
             })
-
         }catch(err){
             console.log("Error getting posts data", err)
             }    
@@ -254,6 +253,9 @@ export default class PostsContainer extends Component {
     componentDidMount() {
         this.getPosts()
     }
+    
+    
+    
     showAllPosts = () =>{
         this.setState({
             conditionalView: '',
