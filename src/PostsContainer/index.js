@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import AllPostsList from '../ShowAllPosts'
-import NewPostModal from '../NewPostModal'
 import PostToShow from '../PostToShow'
 import PostToShowUser from '../PostToShowUser'
 import EditPostModal from '../EditPostModal'
 import AllUserPostsList from '../ShowUserPosts'
-import { Button} from 'semantic-ui-react'
 import UserNav from '../UserNav'
+import LoginError from '../ErrorMessages/LoginError.js'
+import RegistrationError from '../ErrorMessages/RegistrationError'
 
 
 export default class PostsContainer extends Component {
@@ -20,7 +20,8 @@ export default class PostsContainer extends Component {
             idOfPostToEdit: -1,
             loggedIn: false,
             loggedInUser: null,
-            conditionalView: ''
+            conditionalView: '',
+            errorMessage:''
         }
     }
     getPosts = async () =>{
@@ -32,7 +33,6 @@ export default class PostsContainer extends Component {
                 posts: postsJson.data.posts,
                 likes: postsJson.data.likes
             })
-
         }catch(err){
             console.log("Error getting posts data", err)
             }    
@@ -124,7 +124,7 @@ export default class PostsContainer extends Component {
                     'Content-Type': 'application/json'
                 }
             })
-            const updatePostJson = await updatePostResponse.json()
+            await updatePostResponse.json()
             this.setState({
                 idOfPostToEdit: -1,
                 conditionalView: 'show user posts'
@@ -151,9 +151,14 @@ export default class PostsContainer extends Component {
           const loginJson = await loginResponse.json()
           if(loginResponse.status === 200) {
               this.setState({
+                errorMessage: '',
                 loggedIn: true,
-                loggedInUser: loginJson.data.username
+                loggedInUser: loginJson.data.username,
               })
+            } else {
+                this.setState({
+                    errorMessage: 'login error'
+                })
             }
         } catch(error) {
           console.error("Error trying to log in")
@@ -172,11 +177,17 @@ export default class PostsContainer extends Component {
                 },
                 body: JSON.stringify(registerUser)
             })
-        const registerUserJson = await registerUserResponse.json()
+            await registerUserResponse.json()
+            if (registerUserResponse.status === 200 || registerUserResponse.status === 201){
+                this.login(registerUser)
+            } else {
+                this.setState({
+                    errorMessage: 'reg error'
+                })
+            }
         } catch (err){
             console.log("Error in registering", registerUser);
         }
-        this.login(registerUser)
     }
 
 
@@ -185,7 +196,7 @@ export default class PostsContainer extends Component {
         try{
             const url = process.env.REACT_APP_API_URL + "/90s/users/logout/"
             const logoutResponse = await fetch(url)
-            const logoutJson = await logoutResponse.json()
+            await logoutResponse.json()
             this.setState({
                 loggedInUser: null,
                 loggedIn: false,
@@ -242,6 +253,9 @@ export default class PostsContainer extends Component {
     componentDidMount() {
         this.getPosts()
     }
+    
+    
+    
     showAllPosts = () =>{
         this.setState({
             conditionalView: '',
@@ -284,9 +298,11 @@ export default class PostsContainer extends Component {
             idOfPostToEdit: -1
         })
     }
-
-
-    
+    closeErrorModals = () => {
+        this.setState({
+            errorMessage: ''
+        })
+    }
 
     render(){
         return(
@@ -299,10 +315,9 @@ export default class PostsContainer extends Component {
                     register={this.register}
                     loggedIn={this.state.loggedIn}
                     loggedInUser={this.state.loggedInUser}
-                    createPost={this.createPost} 
-
-                />
-                
+                    createPost={this.createPost}
+                    errorModal={this.closeErrorModals}
+                />    
                 <h1 id='title-text' className='main-text'>Thats SoOo 90s!</h1>
                 {
                     this.state.loggedIn === true
@@ -381,6 +396,16 @@ export default class PostsContainer extends Component {
                             state={this.state}
                             likes={this.state.likes}
                         />
+                    }
+                    {
+                        this.state.errorMessage === "login error"
+                        &&
+                        <LoginError />
+                    }
+                    {
+                        this.state.errorMessage === "reg error"
+                        &&
+                        <RegistrationError />
                     }
                     </div>
         )

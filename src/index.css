@@ -24,12 +24,22 @@ body .ui.cards>.card {
   color: whitesmoke;
   font-family: 'Press Start 2P', cursive !important;
 }
+#login-error-header {
+  background-color: rgb(3, 24, 151);
+  padding: none;
+  color: whitesmoke;
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: 15px !important;
+}
 
 #header-button {
   position: right;
   border: solid grey;
   margin: none;
   padding: none;
+}
+#login-error-text{
+  font-family: 'Gloria Hallelujah', cursive !important;
 }
 
 #logout-button {
@@ -97,6 +107,10 @@ h2 {
     margin-left: auto !important;
     margin-right: auto !important;
   }
+}
+#error-login-modal,
+#error-register-modal {
+  position: "end" !important;
 }
 #logout-btn,
 #login-modal,

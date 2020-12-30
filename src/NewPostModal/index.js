@@ -28,7 +28,7 @@ export default function NewPostModal(props) {
                   color="grey"
                   compact>Create Throwback</Button>}
     >
-      <Modal.Header>Create New Post</Modal.Header>
+    <Modal.Header>Create New Post</Modal.Header>
     <Form>
       <Modal.Content>
         
@@ -40,7 +40,7 @@ export default function NewPostModal(props) {
             onChange={handleInputChange}
             value={title}
           />
-          <Label htmlForr="img">Image Link</Label>
+          <Label htmlFor="img">Image Link</Label>
           <Form.Input
             name="img"
             placeholder="Enter an Image URL"
@@ -68,9 +68,6 @@ export default function NewPostModal(props) {
           Sike!
         </Button>
         <Button
-          content="Create Rad Post"
-          labelPosition='right'
-          icon='checkmark'
           onClick={handleSubmit}
           positive
         >
