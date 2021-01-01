@@ -16,7 +16,7 @@ function LoginError() {
       <Modal.Content>
         <Modal.Description>
           <p id="login-error-text">
-            The Username and Password do not match one another. If you do not have an account, please Register. Otherwise, try again.
+            The Username and Password do not match one another. Please try again. If you do not have an account, please Register. 
           </p>
         </Modal.Description>
       </Modal.Content>
