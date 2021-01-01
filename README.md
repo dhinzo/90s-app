@@ -5,7 +5,7 @@
 Remember the good ole days of AOL dialup? Or how about the confident, succinct and yet reassuring voice of Elwood Edwards saying "You've got mail" upon login? The good news is that the impending tech apocalpyse of Y2K didn't send mankind back to the stone-age. The bad news is that it's not the 90s anymore! If you have a pulse and love a retro trip down memory lane with your friends then the 90s app is for you! We took inspiration from South Park's 'member berries' for this concept. What better way to get to know your friends better than knowing what parts of their 90s childhood still bring them joy?
 
 ## Heroku Link
-Open [http://the-90s-app.herokuapp.com/](http://the-90s-app.herokuapp.com/) to view it in the browser.
+Open [https://the-90s-app.herokuapp.com/](https://the-90s-app.herokuapp.com/) to view it in the browser.
 
 
 
