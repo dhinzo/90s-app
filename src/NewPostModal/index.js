@@ -24,6 +24,7 @@ export default function NewPostModal(props) {
       onOpen={() => setOpen(true)}
       open={open}
       trigger={<Button
+                  className="nav-btns"
                   basic
                   color="grey"
                   compact>Create Throwback</Button>}

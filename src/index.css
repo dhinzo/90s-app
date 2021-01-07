@@ -71,7 +71,17 @@ h2 {
 }
 .ui.button {
   font-family: 'Gloria Hallelujah', cursive !important;
+  /* margin: .75rem .25rem .75rem 0; */
 }
+
+@media screen and (max-width: 375px) {
+  .ui.button {
+    font-size: 10px !important;
+    padding: 10px !important;
+  }
+}
+
+
 .main-text {
   margin-top: 2rem;
   padding-bottom: 5% !important;
@@ -89,6 +99,13 @@ h2 {
   color: rgb(241, 247, 116) !important;
 }
 
+
+.ui.positive.button,
+.ui.black.button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 #nav-title.header.item {
   font-family: 'Gloria Hallelujah', cursive !important;
   font-size: 15px;
@@ -101,13 +118,16 @@ h2 {
   background-color: rgb(3, 24, 151) !important;
   font-family: 'Press Start 2P', cursive !important;
 }
-@media only screen and (min-width: 1200px) {
-  .ui.container {
-    width: auto !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+
+@media only screen and (max-width: 667px) {
+  .nav-btns {
+    padding: .5rem !important;
   }
 }
+
+
+
+
 #error-login-modal,
 #error-register-modal {
   position: "end" !important;

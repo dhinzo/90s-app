@@ -1,9 +1,5 @@
-import React, { useState } from 'react'
-import {
-  Container,
-  Menu,
-  Button
-} from 'semantic-ui-react'
+import React from 'react'
+import { Container, Menu, Button } from 'semantic-ui-react'
 import LoginModal from '../LoginContainer'
 import NewPostModal from '../NewPostModal'
 import RegisterModal from '../RegisterContainer'
@@ -30,17 +26,20 @@ const UserNav = (props) => (
           <NewPostModal
             createPost={props.createPost} />
         <Button
+          className="nav-btns"
           basic
           color="grey"
           compact
            onClick={() => props.showAllPosts()}>Home</Button> 
           <Button
+            className="nav-btns"
             basic
             color="grey"
             compact 
             onClick={() => props.showUserPosts()}>My Posts</Button>
         <Menu.Menu position="right">
           <Button
+            className="nav-btns"
             id="logout-btn"
             basic
             color="grey"
@@ -52,6 +51,7 @@ const UserNav = (props) => (
         <React.Fragment>
         <Menu.Menu position="right">  
         <LoginModal
+          
           id="login-modal"
           login={props.login}
           errorModal={props.errorModal}
